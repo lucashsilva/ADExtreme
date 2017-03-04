@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ufcg.computacao.si1.exceptions.UsuarioJaExisteException;
-import br.edu.ufcg.computacao.si1.models.Usuario;
+import br.edu.ufcg.computacao.si1.exceptions.UserAlredyExistException;
+import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.services.TokenAuthenticationService;
-import br.edu.ufcg.computacao.si1.services.UsuarioServiceImpl;
+import br.edu.ufcg.computacao.si1.services.UserServiceImpl;
 
 @RestController
-public class UsuarioController {
+public class UserController {
 	@Autowired
-	private UsuarioServiceImpl usuarioService;
+	private UserServiceImpl userService;
 	@Autowired
 	private TokenAuthenticationService tokenService;
 	
@@ -27,13 +27,13 @@ public class UsuarioController {
 			value = "api/users",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Usuario> addUser(@RequestBody Usuario user) {
+	public ResponseEntity<User> addUser(@RequestBody User user) {
 		try {
-			usuarioService.create(user);
+			userService.create(user);
 		
-			return new ResponseEntity<Usuario>(HttpStatus.CREATED);
-		} catch (UsuarioJaExisteException e) {
-			return new ResponseEntity<Usuario>(HttpStatus.CONFLICT);
+			return new ResponseEntity<User>(HttpStatus.CREATED);
+		} catch (UserAlredyExistException e) {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
 		
 	}

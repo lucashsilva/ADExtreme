@@ -13,12 +13,32 @@ public class AuthenticatedUser implements Authentication {
 	private Integer id;
 	private String role;
 	private boolean authenticated = true;
-
-	public AuthenticatedUser() {
+	
+	public AuthenticatedUser(String name, String credentials, Integer id, String role) {
+		this.name = name;
+		this.credentials = credentials;
+		this.id = id;
+		this.role = role;
 	}
 
-	public AuthenticatedUser(String email) {
-		this.name = email;
+	public String getName() {
+		return name;
+	}
+
+	public String getCredentials() {
+		return credentials;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public boolean isAuthenticated() {
+		return authenticated;
 	}
 
 	public void setName(String name) {
@@ -29,51 +49,16 @@ public class AuthenticatedUser implements Authentication {
 		this.credentials = credentials;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public boolean isAuthenticated() {
-		return authenticated;
 	}
 
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
 	}
 
-	@Override
-	public String getName() {
-		return this.name;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object getCredentials() {
-		return this.credentials;
-	}
-
-	@Override
-	public Object getDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object getPrincipal() {
-		return role;
-	}
-
-}

@@ -10,13 +10,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import br.edu.ufcg.computacao.si1.services.UsuarioServiceImpl;
+import br.edu.ufcg.computacao.si1.services.UserServiceImpl;
 
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-    private UsuarioServiceImpl usuarioService;
+    private UserServiceImpl userService;
     
     @Override
     public Authentication authenticate(Authentication authentication) 
@@ -25,7 +25,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
          
-        if (usuarioService.autenticar(email, password)) {
+        if (userService.autenticar(email, password)) {
             return new UsernamePasswordAuthenticationToken(email, password, new ArrayList<>());
         } else {
         	throw new BadCredentialsException("Bad credentials.");
