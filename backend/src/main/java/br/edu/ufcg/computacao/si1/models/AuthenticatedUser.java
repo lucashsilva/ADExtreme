@@ -22,7 +22,7 @@ public class AuthenticatedUser implements Authentication {
 	}
 	
 	public AuthenticatedUser(String email) {
-		this.name = name;
+		this.name = email;
 	}
 
 	public String getName() {
