@@ -28,14 +28,14 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Optional<Ad> getAnuncio(Long id) {
+    public Optional<Ad> getAd(Long id) {
         return Optional.ofNullable(adRepository.findOne(id));
     }
 
     @Override
     public Collection<Ad> getAd(String type) {
         return adRepository.findAll().stream()
-                .filter(ad -> ad.getTipo().equals(type))
+                .filter(ad -> ad.getType().equals(type))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -62,15 +62,4 @@ public class AdServiceImpl implements AdService {
         return false;
     }
 
-	@Override
-	public Collection<Ad> getAnuncio(String tipo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Ad> getAnuncios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

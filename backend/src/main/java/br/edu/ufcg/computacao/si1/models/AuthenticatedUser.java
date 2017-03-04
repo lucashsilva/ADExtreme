@@ -20,6 +20,10 @@ public class AuthenticatedUser implements Authentication {
 		this.id = id;
 		this.role = role;
 	}
+	
+	public AuthenticatedUser(String email) {
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;
@@ -59,6 +63,24 @@ public class AuthenticatedUser implements Authentication {
 
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getPrincipal() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	}

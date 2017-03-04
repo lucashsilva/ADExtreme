@@ -9,11 +9,11 @@ public interface AdService {
 
     public Ad create(Ad anuncio);
 
-    public Optional<Ad> getAnuncio(Long id);
+    public Optional<Ad> getAd(Long id);
 
-    public Collection<Ad> getAnuncio(String tipo);
+    public Collection<Ad> getAd(String tipo);
 
-    public Collection<Ad> getAnuncios();
+    public Collection<Ad> getAds();
 
     public boolean update(Ad anuncio);
 
