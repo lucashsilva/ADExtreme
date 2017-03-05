@@ -30,9 +30,9 @@ public class AdServiceTest {
 
     @Before
     public void setUp() {
-        ad1 = new Ad("Anuncio de Movel", new Date(), 100, 5, "movel");
-        ad2 = new Ad("Anuncio de Imovel", new Date(), 100000, 3, "imovel");
-        ad3 = new Ad("Anuncio de Emprego", new Date(), 0, 4, "emprego");
+        ad1 = new Ad("Ad of Furniture", new Date(), 100, 5, "furniture");
+        ad2 = new Ad("Ad of House", new Date(), 100000, 3, "house");
+        ad3 = new Ad("Ad of Job", new Date(), 0, 4, "job");
     }
 
     @After
@@ -42,8 +42,8 @@ public class AdServiceTest {
 
     @Test
     public void initializationTest() {
-        assertNotNull("AnuncioService não foi instânciado corretamente", adService);
-        assertTrue("AnuncioService não deveria conter nenhum item", adService.getAds().isEmpty());
+        assertNotNull("AdService was not installed correctly", adService);
+        assertTrue("AdService should not have any item", adService.getAds().isEmpty());
     }
 
 
@@ -83,21 +83,21 @@ public class AdServiceTest {
         assertNotNull(adHouse);
         assertNotNull(adJob);
 
-        assertEquals(adFurniture.getType(), "movel");
-        assertEquals(adHouse.getType(), "imovel");
-        assertEquals(adJob.getType(), "emprego");
+        assertEquals(adFurniture.getType(), "furniture");
+        assertEquals(adHouse.getType(), "house");
+        assertEquals(adJob.getType(), "job");
 
-        assertEquals(EXPECTED_AMOUNT, adService.getAd("movel").size());
-        assertEquals(EXPECTED_AMOUNT, adService.getAd("imovel").size());
-        assertEquals(EXPECTED_AMOUNT, adService.getAd("emprego").size());
+        assertEquals(EXPECTED_AMOUNT, adService.getAd("furniture").size());
+        assertEquals(EXPECTED_AMOUNT, adService.getAd("house").size());
+        assertEquals(EXPECTED_AMOUNT, adService.getAd("job").size());
 
-        assertTrue(adService.getAd("movel").contains(adFurniture));
-        assertTrue(adService.getAd("imovel").contains(adHouse));
-        assertTrue(adService.getAd("emprego").contains(adJob));
+        assertTrue(adService.getAd("furniture").contains(adFurniture));
+        assertTrue(adService.getAd("house").contains(adHouse));
+        assertTrue(adService.getAd("job").contains(adJob));
     }
 
     @Test
-    public void testgetAds() {
+    public void testGetAds() {
         int EXPECTED_AMOUNT = 3;
 
         Ad adFurniture = adService.create(ad1);
@@ -118,96 +118,96 @@ public class AdServiceTest {
 
     @Test
     public void testDelete() {
-        int QTDE_ANUNCIOS_ESPERADA = 3;
+        int EXPECTED_AMOUNT = 3;
 
-        Ad anuncioMovel = adService.create(ad1);
-        Ad anuncioImovel = adService.create(ad2);
-        Ad anuncioEmprego = adService.create(ad3);
+        Ad adFurniture = adService.create(ad1);
+        Ad adHouse = adService.create(ad2);
+        Ad adJob = adService.create(ad3);
 
-        assertEquals(QTDE_ANUNCIOS_ESPERADA, adService.getAds().size());
-        assertTrue(adService.getAds().contains(anuncioMovel));
-        assertTrue(adService.getAds().contains(anuncioImovel));
-        assertTrue(adService.getAds().contains(anuncioEmprego));
+        assertEquals(EXPECTED_AMOUNT, adService.getAds().size());
+        assertTrue(adService.getAds().contains(adFurniture));
+        assertTrue(adService.getAds().contains(adHouse));
+        assertTrue(adService.getAds().contains(adJob));
 
-        assertTrue(adService.delete(anuncioMovel.getId()));
-        QTDE_ANUNCIOS_ESPERADA -= 1;
-        assertEquals(QTDE_ANUNCIOS_ESPERADA, adService.getAds().size());
-        assertFalse(adService.getAds().contains(anuncioMovel));
-        assertTrue(adService.getAds().contains(anuncioImovel));
-        assertTrue(adService.getAds().contains(anuncioEmprego));
+        assertTrue(adService.delete(adFurniture.getId()));
+        EXPECTED_AMOUNT -= 1;
+        assertEquals(EXPECTED_AMOUNT, adService.getAds().size());
+        assertFalse(adService.getAds().contains(adFurniture));
+        assertTrue(adService.getAds().contains(adHouse));
+        assertTrue(adService.getAds().contains(adJob));
 
-        assertTrue(adService.delete(anuncioImovel.getId()));
-        QTDE_ANUNCIOS_ESPERADA -= 1;
-        assertEquals(QTDE_ANUNCIOS_ESPERADA, adService.getAds().size());
-        assertFalse(adService.getAds().contains(anuncioMovel));
-        assertFalse(adService.getAds().contains(anuncioImovel));
-        assertTrue(adService.getAds().contains(anuncioEmprego));
+        assertTrue(adService.delete(adHouse.getId()));
+        EXPECTED_AMOUNT -= 1;
+        assertEquals(EXPECTED_AMOUNT, adService.getAds().size());
+        assertFalse(adService.getAds().contains(adFurniture));
+        assertFalse(adService.getAds().contains(adHouse));
+        assertTrue(adService.getAds().contains(adJob));
 
-        assertTrue(adService.delete(anuncioEmprego.getId()));
-        QTDE_ANUNCIOS_ESPERADA -= 1;
-        assertEquals(QTDE_ANUNCIOS_ESPERADA, adService.getAds().size());
-        assertFalse(adService.getAds().contains(anuncioMovel));
-        assertFalse(adService.getAds().contains(anuncioImovel));
-        assertFalse(adService.getAds().contains(anuncioEmprego));
+        assertTrue(adService.delete(adJob.getId()));
+        EXPECTED_AMOUNT -= 1;
+        assertEquals(EXPECTED_AMOUNT, adService.getAds().size());
+        assertFalse(adService.getAds().contains(adFurniture));
+        assertFalse(adService.getAds().contains(adHouse));
+        assertFalse(adService.getAds().contains(adJob));
 
-        assertEquals(0, QTDE_ANUNCIOS_ESPERADA);
+        assertEquals(0, EXPECTED_AMOUNT);
 
-        assertFalse(adService.delete(anuncioMovel.getId()));
-        assertFalse(adService.delete(anuncioImovel.getId()));
-        assertFalse(adService.delete(anuncioEmprego.getId()));
+        assertFalse(adService.delete(adFurniture.getId()));
+        assertFalse(adService.delete(adHouse.getId()));
+        assertFalse(adService.delete(adJob.getId()));
     }
 
     @Test
     public void testUpdate() {
 
-        String SUFIXO = " editado";
+        String SUFFIX = " edited";
 
-        Ad anuncioMovel = adService.create(ad1);
-        Ad anuncioImovel = adService.create(ad2);
-        Ad anuncioEmprego = adService.create(ad3);
+        Ad adFurniture = adService.create(ad1);
+        Ad adJob = adService.create(ad2);
+        Ad adHouse = adService.create(ad3);
 
-        assertEquals(anuncioMovel, ad1);
-        assertEquals(anuncioImovel, ad2);
-        assertEquals(anuncioEmprego, ad3);
+        assertEquals(adFurniture, ad1);
+        assertEquals(adJob, ad2);
+        assertEquals(adHouse, ad3);
 
-        //Update Titulo
-        anuncioMovel.setTitle(anuncioMovel.getTitle() + SUFIXO);
-        anuncioImovel.setTitle(anuncioImovel.getTitle() + SUFIXO);
-        anuncioEmprego.setTitle(anuncioEmprego.getTitle() + SUFIXO);
+        //Update Title
+        adFurniture.setTitle(adFurniture.getTitle() + SUFFIX);
+        adJob.setTitle(adJob.getTitle() + SUFFIX);
+        adJob.setTitle(adJob.getTitle() + SUFFIX);
 
-        assertTrue(adService.update(anuncioMovel));
-        assertTrue(adService.update(anuncioImovel));
-        assertTrue(adService.update(anuncioEmprego));
+        assertTrue(adService.update(adFurniture));
+        assertTrue(adService.update(adJob));
+        assertTrue(adService.update(adJob));
 
-        assertEquals(anuncioMovel.getTitle(), adService.getAd(anuncioMovel.getId()).get().getTitle());
-        assertEquals(anuncioImovel.getTitle(), adService.getAd(anuncioImovel.getId()).get().getTitle());
-        assertEquals(anuncioEmprego.getTitle(), adService.getAd(anuncioEmprego.getId()).get().getTitle());
+        assertEquals(adFurniture.getTitle(), adService.getAd(adFurniture.getId()).get().getTitle());
+        assertEquals(adJob.getTitle(), adService.getAd(adJob.getId()).get().getTitle());
+        assertEquals(adJob.getTitle(), adService.getAd(adJob.getId()).get().getTitle());
 
-        //Update preço
-        anuncioMovel.setPrice(anuncioImovel.getPrice() * 2);
-        anuncioImovel.setPrice(anuncioImovel.getPrice() * 2);
-        anuncioEmprego.setPrice(anuncioEmprego.getPrice() * 2);
+        //Update Price
+        adFurniture.setPrice(adJob.getPrice() * 2);
+        adJob.setPrice(adJob.getPrice() * 2);
+        adJob.setPrice(adJob.getPrice() * 2);
 
-        assertTrue(adService.update(anuncioMovel));
-        assertTrue(adService.update(anuncioImovel));
-        assertTrue(adService.update(anuncioEmprego));
+        assertTrue(adService.update(adFurniture));
+        assertTrue(adService.update(adJob));
+        assertTrue(adService.update(adJob));
 
-        assertEquals(anuncioMovel.getPrice(), adService.getAd(anuncioMovel.getId()).get().getPrice());
-        assertEquals(anuncioImovel.getPrice(), adService.getAd(anuncioImovel.getId()).get().getPrice());
-        assertEquals(anuncioEmprego.getPrice(), adService.getAd(anuncioEmprego.getId()).get().getPrice());
+        assertEquals(adFurniture.getPrice(), adService.getAd(adFurniture.getId()).get().getPrice());
+        assertEquals(adJob.getPrice(), adService.getAd(adJob.getId()).get().getPrice());
+        assertEquals(adJob.getPrice(), adService.getAd(adJob.getId()).get().getPrice());
 
-        //Update nota
-        anuncioMovel.setClassification(5);
-        anuncioImovel.setClassification(3);
-        anuncioEmprego.setClassification(4);
+        //Update Classification
+        adFurniture.setClassification(5);
+        adJob.setClassification(3);
+        adHouse.setClassification(4);
 
-        assertTrue(adService.update(anuncioMovel));
-        assertTrue(adService.update(anuncioImovel));
-        assertTrue(adService.update(anuncioEmprego));
+        assertTrue(adService.update(adFurniture));
+        assertTrue(adService.update(adHouse));
+        assertTrue(adService.update(adJob));
 
-        assertEquals(5, adService.getAd(anuncioMovel.getId()).get().getClassification());
-        assertEquals(3, adService.getAd(anuncioImovel.getId()).get().getClassification());
-        assertEquals(4, adService.getAd(anuncioEmprego.getId()).get().getClassification());
+        assertEquals(5, adService.getAd(adFurniture.getId()).get().getClassification());
+        assertEquals(3, adService.getAd(adJob.getId()).get().getClassification());
+        assertEquals(4, adService.getAd(adHouse.getId()).get().getClassification());
     }
 
 }
