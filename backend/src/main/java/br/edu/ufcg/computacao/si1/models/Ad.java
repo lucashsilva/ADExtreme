@@ -43,21 +43,21 @@ public class Ad {
     @Column(name = "classification")
     @NotNull(message = "Ad classification can not be null.")
     @Min(0) @Max(5)
-    private double classification;
+    private int classification;
     
     @Column(name = "type")
     @NotNull(message = "Ad type can not be null.")
     private String type;
 
-    public Ad(String title, Date creationDate, double price, double classification, String type) {
+    public Ad(String title, Date creationDate, double price, int classification, String type) {
         this.title = title;
         this.creationDate = creationDate;
         this.price = price;
         this.classification = classification;
         this.type = type;
     }
-    
-    
+
+    public Ad() {};
 
 	public Long getId() {
 		return id;
@@ -83,7 +83,7 @@ public class Ad {
 
 
 
-	public double getClassification() {
+	public int getClassification() {
 		return classification;
 	}
 
@@ -119,7 +119,7 @@ public class Ad {
 
 
 
-	public void setClassification(double classification) {
+	public void setClassification(int classification) {
 		this.classification = classification;
 	}
 
