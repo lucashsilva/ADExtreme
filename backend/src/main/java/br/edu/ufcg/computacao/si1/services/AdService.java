@@ -3,19 +3,19 @@ package br.edu.ufcg.computacao.si1.services;
 import java.util.Collection;
 import java.util.Optional;
 
-import br.edu.ufcg.computacao.si1.models.Ad;
+import br.edu.ufcg.computacao.si1.models.Advertising;
 
 public interface AdService {
 
-    public Ad create(Ad anuncio);
+    public Advertising create(Advertising anuncio);
 
-    public Optional<Ad> getAd(Long id);
+    public Optional<Advertising> getAd(Long id);
 
-    public Collection<Ad> getAd(String tipo);
+    public Collection<Advertising> getAd(String tipo);
 
-    public Collection<Ad> getAds();
+    public Collection<Advertising> getAds();
 
-    public boolean update(Ad anuncio);
+    public boolean update(Advertising anuncio);
 
     public boolean delete(Long id);
 
