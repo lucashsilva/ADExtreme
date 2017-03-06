@@ -58,8 +58,8 @@ public class Advertising {
         this.type = type;
         this.user = user;
     }
-    
-    
+
+    public Advertising() {};
 
 	public Long getId() {
 		return id;
@@ -121,7 +121,7 @@ public class Advertising {
 
 
 
-	public void setClassification(double classification) {
+	public void setClassification(int classification) {
 		this.classification = classification;
 	}
 
@@ -132,9 +132,12 @@ public class Advertising {
 	}
 
 
+
     public User getUser() {
         return user;
     }
+
+
 
     public void setUser(User user) {
         this.user = user;
