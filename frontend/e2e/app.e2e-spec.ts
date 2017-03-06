@@ -1,6 +1,6 @@
 import { AdextremePage } from './app.po';
 
-describe('adextreme App', function() {
+describe('adextreme App', () => {
   let page: AdextremePage;
 
   beforeEach(() => {

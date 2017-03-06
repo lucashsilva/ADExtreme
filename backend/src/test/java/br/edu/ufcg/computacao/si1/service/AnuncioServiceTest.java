@@ -1,3 +1,4 @@
+/*
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.models.Ad;
@@ -17,9 +18,7 @@ import java.util.Date;
 
 import static junit.framework.TestCase.*;
 
-/**
- * Created by Marcus Oliveira on 28/12/16.
- */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AnuncioServiceTest {
@@ -216,3 +215,5 @@ public class AnuncioServiceTest {
     }
 
 }
+
+*/
