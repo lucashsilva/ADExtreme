@@ -1,6 +1,8 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.models.Ad;
+import br.edu.ufcg.computacao.si1.enums.AdType;
+import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.repositories.AdRepository;
 import br.edu.ufcg.computacao.si1.services.AdService;
 import org.junit.After;
@@ -25,14 +27,16 @@ public class AdServiceTest {
     @Autowired
     private AdRepository adRepository;
 
-    private Ad ad1, ad2, ad3;
+    private Advertising ad1, ad2, ad3;
+    private User user;
 
 
     @Before
     public void setUp() {
-        ad1 = new Ad("Ad of Furniture", new Date(), 100, 5, "furniture");
-        ad2 = new Ad("Ad of House", new Date(), 100000, 3, "house");
-        ad3 = new Ad("Ad of Job", new Date(), 0, 4, "job");
+        user = new User("user", "user@email.com","password","natural person");
+        ad1 = new Advertising("Ad of Furniture", new Date(), 100, 5, AdType.FORNITURE, user);
+        ad2 = new Advertising("Ad of House", new Date(), 100000, 3, AdType.FORNITURE, user);
+        ad3 = new Advertising("Ad of Job", new Date(), 0, 4, AdType.JOB, user);
     }
 
     @After
@@ -49,9 +53,9 @@ public class AdServiceTest {
 
     @Test
     public void testCreateAd() {
-        Ad ad1FromDB = adService.create(ad1);
-        Ad ad2FromDB = adService.create(ad2);
-        Ad ad3FromDB = adService.create(ad3);
+        Advertising ad1FromDB = adService.create(ad1);
+        Advertising ad2FromDB = adService.create(ad2);
+        Advertising ad3FromDB = adService.create(ad3);
 
         assertNotNull(ad1FromDB);
         assertNotNull(ad2FromDB);
@@ -75,9 +79,9 @@ public class AdServiceTest {
 
         int EXPECTED_AMOUNT = 1;
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adHouse = adService.create(ad2);
-        Ad adJob = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adHouse = adService.create(ad2);
+        Advertising adJob = adService.create(ad3);
 
         assertNotNull(adFurniture);
         assertNotNull(adHouse);
@@ -100,9 +104,9 @@ public class AdServiceTest {
     public void testGetAds() {
         int EXPECTED_AMOUNT = 3;
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adHouse = adService.create(ad2);
-        Ad adJob = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adHouse = adService.create(ad2);
+        Advertising adJob = adService.create(ad3);
 
         assertNotNull(adFurniture);
         assertNotNull(adHouse);
@@ -120,9 +124,9 @@ public class AdServiceTest {
     public void testDelete() {
         int EXPECTED_AMOUNT = 3;
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adHouse = adService.create(ad2);
-        Ad adJob = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adHouse = adService.create(ad2);
+        Advertising adJob = adService.create(ad3);
 
         assertEquals(EXPECTED_AMOUNT, adService.getAds().size());
         assertTrue(adService.getAds().contains(adFurniture));
@@ -162,9 +166,9 @@ public class AdServiceTest {
 
         String SUFFIX = " edited";
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adJob = adService.create(ad2);
-        Ad adHouse = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adJob = adService.create(ad2);
+        Advertising adHouse = adService.create(ad3);
 
         assertEquals(adFurniture, ad1);
         assertEquals(adJob, ad2);
