@@ -46,7 +46,7 @@ public class User extends org.springframework.security.core.userdetails.User{
 
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = validatePassword(password);
         this.role = role;
     }
 
@@ -92,6 +92,12 @@ public class User extends org.springframework.security.core.userdetails.User{
 
 	public boolean authenticate(String senha) {
 		return this.password.equals(senha);
+	}
+	
+	private String validatePassword(String password){
+		if(password.isEmpty())
+			throw new IllegalArgumentException();
+		return password;
 	}
 
 }

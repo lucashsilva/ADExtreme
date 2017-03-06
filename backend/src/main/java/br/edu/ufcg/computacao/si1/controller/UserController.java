@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,8 @@ public class UserController {
 			return new ResponseEntity<User>(HttpStatus.CREATED);
 		} catch (UserAlredyExistException e) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+		} catch(TransactionSystemException e) {
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}
