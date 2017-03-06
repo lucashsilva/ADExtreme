@@ -18,8 +18,10 @@ import br.edu.ufcg.computacao.si1.services.UserServiceImpl;
 
 @RestController
 public class UserController {
+
 	@Autowired
 	private UserServiceImpl userService;
+
 	@Autowired
 	private TokenAuthenticationService tokenService;
 	

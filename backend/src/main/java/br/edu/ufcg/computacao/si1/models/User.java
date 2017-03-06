@@ -1,40 +1,47 @@
 package br.edu.ufcg.computacao.si1.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.authority.AuthorityUtils;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_user")
 public class User extends org.springframework.security.core.userdetails.User{
 	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
     private Long id;
+
     @Column
     @NotNull(message = "Username can not be null.")
     @NotEmpty(message = "Username can not be empty.")
     private String name;
+
     @Column(unique = true)
     @NotNull(message = "User email can not be null.")
     @NotEmpty(message = "User email can not be empty.")
     private String email;
+
     @Column
     @NotNull(message = "User password can not be null.")
     @NotEmpty(message = "User password can not be empty")
     private String password;
+
     @Column
     @NotNull(message = "User role can not be null.")
     @NotEmpty(message = "User role can not be emptt.")
     private String role;
+
+	@Column
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+    private Set<Advertising> advertisings;
 
     public User() {
         super("default", "default", AuthorityUtils.createAuthorityList("USER"));
@@ -90,8 +97,8 @@ public class User extends org.springframework.security.core.userdetails.User{
 		this.role = role;
 	}
 
-	public boolean authenticate(String senha) {
-		return this.password.equals(senha);
+	public boolean authenticate(String password) {
+		return this.password.equals(password);
 	}
 	
 	private String validatePassword(String password){
@@ -100,4 +107,13 @@ public class User extends org.springframework.security.core.userdetails.User{
 		return password;
 	}
 
+	public Set<Advertising> getAdvertisings() {
+		return advertisings;
+	}
+
+	public void setAdvertisings(Set<Advertising> advertisings) {
+		if(advertisings == null)
+			advertisings = new HashSet<>();
+		this.advertisings = advertisings;
+	}
 }

@@ -1,8 +1,14 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.models.Ad;
+import br.edu.ufcg.computacao.si1.enums.AdType;
+import br.edu.ufcg.computacao.si1.exceptions.UserAlredyExistException;
+import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.repositories.AdRepository;
+import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 import br.edu.ufcg.computacao.si1.services.AdService;
+import br.edu.ufcg.computacao.si1.services.UserService;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,23 +27,33 @@ public class AdServiceTest {
 
     @Autowired
     private AdService adService;
+    
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private AdRepository adRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
-    private Ad ad1, ad2, ad3;
+    private Advertising ad1, ad2, ad3;
+    private User user;
 
 
     @Before
-    public void setUp() {
-        ad1 = new Ad("Ad of Furniture", new Date(), 100, 5, "furniture");
-        ad2 = new Ad("Ad of House", new Date(), 100000, 3, "house");
-        ad3 = new Ad("Ad of Job", new Date(), 0, 4, "job");
+    public void setUp() throws UserAlredyExistException {
+        user = userService.create(new User("user", "user@email.com","password","natural person"));
+                   
+        ad1 = new Advertising("Ad of Furniture", new Date(), 100, 5, AdType.FORNITURE, user);
+        ad2 = new Advertising("Ad of House", new Date(), 100000, 3, AdType.SERVICE, user);
+        ad3 = new Advertising("Ad of Job", new Date(), 0, 4, AdType.JOB, user);
     }
 
     @After
     public void tearDown() {
         adRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -49,9 +65,9 @@ public class AdServiceTest {
 
     @Test
     public void testCreateAd() {
-        Ad ad1FromDB = adService.create(ad1);
-        Ad ad2FromDB = adService.create(ad2);
-        Ad ad3FromDB = adService.create(ad3);
+        Advertising ad1FromDB = adService.create(ad1);
+        Advertising ad2FromDB = adService.create(ad2);
+        Advertising ad3FromDB = adService.create(ad3);
 
         assertNotNull(ad1FromDB);
         assertNotNull(ad2FromDB);
@@ -75,34 +91,34 @@ public class AdServiceTest {
 
         int EXPECTED_AMOUNT = 1;
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adHouse = adService.create(ad2);
-        Ad adJob = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adHouse = adService.create(ad2);
+        Advertising adJob = adService.create(ad3);
 
         assertNotNull(adFurniture);
         assertNotNull(adHouse);
         assertNotNull(adJob);
 
-        assertEquals(adFurniture.getType(), "furniture");
-        assertEquals(adHouse.getType(), "house");
-        assertEquals(adJob.getType(), "job");
+        assertEquals(AdType.FORNITURE, adFurniture.getType());
+        assertEquals(AdType.SERVICE, adHouse.getType());
+        assertEquals(AdType.JOB,adJob.getType());
 
-        assertEquals(EXPECTED_AMOUNT, adService.getAd("furniture").size());
-        assertEquals(EXPECTED_AMOUNT, adService.getAd("house").size());
-        assertEquals(EXPECTED_AMOUNT, adService.getAd("job").size());
+        assertEquals(EXPECTED_AMOUNT, adService.getAd(AdType.FORNITURE.toString()).size());
+        assertEquals(EXPECTED_AMOUNT, adService.getAd(AdType.SERVICE.toString()).size());
+        assertEquals(EXPECTED_AMOUNT, adService.getAd(AdType.JOB.toString()).size());
 
-        assertTrue(adService.getAd("furniture").contains(adFurniture));
-        assertTrue(adService.getAd("house").contains(adHouse));
-        assertTrue(adService.getAd("job").contains(adJob));
+        assertTrue(adService.getAd(AdType.FORNITURE.toString()).contains(adFurniture));
+        assertTrue(adService.getAd(AdType.SERVICE.toString()).contains(adHouse));
+        assertTrue(adService.getAd(AdType.JOB.toString()).contains(adJob));
     }
 
     @Test
     public void testGetAds() {
         int EXPECTED_AMOUNT = 3;
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adHouse = adService.create(ad2);
-        Ad adJob = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adHouse = adService.create(ad2);
+        Advertising adJob = adService.create(ad3);
 
         assertNotNull(adFurniture);
         assertNotNull(adHouse);
@@ -120,9 +136,9 @@ public class AdServiceTest {
     public void testDelete() {
         int EXPECTED_AMOUNT = 3;
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adHouse = adService.create(ad2);
-        Ad adJob = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adHouse = adService.create(ad2);
+        Advertising adJob = adService.create(ad3);
 
         assertEquals(EXPECTED_AMOUNT, adService.getAds().size());
         assertTrue(adService.getAds().contains(adFurniture));
@@ -162,9 +178,9 @@ public class AdServiceTest {
 
         String SUFFIX = " edited";
 
-        Ad adFurniture = adService.create(ad1);
-        Ad adJob = adService.create(ad2);
-        Ad adHouse = adService.create(ad3);
+        Advertising adFurniture = adService.create(ad1);
+        Advertising adJob = adService.create(ad2);
+        Advertising adHouse = adService.create(ad3);
 
         assertEquals(adFurniture, ad1);
         assertEquals(adJob, ad2);
@@ -205,9 +221,9 @@ public class AdServiceTest {
         assertTrue(adService.update(adHouse));
         assertTrue(adService.update(adJob));
 
-        assertEquals(5, adService.getAd(adFurniture.getId()).get().getClassification());
-        assertEquals(3, adService.getAd(adJob.getId()).get().getClassification());
-        assertEquals(4, adService.getAd(adHouse.getId()).get().getClassification());
+        assertEquals(5.0, adService.getAd(adFurniture.getId()).get().getClassification());
+        assertEquals(3.0, adService.getAd(adJob.getId()).get().getClassification());
+        assertEquals(4.0, adService.getAd(adHouse.getId()).get().getClassification());
     }
 
 }
