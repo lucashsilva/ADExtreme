@@ -27,8 +27,8 @@ public class UserControllerTest {
 
 	@Before
 	public void setUp() {
-		validUser = new User("Odravison", "Ojunior4@fake.com", "hao123", "user");
-		userWithInvalidName = new User("", "Ojunior4@fake.com", "hao123", "user");
+		validUser = new User("Odravison",  "odra","Ojunior4@fake.com", "hao123", "user");
+		userWithInvalidName = new User("", "odra", "Ojunior4@fake.com", "hao123", "user");
 	}
 	
 	@Test

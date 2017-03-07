@@ -22,11 +22,11 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) 
       throws AuthenticationException {
    
-        String email = authentication.getName();
+        String username = authentication.getName();
         String password = authentication.getCredentials().toString();
          
-        if (userService.autenticar(email, password)) {
-            return new UsernamePasswordAuthenticationToken(email, password, new ArrayList<>());
+        if (userService.autenticate(username, password)) {
+            return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
         } else {
         	throw new BadCredentialsException("Bad credentials.");
         }

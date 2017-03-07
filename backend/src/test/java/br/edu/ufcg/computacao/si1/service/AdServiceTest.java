@@ -43,7 +43,7 @@ public class AdServiceTest {
 
     @Before
     public void setUp() throws UserAlredyExistException {
-        user = userService.create(new User("user", "user@email.com","password","natural person"));
+        user = userService.create(new User("user", "odra", "user@email.com","password","natural person"));
                    
         ad1 = new Advertising("Ad of Furniture", new Date(), 100, 5, AdType.FORNITURE, user);
         ad2 = new Advertising("Ad of House", new Date(), 100000, 3, AdType.SERVICE, user);

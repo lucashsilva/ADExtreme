@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class AdextremePage {
+export class AngularSrcPage {
   navigateTo() {
     return browser.get('/');
   }

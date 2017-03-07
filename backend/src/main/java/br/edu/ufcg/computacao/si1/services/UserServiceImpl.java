@@ -22,15 +22,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User create(User user) throws UserAlredyExistException {
-    	if(!exists(user.getEmail())) {
+    	if(!exists(user.getUsername())) {
     		return this.userRepository.save(user);
     	}
     	 
     	throw new UserAlredyExistException();
     }
 
-    private boolean exists(String email) {
-		return userRepository.findByEmail(email) != null;
+    private boolean exists(String username) {
+		return userRepository.findByUsername(username) != null;
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> getUser(String email) {
-        return Optional.ofNullable(userRepository.findByEmail(email));
+    public Optional<User> getUser(String username) {
+        return Optional.ofNullable(userRepository.findByUsername(username));
     }
 
     @Override
@@ -67,8 +67,8 @@ public class UserServiceImpl implements UserService{
     }
 
 	@Override
-	public boolean autenticar(String email, String password) {
-		Optional<User> user = getUser(email);
+	public boolean autenticate(String username, String password) {
+		Optional<User> user = getUser(username);
 		
 		return user.isPresent() && user.get().authenticate(password);
 	}

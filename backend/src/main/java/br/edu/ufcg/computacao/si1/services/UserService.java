@@ -19,5 +19,5 @@ public interface UserService {
 
     boolean delete(Long id);
 
-	boolean autenticar(String email, String senha);
+	boolean autenticate(String email, String senha);
 }

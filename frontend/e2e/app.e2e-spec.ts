@@ -1,10 +1,10 @@
-import { AdextremePage } from './app.po';
+import { AngularSrcPage } from './app.po';
 
-describe('adextreme App', () => {
-  let page: AdextremePage;
+describe('angular-src App', function() {
+  let page: AngularSrcPage;
 
   beforeEach(() => {
-    page = new AdextremePage();
+    page = new AngularSrcPage();
   });
 
   it('should display message saying app works', () => {

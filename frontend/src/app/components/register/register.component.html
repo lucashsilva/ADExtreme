@@ -1,0 +1,49 @@
+<h2 class="page-header">Registro</h2>
+
+  <form (submit)="onRegisterSubmit()">
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="name" name="name" type="name" class="form-control" id="inputName" placeholder="Name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="username" name="username" type="username" class="form-control" id="inputUsername" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="email" name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Senha</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="password" name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+    <fieldset class="form-group row">
+     <div class="col-sm-10">
+       <div class="form-check">
+         <label class="form-check-label">
+           <input class="form-check-input" type="radio" [(ngModel)]="role" name="role" id="userRadio" value="USER">
+           Pessoa jurídica
+         </label>
+       </div>
+       <div class="form-check">
+         <label class="form-check-label">
+           <input class="form-check-input" type="radio" [(ngModel)]="role" name="role" id="companyRadio" value="COMPANY">
+           Pessoa física
+         </label>
+       </div>
+     </div>
+   </fieldset>
+    <div class="form-group row">
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </div>
+</form>

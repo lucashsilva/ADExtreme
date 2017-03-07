@@ -6,10 +6,10 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.edu.ufcg.computacao.si1.models.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufcg.computacao.si1.models.AuthenticatedUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -42,7 +42,7 @@ public class TokenAuthenticationService {
 			String email = extractEmail(token);
 			if (email != null) // we managed to retrieve a user
 			{
-				return new AuthenticatedUser(email);
+				return new User(email);
 			}
 		}
 		return null;
