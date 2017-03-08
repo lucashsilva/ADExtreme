@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ufcg.computacao.si1.exceptions.UserAlredyExistException;
+import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.services.TokenAuthenticationService;
 import br.edu.ufcg.computacao.si1.services.UserServiceImpl;
@@ -22,9 +22,6 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 
-	@Autowired
-	private TokenAuthenticationService tokenService;
-	
 	@CrossOrigin
 	@RequestMapping(
 			value = "api/users",
@@ -35,7 +32,7 @@ public class UserController {
 			userService.create(user);
 		
 			return new ResponseEntity<User>(HttpStatus.CREATED);
-		} catch (UserAlredyExistException e) {
+		} catch (UserAlreadyExistsException e) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		} catch(TransactionSystemException e) {
 			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);

@@ -1,0 +1,31 @@
+<form>
+  <h1>Cadastro</h1>
+  <div class="form-group">
+    <input [(ngModel)]="userInfo.name" [ngModelOptions]="{standalone: true}" type="nome" class="form-control" id="nome" aria-describedby="nome" placeholder="Nome">
+  </div>
+  <div class="form-group">
+    <input [(ngModel)]="userInfo.email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <input [(ngModel)]="userInfo.password" [ngModelOptions]="{standalone: true}" type="password" class="form-control" id="password" placeholder="Senha">
+  </div>
+  <fieldset class="form-group">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="personType" id="personType1" [value]="USER" [checked]="userInfo.role ==='USER'">
+        Pessoa física
+      </label>
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="personType" id="personType2" [value]="COMPANY" [checked]="userInfo.role ==='COMPANY'">
+        Pessoa jurídica
+      </label>
+    </div>
+  </fieldset>
+  <div *ngIf="errors.length > 0" class="errors">
+    <span class="error" *ngFor="let error of errors">{{ error }}</span>
+  </div>
+  <button (click)="signup()" type="submit" class="btn btn-primary">Cadastrar</button>
+  <button (click)="resetForm()" class="btn btn-warning">Limpar</button>
+</form>

@@ -1,13 +1,11 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
-import br.edu.ufcg.computacao.si1.exceptions.UserAlredyExistException;
-import br.edu.ufcg.computacao.si1.models.Advertising;
-import br.edu.ufcg.computacao.si1.models.User;
-import br.edu.ufcg.computacao.si1.repositories.AdRepository;
-import br.edu.ufcg.computacao.si1.repositories.UserRepository;
-import br.edu.ufcg.computacao.si1.services.AdService;
-import br.edu.ufcg.computacao.si1.services.UserService;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,9 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-
-import static junit.framework.TestCase.*;
+import br.edu.ufcg.computacao.si1.enums.AdType;
+import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
+import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.repositories.AdRepository;
+import br.edu.ufcg.computacao.si1.repositories.UserRepository;
+import br.edu.ufcg.computacao.si1.services.AdService;
+import br.edu.ufcg.computacao.si1.services.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -42,7 +45,7 @@ public class AdServiceTest {
 
 
     @Before
-    public void setUp() throws UserAlredyExistException {
+    public void setUp() throws UserAlreadyExistsException {
         user = userService.create(new User("user", "user@email.com","password","natural person"));
                    
         ad1 = new Advertising("Ad of Furniture", new Date(), 100, 5, AdType.FORNITURE, user);

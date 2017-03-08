@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.ufcg.computacao.si1.exceptions.UserAlredyExistException;
+import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 
@@ -21,12 +21,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User create(User user) throws UserAlredyExistException {
+    public User create(User user) throws UserAlreadyExistsException {
     	if(!exists(user.getEmail())) {
     		return this.userRepository.save(user);
     	}
     	 
-    	throw new UserAlredyExistException();
+    	throw new UserAlreadyExistsException();
     }
 
     private boolean exists(String email) {
