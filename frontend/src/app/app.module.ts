@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { AuthGuardProvider } from './providers/auth-guard.provider';
 import { SignupPageComponent } from './signup/signup-page/signup-page.component';
+import { ConnectPageComponent } from './connect-page/connect-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SignupPageComponent } from './signup/signup-page/signup-page.component'
     DashboardComponent,
     LoginPageComponent,
     SignupFormComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    ConnectPageComponent
   ],
   imports: [
     BrowserModule,

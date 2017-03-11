@@ -1,25 +1,22 @@
-@font-face { font-family: "Panton Bold"; src: url("/assets/fonts/Panton-BlackCaps.otf"); }
-@font-face { font-family: "Panton Bold Italic"; src: url("/assets/fonts/Panton-BlackitalicCaps.otf"); }
-@font-face { font-family: "Panton Light"; src: url("/assets/fonts/Panton-LightCaps.otf"); }
-@font-face { font-family: "Panton Light Italic"; src: url("/assets/fonts/Panton-LightitalicCaps.otf"); }
-
-h1, h2, h3, h4, h5, h6 { font-size: 2em; font-family: "Panton Bold"; }
+h1, h2, h3, h4, h5, h6 { font-size: 2em; }
 
 $white: #fff;
-$yellow: #e6c00f;
-$medium-blue: #2962FF;
-$dark-blue: #0D47A1;
+$yellow: #FFEB3B;
+$medium-blue: #42A5F5;
+$dark-blue: #1A237E;
 $medium-grey: #E0E0E0;
 $light-grey: #fafafa;
 $red: #E53935;
-
+$black: #000000;
+$body-grey: #eeeeee;
 
 
 button {
     border: none;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 10px 15px;
     font-size: 12px;
+    background: $medium-blue;
 }
 
 input {
