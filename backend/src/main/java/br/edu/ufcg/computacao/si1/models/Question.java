@@ -21,6 +21,7 @@ public class Question {
     private String body;
 
     @Column(name ="answer")
+    @NotNull(message = "Question answer can not be null.")
     private String answer;
 
     @Column(name = "creation_date")
@@ -33,9 +34,11 @@ public class Question {
     private Advertising advertising;
 
 
-    public Question(String body) {
+    public Question(String body, Advertising advertising) {
         this.body = body;
+        this.answer = "";
         this.creationDate = new Date();
+        this.advertising = advertising;
     }
 
     public Question(){};

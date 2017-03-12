@@ -47,6 +47,7 @@ public class User extends org.springframework.security.core.userdetails.User{
 
 	@Column
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+	@NotNull(message = "User advertisings can not be null.")
     private Set<Advertising> advertisings;
 
     public User() {
@@ -62,6 +63,7 @@ public class User extends org.springframework.security.core.userdetails.User{
         this.password = validatePassword(password);
         this.role = role;
         this.credit = 0.0;
+        this.advertisings = new HashSet<>();
     }
 
 	public Long getId() {
@@ -120,6 +122,16 @@ public class User extends org.springframework.security.core.userdetails.User{
 		this.credit -= amount;
 	}
 
+	public Set<Advertising> getAdvertisings() {
+		return advertisings;
+	}
+
+	public void setAdvertisings(Set<Advertising> advertisings) {
+		if(advertisings == null)
+			advertisings = new HashSet<>();
+		this.advertisings = advertisings;
+	}
+
 	public boolean authenticate(String password) {
 		return this.password.equals(password);
 	}
@@ -130,13 +142,5 @@ public class User extends org.springframework.security.core.userdetails.User{
 		return password;
 	}
 
-	public Set<Advertising> getAdvertisings() {
-		return advertisings;
-	}
 
-	public void setAdvertisings(Set<Advertising> advertisings) {
-		if(advertisings == null)
-			advertisings = new HashSet<>();
-		this.advertisings = advertisings;
-	}
 }

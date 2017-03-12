@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.models;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -70,6 +71,7 @@ public class Advertising {
         this.classification = classification;
         this.type = type;
         this.user = user;
+        this.questions = new HashSet<>();
     }
 
     public Advertising() {}
@@ -134,6 +136,17 @@ public class Advertising {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        if(questions == null){
+            this.questions = new HashSet<>();
+        }
+        this.questions = questions;
     }
 
     @Override
