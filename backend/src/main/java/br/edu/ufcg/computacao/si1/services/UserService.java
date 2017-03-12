@@ -9,9 +9,9 @@ import br.edu.ufcg.computacao.si1.models.User;
 public interface UserService {
     User create(User usuario) throws UserAlredyExistException;
 
-    Optional<User> getUser(Long id);
+    Optional<User> getUserById(Long id);
 
-    Optional<User> getUser(String email);
+    Optional<User> getUserByEmail(String email);
 
     Collection<User> getUsers();
 

@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.controller;
 
 import static org.junit.Assert.assertEquals;
 
+import br.edu.ufcg.computacao.si1.enums.UserRole;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +28,8 @@ public class UserControllerTest {
 
 	@Before
 	public void setUp() {
-		validUser = new User("Odravison", "Ojunior4@fake.com", "hao123", "user");
-		userWithInvalidName = new User("", "Ojunior4@fake.com", "hao123", "user");
+		validUser = new User("Odravison", "Ojunior4@fake.com", "hao123", UserRole.LEGAL_PERSON);
+		userWithInvalidName = new User("", "Ojunior4@fake.com", "hao123", UserRole.NATURAL_PERSON);
 	}
 	
 	@Test

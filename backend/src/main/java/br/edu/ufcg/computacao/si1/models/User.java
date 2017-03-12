@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import br.edu.ufcg.computacao.si1.enums.UserRole;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.authority.AuthorityUtils;
 
@@ -19,25 +20,30 @@ public class User extends org.springframework.security.core.userdetails.User{
 	@Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     @NotNull(message = "Username can not be null.")
     @NotEmpty(message = "Username can not be empty.")
     private String name;
 
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     @NotNull(message = "User email can not be null.")
     @NotEmpty(message = "User email can not be empty.")
     private String email;
 
-    @Column
+    @Column(name = "password")
     @NotNull(message = "User password can not be null.")
     @NotEmpty(message = "User password can not be empty")
     private String password;
 
-    @Column
+    @Column(name="role")
     @NotNull(message = "User role can not be null.")
-    @NotEmpty(message = "User role can not be emptt.")
-    private String role;
+    @NotEmpty(message = "User role can not be empty.")
+	@Enumerated(EnumType.STRING)
+    private UserRole role;
+
+	@Column(name = "credit")
+	@NotNull(message = "User credit can not be null.")
+    private double credit;
 
 	@Column
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
@@ -47,14 +53,15 @@ public class User extends org.springframework.security.core.userdetails.User{
         super("default", "default", AuthorityUtils.createAuthorityList("USER"));
     }
 
-    public User(String name, String email, String password, String role) {
+    public User(String name, String email, String password, UserRole role) {
 
-        super(email, password, AuthorityUtils.createAuthorityList(role));
+        super(email, password, AuthorityUtils.createAuthorityList(role.name()));
 
         this.name = name;
         this.email = email;
         this.password = validatePassword(password);
         this.role = role;
+        this.credit = 0.0;
     }
 
 	public Long getId() {
@@ -73,7 +80,7 @@ public class User extends org.springframework.security.core.userdetails.User{
 		return password;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
@@ -93,8 +100,24 @@ public class User extends org.springframework.security.core.userdetails.User{
 		this.password = password;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
+	}
+
+	public double getCredit() {
+		return credit;
+	}
+
+	public void setCredit(double credit) {
+		this.credit = credit;
+	}
+
+	public void increaseCredit(double amount){
+    	this.credit += amount;
+	}
+
+	public void discountCredit(double amount){
+		this.credit -= amount;
 	}
 
 	public boolean authenticate(String password) {

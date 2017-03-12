@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.models;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -13,8 +14,9 @@ import br.edu.ufcg.computacao.si1.enums.AdType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="tb_anuncio")
+@Table(name="tb_advertising")
 public class Advertising {
+
     @SuppressWarnings("unused")
 	private final static DateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
     
@@ -28,9 +30,13 @@ public class Advertising {
     @NotEmpty(message = "Advertising title can not be empty.")
     private String title;
 
-    @Column(name = "creation_date")
+    @Column(name = "publication_date")
     @NotNull(message = "Advertising creation date can not be null.")
-    private Date creationDate;
+    private Date publicationDate;
+
+	@Column(name = "expiration_date")
+	@NotNull(message = "Advertising creation date can not be null.")
+	private Date expirationDate;
 
     @Column(name = "price")
     @NotNull(message = "Advertising price can not be null.")
@@ -44,6 +50,7 @@ public class Advertising {
     
     @Column(name = "type")
     @NotNull(message = "Advertising type can not be null.")
+	@Enumerated(EnumType.STRING)
     private AdType type;
 
     @ManyToOne
@@ -51,97 +58,82 @@ public class Advertising {
     @NotNull(message = "Advertising user can not be null.")
     private User user;
 
-    public Advertising(String title, Date creationDate, double price, double classification, AdType type, User user) {
+    @Column
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "advertising", orphanRemoval = true)
+    private Set<Question> questions;
+
+    public Advertising(String title, Date publicationDate, Date expirationDate, double price, double classification, AdType type, User user) {
         this.title = title;
-        this.creationDate = creationDate;
+        this.publicationDate = publicationDate;
+        this.expirationDate = expirationDate;
         this.price = price;
         this.classification = classification;
         this.type = type;
         this.user = user;
     }
 
-    public Advertising() {};
+    public Advertising() {}
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public String getTitle() {
 		return title;
 	}
 
-
-
-	public Date getCreationDate() {
-		return creationDate;
+	public Date getPublicationDate() {
+		return publicationDate;
 	}
-
-
 
 	public double getPrice() {
 		return price;
 	}
 
-
-
 	public double getClassification() {
 		return classification;
 	}
 
-
-
-	public AdType getType() {
-		return type;
-	}
-
-
+	public AdType getType() { return type; }
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
-
-
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-
-
 	public void setClassification(int classification) {
 		this.classification = classification;
 	}
-
-
 
 	public void setType(AdType type) {
 		this.type = type;
 	}
 
-
-
     public User getUser() {
         return user;
     }
 
-
-
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     @Override
@@ -151,8 +143,6 @@ public class Advertising {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -171,12 +161,11 @@ public class Advertising {
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Advertising [id=" + id + ", title=" + title + ", creation date=" + creationDate + ", price=" + price
-				+ ", classification=" + classification + ", type=" + type + "]";
+		return "Advertising [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
+                ", expiration date="+ expirationDate + ", price=" + price +
+                ", classification=" + classification + ", type=" + type + "]";
 	}
 
 	

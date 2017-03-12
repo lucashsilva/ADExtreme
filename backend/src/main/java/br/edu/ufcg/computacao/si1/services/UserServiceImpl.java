@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-    public Optional<User> getUser(Long id) {
+    public Optional<User> getUserById(Long id) {
         return Optional.ofNullable(userRepository.findOne(id));
     }
 
     @Override
-    public Optional<User> getUser(String email) {
+    public Optional<User> getUserByEmail(String email) {
         return Optional.ofNullable(userRepository.findByEmail(email));
     }
 
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean autenticar(String email, String password) {
-		Optional<User> user = getUser(email);
+		Optional<User> user = getUserByEmail(email);
 		
 		return user.isPresent() && user.get().authenticate(password);
 	}
