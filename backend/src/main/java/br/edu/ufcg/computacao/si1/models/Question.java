@@ -10,6 +10,8 @@ import java.util.Date;
 @Table(name = "tb_question")
 public class Question {
 
+    private final String NO_ANSWER = "";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
@@ -36,7 +38,7 @@ public class Question {
 
     public Question(String body, Advertising advertising) {
         this.body = body;
-        this.answer = "";
+        this.answer = NO_ANSWER;
         this.creationDate = new Date();
         this.advertising = advertising;
     }

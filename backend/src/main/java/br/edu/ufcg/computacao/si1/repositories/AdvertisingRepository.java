@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.Collection;
 
-@Repository
-@Transactional
+
 public interface AdvertisingRepository extends JpaRepository<Advertising, Long> {
 
 }

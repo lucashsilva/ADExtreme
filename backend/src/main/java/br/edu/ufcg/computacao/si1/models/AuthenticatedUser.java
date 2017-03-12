@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.models;
 
 import java.util.Collection;
 
+import br.edu.ufcg.computacao.si1.enums.UserRole;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -11,10 +12,10 @@ public class AuthenticatedUser implements Authentication {
 	private String name;
 	private String credentials;
 	private Integer id;
-	private String role;
+	private UserRole role;
 	private boolean authenticated = true;
 	
-	public AuthenticatedUser(String name, String credentials, Integer id, String role) {
+	public AuthenticatedUser(String name, String credentials, Integer id, UserRole role) {
 		this.name = name;
 		this.credentials = credentials;
 		this.id = id;
@@ -37,7 +38,7 @@ public class AuthenticatedUser implements Authentication {
 		return id;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
@@ -57,7 +58,7 @@ public class AuthenticatedUser implements Authentication {
 		this.id = id;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 

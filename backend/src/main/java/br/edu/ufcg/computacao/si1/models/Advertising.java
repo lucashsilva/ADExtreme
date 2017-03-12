@@ -20,7 +20,8 @@ public class Advertising {
 
     @SuppressWarnings("unused")
 	private final static DateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-    
+    private final double INITIAL_CLASSIFICATION = 0.0;
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
@@ -63,12 +64,12 @@ public class Advertising {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "advertising", orphanRemoval = true)
     private Set<Question> questions;
 
-    public Advertising(String title, Date publicationDate, Date expirationDate, double price, double classification, AdType type, User user) {
+    public Advertising(String title, Date publicationDate, Date expirationDate, double price, AdType type, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
         this.price = price;
-        this.classification = classification;
+        this.classification = INITIAL_CLASSIFICATION;
         this.type = type;
         this.user = user;
         this.questions = new HashSet<>();
@@ -107,14 +108,18 @@ public class Advertising {
 	}
 
 	public void setPublicationDate(Date publicationDate) {
-		this.publicationDate = publicationDate;
+		if(publicationDate == null) {
+            this.publicationDate = new Date();
+        }else{
+            this.publicationDate = publicationDate;
+        }
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public void setClassification(int classification) {
+	public void setClassification(double classification) {
 		this.classification = classification;
 	}
 
@@ -135,7 +140,11 @@ public class Advertising {
     }
 
     public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+        if(expirationDate == null) {
+            this.expirationDate = new Date();
+        } else {
+            this.expirationDate = expirationDate;
+        }
     }
 
     public Set<Question> getQuestions() {
@@ -145,8 +154,13 @@ public class Advertising {
     public void setQuestions(Set<Question> questions) {
         if(questions == null){
             this.questions = new HashSet<>();
+        }else{
+            this.questions = questions;
         }
-        this.questions = questions;
+    }
+
+    public boolean addQuestion(Question question){
+        return question != null && this.questions.add(question);
     }
 
     @Override

@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import br.edu.ufcg.computacao.si1.enums.AdType;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
+import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +30,10 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     @Override
     public Advertising create(Advertising ad) throws InvalidAdvertisingUserException {
         AdType adType = ad.getType();
-        UserRole userRole = ad.getUser().getRole();
+        User user = ad.getUser();
 
-        if(userRole.equals(UserRole.NATURAL_PERSON) & (adType.equals(AdType.JOB) || adType.equals(AdType.SERVICE))){
+        if(user.getRole().equals(UserRole.NATURAL_PERSON)
+                && (adType.equals(AdType.JOB) || adType.equals(AdType.SERVICE))){
             throw new InvalidAdvertisingUserException();
         }
 

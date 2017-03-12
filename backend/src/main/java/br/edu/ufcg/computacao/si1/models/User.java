@@ -13,7 +13,9 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_user")
 public class User extends org.springframework.security.core.userdetails.User{
+
 	private static final long serialVersionUID = 1L;
+	private final double INITIAL_CREDIT = 0.0;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +39,6 @@ public class User extends org.springframework.security.core.userdetails.User{
 
     @Column(name="role")
     @NotNull(message = "User role can not be null.")
-    @NotEmpty(message = "User role can not be empty.")
 	@Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -47,11 +48,10 @@ public class User extends org.springframework.security.core.userdetails.User{
 
 	@Column
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
-	@NotNull(message = "User advertisings can not be null.")
     private Set<Advertising> advertisings;
 
     public User() {
-        super("default", "default", AuthorityUtils.createAuthorityList("USER"));
+        super("default", "default", AuthorityUtils.createAuthorityList("LEGAL_PERSON"));
     }
 
     public User(String name, String email, String password, UserRole role) {
@@ -62,7 +62,7 @@ public class User extends org.springframework.security.core.userdetails.User{
         this.email = email;
         this.password = validatePassword(password);
         this.role = role;
-        this.credit = 0.0;
+        this.credit = INITIAL_CREDIT;
         this.advertisings = new HashSet<>();
     }
 
@@ -127,9 +127,15 @@ public class User extends org.springframework.security.core.userdetails.User{
 	}
 
 	public void setAdvertisings(Set<Advertising> advertisings) {
-		if(advertisings == null)
-			advertisings = new HashSet<>();
-		this.advertisings = advertisings;
+		if(advertisings == null) {
+			this.advertisings = new HashSet<>();
+		}else {
+			this.advertisings = advertisings;
+		}
+	}
+
+	public boolean addAdvertising(Advertising advertising){
+		return advertising != null && this.advertisings.add(advertising);
 	}
 
 	public boolean authenticate(String password) {
@@ -137,8 +143,9 @@ public class User extends org.springframework.security.core.userdetails.User{
 	}
 	
 	private String validatePassword(String password){
-		if(password.isEmpty())
+		if(password.isEmpty()) {
 			throw new IllegalArgumentException();
+		}
 		return password;
 	}
 

@@ -27,7 +27,8 @@ public class UserController {
 	
 
     @RequestMapping(
-            method = RequestMethod.POST
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<User> addUser(@RequestBody User user) {
         try {
@@ -43,22 +44,28 @@ public class UserController {
 
 
     @RequestMapping(
-            value = "/{id}",
+            value = "/id/{id}",
             method = RequestMethod.GET
     )
     public ResponseEntity<User> getUser(@PathVariable Long id){
-        User user = userService.getUserById(id).get();
+        User user = new User();
+
+        if(userService.getUserById(id).isPresent())
+            user = userService.getUserById(id).get();
 
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
 
     @RequestMapping(
-            value = "/{email}",
+            value = "/email/{email}",
             method = RequestMethod.GET
     )
     public ResponseEntity<User> getUser(@PathVariable String email){
-        User user = userService.getUserByEmail(email).get();
+        User user = new User();
+
+        if(userService.getUserByEmail(email).isPresent())
+            user = userService.getUserByEmail(email).get();
 
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
