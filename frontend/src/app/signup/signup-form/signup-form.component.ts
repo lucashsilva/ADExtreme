@@ -45,6 +45,7 @@ export class SignupFormComponent implements OnInit {
 
   signup() {
     if(this.validate()) {
+
       this.authenticationService.signup(this.userInfo).then(success => {
         if(success) {
           this.router.navigate(['dashboard']);
