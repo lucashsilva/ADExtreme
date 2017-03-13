@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnectPageComponent } from './connect-page.component';
+import { ConnectCardComponent } from './connect-card.component';
 
-describe('ConnectPageComponent', () => {
-  let component: ConnectPageComponent;
-  let fixture: ComponentFixture<ConnectPageComponent>;
+describe('ConnectCardComponent', () => {
+  let component: ConnectCardComponent;
+  let fixture: ComponentFixture<ConnectCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConnectPageComponent ]
+      declarations: [ ConnectCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConnectPageComponent);
+    fixture = TestBed.createComponent(ConnectCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

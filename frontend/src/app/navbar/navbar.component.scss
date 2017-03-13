@@ -1,0 +1,21 @@
+@import "../../defaults";
+
+.dropdown-menu {
+    min-width: 20vw;
+}
+
+.navbar {
+    background: $medium-blue;
+    color: $white;
+    box-shadow: 0px 0px 5px $black;
+}
+.navbar a, .navbar-light, .navbar-nav .active >.nav-link {
+    color: $white;
+    cursor: pointer;
+}
+
+.navbar a:hover {
+    opacity: 0.8;
+    color: $white;
+}
+

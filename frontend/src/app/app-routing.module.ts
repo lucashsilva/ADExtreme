@@ -2,15 +2,14 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuardProvider } from './providers/auth-guard.provider';
-import { ConnectPageComponent } from './connect-page/connect-page.component';
+import { SignupFormComponent } from './signup/signup-form/signup-form.component';
 
 const routes: Routes = [
-    { path: '', component: MainComponent, canActivate: [AuthGuardProvider], children: [
+    { path: '', component: MainComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
-      { path: 'dashboard', component: DashboardComponent }
-    ] },
-  { path: 'connect', component: ConnectPageComponent }
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'signup', component: SignupFormComponent }
+    ] }
 ];
 
 @NgModule({

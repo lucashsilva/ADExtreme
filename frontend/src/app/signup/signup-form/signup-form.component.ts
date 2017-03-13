@@ -30,7 +30,7 @@ export class SignupFormComponent implements OnInit {
       this.errors.push("Nome inválido.");
       hasError = true;
     }
-    if(!this.userInfo.email) {
+    if(!this.userInfo.email || !this.userInfo.email.includes("@")) {
       this.errors.push("Email inválido.");
       hasError = true;
     }
@@ -38,6 +38,7 @@ export class SignupFormComponent implements OnInit {
       this.errors.push("A senha deve conter pelo menos 8 caracteres.");
       hasError = true;
     }
+    
 
     return !hasError;
   }

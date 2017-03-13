@@ -12,7 +12,7 @@ export class AuthenticationService {
   authenticatedUser: AuthenticatedUser;
   APIUrl = "http://localhost:8080/api";
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
     this.authenticatedUser = <AuthenticatedUser> JSON.parse(localStorage.getItem('currentUser'));
    }
 
@@ -34,6 +34,12 @@ export class AuthenticationService {
 
   isLoggedIn(): boolean {
     return this.authenticatedUser != null;
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.authenticatedUser = null;
+    location.reload();
   }
 
   signup(userInfo: UserInfo) {

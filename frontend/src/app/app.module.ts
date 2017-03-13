@@ -8,9 +8,10 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
-import { AuthGuardProvider } from './providers/auth-guard.provider';
-import { ConnectPageComponent } from './connect-page/connect-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ConnectCardComponent } from './connect-card/connect-card.component';
+import { NavbarComponent } from './navbar/navbar.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { ConnectPageComponent } from './connect-page/connect-page.component';
     MainComponent,
     DashboardComponent,
     SignupFormComponent,
-    ConnectPageComponent
+    SidebarComponent,
+    ConnectCardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,8 +32,7 @@ import { ConnectPageComponent } from './connect-page/connect-page.component';
     AppRoutingModule
   ],
   providers: [
-    AuthenticationService,
-    AuthGuardProvider
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

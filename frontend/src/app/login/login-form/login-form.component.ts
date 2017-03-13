@@ -40,7 +40,7 @@ export class LoginFormComponent implements OnInit {
     this.errors = new Array<string>();
     let hasError = false;
 
-    if(!this.credentials.email) {
+    if(!this.credentials.email || !this.credentials.email.includes("@")) {
       this.errors.push("Email inválido.");
       hasError = true;
     }

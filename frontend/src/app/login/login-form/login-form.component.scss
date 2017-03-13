@@ -9,8 +9,20 @@
     color: $white;
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 4px;
 }
 
 form {
     font-size: 12px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.signup {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
 }

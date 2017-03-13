@@ -8,6 +8,5 @@
   <div *ngIf="errors.length > 0" class="errors">
     <span class="error" *ngFor="let error of errors">{{ error }}</span>
   </div>
-  <button (click)="login()" type="submit" class="btn btn-primary">Login</button>
-  <button (click)="resetForm()" class="btn btn-warning">Limpar</button>
+  <button (click)="login()" type="submit" class="btn btn-primary">Login</button> <span class="signup">ou <a href="/signup">cadastre-se!</a></span>
 </form>

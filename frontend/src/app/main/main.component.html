@@ -1,3 +1,11 @@
+<app-navbar></app-navbar>
 <div class="container">
-    <router-outlet></router-outlet>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-3 sidebar">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-9 card">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
