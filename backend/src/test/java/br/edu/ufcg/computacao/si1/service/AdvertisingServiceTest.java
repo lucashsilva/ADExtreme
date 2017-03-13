@@ -1,15 +1,11 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
-import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
-import br.edu.ufcg.computacao.si1.exceptions.UserAlredyExistException;
-import br.edu.ufcg.computacao.si1.models.Advertising;
-import br.edu.ufcg.computacao.si1.models.User;
-import br.edu.ufcg.computacao.si1.repositories.AdvertisingRepository;
-import br.edu.ufcg.computacao.si1.repositories.UserRepository;
-import br.edu.ufcg.computacao.si1.services.AdvertisingService;
-import br.edu.ufcg.computacao.si1.services.UserService;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,9 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-
-import static junit.framework.TestCase.*;
+import br.edu.ufcg.computacao.si1.enums.AdType;
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
+import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
+import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.repositories.AdvertisingRepository;
+import br.edu.ufcg.computacao.si1.repositories.UserRepository;
+import br.edu.ufcg.computacao.si1.services.AdvertisingService;
+import br.edu.ufcg.computacao.si1.services.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,10 +47,10 @@ public class AdvertisingServiceTest {
 
 
     @Before
-    public void setUp() throws UserAlredyExistException {
+    public void setUp() throws UserAlreadyExistsException {
         user = userService.create(new User("user", "user@email.com","password", UserRole.LEGAL_PERSON));
                    
-        ad1 = new Advertising("Ad of Furniture", new Date(), new Date(), 100, AdType.FORNITURE, user);
+        ad1 = new Advertising("Ad of Furniture", new Date(), new Date(), 100, AdType.FURNITURE, user);
         ad1.setClassification(5);
         ad2 = new Advertising("Ad of House", new Date(), new Date(), 100000, AdType.SERVICE, user);
         ad1.setClassification(3);
@@ -104,15 +107,15 @@ public class AdvertisingServiceTest {
         assertNotNull(adHouse);
         assertNotNull(adJob);
 
-        assertEquals(AdType.FORNITURE, adFurniture.getType());
+        assertEquals(AdType.FURNITURE, adFurniture.getType());
         assertEquals(AdType.SERVICE, adHouse.getType());
         assertEquals(AdType.JOB,adJob.getType());
 
-        assertEquals(EXPECTED_AMOUNT, advertisingService.getAdByType(AdType.FORNITURE.toString()).size());
+        assertEquals(EXPECTED_AMOUNT, advertisingService.getAdByType(AdType.FURNITURE.toString()).size());
         assertEquals(EXPECTED_AMOUNT, advertisingService.getAdByType(AdType.SERVICE.toString()).size());
         assertEquals(EXPECTED_AMOUNT, advertisingService.getAdByType(AdType.JOB.toString()).size());
 
-        assertTrue(advertisingService.getAdByType(AdType.FORNITURE.toString()).contains(adFurniture));
+        assertTrue(advertisingService.getAdByType(AdType.FURNITURE.toString()).contains(adFurniture));
         assertTrue(advertisingService.getAdByType(AdType.SERVICE.toString()).contains(adHouse));
         assertTrue(advertisingService.getAdByType(AdType.JOB.toString()).contains(adJob));
     }

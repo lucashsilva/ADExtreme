@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_user")
-public class User extends org.springframework.security.core.userdetails.User{
+public class User {
 
 	private static final long serialVersionUID = 1L;
 	private final double INITIAL_CREDIT = 0.0;
@@ -51,13 +51,10 @@ public class User extends org.springframework.security.core.userdetails.User{
     private Set<Advertising> advertisings;
 
     public User() {
-        super("default", "default", AuthorityUtils.createAuthorityList("LEGAL_PERSON"));
+        
     }
 
     public User(String name, String email, String password, UserRole role) {
-
-        super(email, password, AuthorityUtils.createAuthorityList(role.name()));
-
         this.name = name;
         this.email = email;
         this.password = validatePassword(password);
@@ -76,10 +73,6 @@ public class User extends org.springframework.security.core.userdetails.User{
 
 	public String getEmail() {
 		return email;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public UserRole getRole() {
