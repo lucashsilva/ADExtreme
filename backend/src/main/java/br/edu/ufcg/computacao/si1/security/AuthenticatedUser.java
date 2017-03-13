@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.models.User;
 
 @JsonInclude(Include.NON_NULL)
@@ -37,13 +38,7 @@ public class AuthenticatedUser implements Authentication {
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    	final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-    	
-    	if(user != null) {
-    		grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
-    	}
-    	
-        return grantedAuthorities;
+    	return null;
     }
 
     @Override
@@ -79,6 +74,14 @@ public class AuthenticatedUser implements Authentication {
     @Override
     public String getName() {
         return null;
+    }
+    
+    public UserRole getRole() {
+    	return this.user.getRole();
+    }
+    
+    public String getEmail() {
+    	return this.user.getEmail();
     }
 
 }

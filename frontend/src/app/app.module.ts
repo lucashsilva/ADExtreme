@@ -8,10 +8,8 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginPageComponent } from './login/login-page/login-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 import { AuthGuardProvider } from './providers/auth-guard.provider';
-import { SignupPageComponent } from './signup/signup-page/signup-page.component';
 import { ConnectPageComponent } from './connect-page/connect-page.component';
 
 @NgModule({
@@ -21,9 +19,7 @@ import { ConnectPageComponent } from './connect-page/connect-page.component';
     LoginFormComponent,
     MainComponent,
     DashboardComponent,
-    LoginPageComponent,
     SignupFormComponent,
-    SignupPageComponent,
     ConnectPageComponent
   ],
   imports: [
