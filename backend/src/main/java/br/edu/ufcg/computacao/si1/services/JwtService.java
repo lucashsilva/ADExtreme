@@ -21,7 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtService {
     private static final String ISSUER = "ad-extreme";
     private UserService userService;
-    private final String secretKey = "si1lab03";
+    private final String secretKey = "si1-ad-extreme";
 
     @Autowired
     public JwtService(UserServiceImpl userService) {
