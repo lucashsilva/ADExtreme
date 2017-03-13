@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -38,9 +39,15 @@ public class JwtService {
                 .compact();
     }
     
-    public Optional<User> verify(String token) throws IOException, URISyntaxException {
+    public Optional<User> getUserFromToken(String token) throws IOException, URISyntaxException, UserNotFoundException {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
         
-        return userService.getUserByEmail(claims.getBody().getSubject().toString());
+        Optional<User> user = userService.getUserByEmail(claims.getBody().getSubject().toString());
+        
+        if(user.isPresent()) {
+        	return user;
+        } else {
+        	throw new UserNotFoundException();
+        }
     }
 }

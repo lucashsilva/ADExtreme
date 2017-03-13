@@ -25,7 +25,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         try {
-            Optional<User> possibleProfile = jwtService.verify((String) authentication.getCredentials());
+            Optional<User> possibleProfile = jwtService.getUserFromToken((String) authentication.getCredentials());
             
             return new AuthenticatedUser(possibleProfile.get());
         } catch (Exception e) {

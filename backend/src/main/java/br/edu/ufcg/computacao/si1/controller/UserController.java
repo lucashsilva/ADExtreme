@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,28 +49,14 @@ public class UserController {
             method = RequestMethod.GET
     )
     public ResponseEntity<User> getUser(@PathVariable Long id){
-        User user = new User();
+        Optional<User> user = userService.getUserById(id);
 
-        if(userService.getUserById(id).isPresent())
-            user = userService.getUserById(id).get();
-
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        if(user.isPresent()) {
+        	return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+        } else {
+        	return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
     }
-
-
-    @RequestMapping(
-            value = "/{email}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<User> getUser(@PathVariable String email){
-        User user = new User();
-
-        if(userService.getUserByEmail(email).isPresent())
-            user = userService.getUserByEmail(email).get();
-
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
-
 
     @RequestMapping(
             method = RequestMethod.GET
