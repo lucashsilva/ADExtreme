@@ -16,9 +16,6 @@ import br.edu.ufcg.computacao.si1.providers.UserAuthenticationProvider;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private JwtAuthenticationFilter jwtAuthFilter;
-
-	@Autowired
 	private UserAuthenticationProvider authProvider;
 
 	@Autowired
@@ -35,10 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers(HttpMethod.OPTIONS, "/api/users")
         .permitAll()
-        .antMatchers("/**/*")
+        .anyRequest()
         .fullyAuthenticated()
         .and()
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
         .exceptionHandling()
         .authenticationEntryPoint(jwtAuthEndPoint);
 	}

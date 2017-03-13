@@ -5,16 +5,14 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
-import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
-import br.edu.ufcg.computacao.si1.models.User;
-import br.edu.ufcg.computacao.si1.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.edu.ufcg.computacao.si1.enums.AdType;
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
 import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisingRepository;
 
 @Service

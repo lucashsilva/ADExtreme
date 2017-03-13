@@ -49,14 +49,14 @@ export class AuthenticationService {
   private setAuthenticatedUser(user: AuthenticatedUser) {
     if(user.token && user.email) {
       this.authenticatedUser = user;
-      localStorage.setItem('currentUser', JSON.stringify({email: this.authenticatedUser.email,
-                                                              token: this.authenticatedUser.token}));
+      localStorage.setItem('currentUser', JSON.stringify(this.authenticatedUser));
     }
   }
 
   getOptions() {
   let options = new RequestOptions();
   let headers = new Headers();
+
   headers.append('Content-Type', 'application/json');
   
   if(this.authenticatedUser) {

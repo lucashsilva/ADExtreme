@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
-import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 
