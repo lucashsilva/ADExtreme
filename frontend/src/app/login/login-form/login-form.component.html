@@ -1,0 +1,13 @@
+<form>
+  <div class="form-group">
+    <input [(ngModel)]="credentials.email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <input [(ngModel)]="credentials.password" [ngModelOptions]="{standalone: true}" type="password" class="form-control" id="password" placeholder="Senha">
+  </div>
+  <div *ngIf="errors.length > 0" class="errors">
+    <span class="error" *ngFor="let error of errors">{{ error }}</span>
+  </div>
+  <button (click)="login()" type="submit" class="btn btn-primary">Login</button>
+  <button (click)="resetForm()" class="btn btn-warning">Limpar</button>
+</form>

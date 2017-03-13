@@ -1,0 +1,16 @@
+@import "../../../defaults";
+
+.error {
+    display: block;
+}
+
+.errors {
+    background: $red;
+    color: $white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form {
+    font-size: 12px;
+}

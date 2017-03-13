@@ -1,4 +1,12 @@
-@import "../../defaults";
+@import "../../../defaults";
+
+.form-check {
+    display: inline;
+}
+
+form {
+    font-size: 12px;
+}
 
 .error {
     display: block;
