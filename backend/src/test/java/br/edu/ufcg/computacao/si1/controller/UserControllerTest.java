@@ -39,7 +39,7 @@ public class UserControllerTest {
 
 	@Test
 	public void testCreateUserUnsuccessfully() {
-		assertEquals(new ResponseEntity<>(HttpStatus.BAD_REQUEST), controller.addUser(userWithInvalidName));
+		assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), controller.addUser(userWithInvalidName));
 	}
 	
 	@Test
