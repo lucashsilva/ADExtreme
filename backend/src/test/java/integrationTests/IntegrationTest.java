@@ -1,9 +1,15 @@
 package integrationTests;
 
 
-import br.edu.ufcg.computacao.si1.ADExtremeApplication;
-import br.edu.ufcg.computacao.si1.models.User;
-import br.edu.ufcg.computacao.si1.repositories.UserRepository;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,17 +24,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import br.edu.ufcg.computacao.si1.ADExtremeApplication;
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 
 
 @RunWith(SpringRunner.class)
@@ -42,10 +41,9 @@ public class IntegrationTest {
             Charset.forName("utf8"));
 
     private MockMvc mockMvc;
-    private HttpMessageConverter mapping;
+    private HttpMessageConverter<User> mapping;
 
     private User user;
-    private List<User> bookmarkList = new ArrayList<>();
 
     @Autowired
     private UserRepository repository;
@@ -53,23 +51,24 @@ public class IntegrationTest {
     @Autowired
     private WebApplicationContext context;
 
-    @Autowired
+    @SuppressWarnings("unchecked")
+	@Autowired
     void setConverters(HttpMessageConverter<?>[] converters) {
-        this.mapping = Arrays.asList(converters).stream()
+        this.mapping = (HttpMessageConverter<User>) Arrays.asList(converters).stream()
                 .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
                 .findAny()
                 .orElse(null);
 
         assertNotNull("the JSON message converter must not be null", this.mapping);
     }
-/*
+
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(context).build();
 
         this.repository.deleteAllInBatch();
 
-        this.user = new User("Odravison", "Ojunior4@fake.com", "hao123", "user");
+        this.user = new User("Odravison", "Junior", "Ojunior4@fake.com", "hao123", UserRole.LEGAL_PERSON);
     }
 
     @Test
@@ -77,7 +76,7 @@ public class IntegrationTest {
         mockMvc.perform(post(USER_API)
                 .content(this.json(new User()))
                 .contentType(contentType))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
 
     @Test
@@ -101,8 +100,8 @@ public class IntegrationTest {
                 .andExpect(status().isConflict());
     }
 
-*/
-    private String json(Object object) throws IOException {
+
+    private String json(User object) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
         this.mapping.write(object, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
         return mockHttpOutputMessage.getBodyAsString();

@@ -39,7 +39,7 @@ public class UserController {
         } catch (UserAlreadyExistsException e) {
             return new ResponseEntity<User>(HttpStatus.CONFLICT);
         } catch(TransactionSystemException e) {
-            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
