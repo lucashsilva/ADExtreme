@@ -3,16 +3,7 @@ package br.edu.ufcg.computacao.si1.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,10 +21,9 @@ public class User {
 	@Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "name")
-    @NotNull(message = "Username can not be null.")
-    @NotEmpty(message = "Username can not be empty.")
-    private String name;
+	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
+    private Name name;
 
     @Column(name = "email", unique = true)
     @NotNull(message = "User email can not be null.")
@@ -54,30 +44,24 @@ public class User {
 	@NotNull(message = "User credit can not be null.")
     private double credit;
 
-	@Column
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
-    private Set<Advertising> advertisings;
 
     public User() {
         
     }
 
-    public User(String name, String email, String password, UserRole role) {
-        this.name = name;
+    public User(String firstName, String lastName, String email, String password, UserRole role) {
+        this.name = new Name(firstName, lastName);
         this.email = email;
         this.password = validatePassword(password);
         this.role = role;
         this.credit = INITIAL_CREDIT;
-        this.advertisings = new HashSet<>();
     }
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
+
 
 	public String getEmail() {
 		return email;
@@ -91,7 +75,11 @@ public class User {
 		this.id = id;
 	}
 
-	public void setName(String name) {
+	public Name getName() {
+		return name;
+	}
+
+	public void setName(Name name) {
 		this.name = name;
 	}
 
@@ -123,21 +111,6 @@ public class User {
 		this.credit -= amount;
 	}
 
-	public Set<Advertising> getAdvertisings() {
-		return advertisings;
-	}
-
-	public void setAdvertisings(Set<Advertising> advertisings) {
-		if(advertisings == null) {
-			this.advertisings = new HashSet<>();
-		}else {
-			this.advertisings = advertisings;
-		}
-	}
-
-	public boolean addAdvertising(Advertising advertising){
-		return advertising != null && this.advertisings.add(advertising);
-	}
 
 	public boolean authenticate(String password) {
 		return this.password.equals(password);

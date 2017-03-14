@@ -29,12 +29,12 @@ public class UserController {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<User> addUser(@RequestBody User user) {
         try {
             userService.create(user);
-
             return new ResponseEntity<User>(HttpStatus.CREATED);
         } catch (UserAlreadyExistsException e) {
             return new ResponseEntity<User>(HttpStatus.CONFLICT);

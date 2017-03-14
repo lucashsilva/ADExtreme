@@ -16,7 +16,7 @@ export class AuthenticationService {
     this.authenticatedUser = <AuthenticatedUser> JSON.parse(localStorage.getItem('currentUser'));
    }
 
-  login(userCredentials: UserCredentials) { 
+  login(userCredentials: UserCredentials) {
     return this.http.post(this.APIUrl + "/auth/login", JSON.stringify(userCredentials), this.getOptions())
                       .map((response: Response) => {
 
@@ -64,7 +64,7 @@ export class AuthenticationService {
   let headers = new Headers();
 
   headers.append('Content-Type', 'application/json');
-  
+
   if(this.authenticatedUser) {
     headers.append('Authorization', this.authenticatedUser.token);
   }
@@ -86,7 +86,11 @@ class AuthenticatedUser {
 }
 
 export class UserInfo {
-  name: string;
+
+  name: {
+    firstName: string;
+    lastName: string;
+  };
   password: string;
   role: string;
   email: string;
@@ -103,4 +107,3 @@ export class UserCredentials {
   constructor() {}
 
 }
-

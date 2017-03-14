@@ -26,7 +26,7 @@ export class SignupFormComponent implements OnInit {
     this.errors = new Array<string>();
     let hasError = false;
 
-    if (!this.userInfo.name) {
+    if (!this.userInfo.name.firstName) {
       this.errors.push("Nome inválido.");
       hasError = true;
     }
@@ -38,7 +38,7 @@ export class SignupFormComponent implements OnInit {
       this.errors.push("A senha deve conter pelo menos 8 caracteres.");
       hasError = true;
     }
-    
+
 
     return !hasError;
   }

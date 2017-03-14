@@ -28,8 +28,8 @@ public class UserControllerTest {
 
 	@Before
 	public void setUp() {
-		validUser = new User("Odravison", "Ojunior4@fake.com", "hao123", UserRole.LEGAL_PERSON);
-		userWithInvalidName = new User("", "Ojunior4@fake.com", "hao123", UserRole.NATURAL_PERSON);
+		validUser = new User("Odravison", "Doe", "Ojunior4@fake.com", "hao123", UserRole.LEGAL_PERSON);
+		userWithInvalidName = new User("", "Doe", "Ojunior4@fake.com", "hao123", UserRole.NATURAL_PERSON);
 	}
 	
 	@Test

@@ -30,9 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
-/**
- * @author Josh Long
- */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ADExtremeApplication.class)
 @WebAppConfiguration
