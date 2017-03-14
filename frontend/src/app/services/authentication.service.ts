@@ -32,6 +32,10 @@ export class AuthenticationService {
     }).toPromise();
   }
 
+  getUserInfo() {
+    return this.http.get(this.APIUrl + "/users/")
+  }
+
   isLoggedIn(): boolean {
     return this.authenticatedUser != null;
   }
@@ -53,7 +57,7 @@ export class AuthenticationService {
   }
 
   private setAuthenticatedUser(user: AuthenticatedUser) {
-    if(user.token && user.email) {
+    if(user.token && user.userInfo ) {
       this.authenticatedUser = user;
       localStorage.setItem('currentUser', JSON.stringify(this.authenticatedUser));
     }
@@ -81,6 +85,7 @@ export class UserInfo {
   password: string;
   role: string;
   email: string;
+  credit: number;
 
   constructor() {
     this.name = new Name();
@@ -88,11 +93,12 @@ export class UserInfo {
   }
 }
 
-class AuthenticatedUser extends UserInfo {
+class AuthenticatedUser {
   token: string;
+  authenticated: boolean;
+  userInfo: UserInfo;
 
   constructor() {
-    super();
   }
 }
 

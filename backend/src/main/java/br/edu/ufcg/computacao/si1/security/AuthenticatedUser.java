@@ -7,8 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.models.Name;
 import br.edu.ufcg.computacao.si1.models.User;
 
 @JsonInclude(Include.NON_NULL)
@@ -74,12 +76,8 @@ public class AuthenticatedUser implements Authentication {
         return null;
     }
     
-    public UserRole getRole() {
-    	return this.user.getRole();
-    }
-    
-    public String getEmail() {
-    	return this.user.getEmail();
+    public User getUserInfo() {
+    	return this.user;
     }
 
 }
