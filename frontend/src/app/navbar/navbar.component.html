@@ -21,7 +21,7 @@
       </li>
       <li class="nav-item dropdown" *ngIf="this.authenticationService.isLoggedIn()">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Conta
+          {{ this.authenticationService.authenticatedUser.name.firstName }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           Opções conta

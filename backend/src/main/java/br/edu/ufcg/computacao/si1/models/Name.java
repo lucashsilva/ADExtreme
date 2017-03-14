@@ -16,12 +16,12 @@ public class Name {
     
     @Column(name = "first_name")
     @NotNull(message = "User first name can not be null.")
-    @NotEmpty(message = "User password can not be empty")
+    @NotEmpty(message = "User last name can not be empty.")
     private String firstName;
     
     @Column(name = "last_name")
     @NotNull(message = "User last name can not be null.")
-    @NotEmpty(message = "User password can not be empty")
+    @NotEmpty(message = "User last name can not be empty.")
     private String lastName;
 
     public Name(String firstName, String lastName) {

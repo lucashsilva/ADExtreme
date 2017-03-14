@@ -5,12 +5,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -29,8 +28,9 @@ public class User {
 	@Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+	@NotNull(message = "User name can not be null.")
     private Name name;
 
     @Column(name = "email", unique = true)
@@ -68,8 +68,6 @@ public class User {
 	public Long getId() {
 		return id;
 	}
-
-
 
 	public String getEmail() {
 		return email;

@@ -30,6 +30,11 @@ export class SignupFormComponent implements OnInit {
       this.errors.push("Nome inválido.");
       hasError = true;
     }
+
+    if (!this.userInfo.name.firstName) {
+      this.errors.push("Sobrenome inválido.");
+      hasError = true;
+    }
     if(!this.userInfo.email || !this.userInfo.email.includes("@")) {
       this.errors.push("Email inválido.");
       hasError = true;

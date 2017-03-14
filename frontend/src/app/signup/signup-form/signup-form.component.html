@@ -1,14 +1,14 @@
 <form>
-  <p><h2>Cadastre-se</h2></p>
+  <h2>Cadastre-se</h2>
   <div class="form-group row">
     <div class="form-group col-md-6">
-      <input [(ngModel)]="userInfo.name.firstName" [ngModelOptions]="{standalone: true}" type="name" class="form-control" id="firstName" aria-describedby="firstName" placeholder="Primeiro nome">
+      <input [(ngModel)]="userInfo.name.firstName" [ngModelOptions]="{standalone: true}" type="name" class="form-control" id="firstName" aria-describedby="firstName" placeholder="Nome">
     </div>
     <div class="form-group col-md-6">
-      <input [(ngModel)]="userInfo.name.lastName" [ngModelOptions]="{standalone: true}" type="name" class="form-control" id="lastName" aria-describedby="lastName" placeholder="Ultimo nome">
+      <input [(ngModel)]="userInfo.name.lastName" [ngModelOptions]="{standalone: true}" type="name" class="form-control" id="lastName" aria-describedby="lastName" placeholder="Sobrenome">
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group email">
     <input [(ngModel)]="userInfo.email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
   </div>
   <div class="form-group">

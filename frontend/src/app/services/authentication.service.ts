@@ -75,29 +75,32 @@ export class AuthenticationService {
   }
 }
 
-class AuthenticatedUser {
-  email: string;
-  token: string;
-  role: string;
-
-  constructor() {
-
-  }
-}
-
 export class UserInfo {
 
-  name: {
-    firstName: string;
-    lastName: string;
-  };
+  name: Name;
   password: string;
   role: string;
   email: string;
 
   constructor() {
+    this.name = new Name();
     this.role = "NATURAL_PERSON"
   }
+}
+
+class AuthenticatedUser extends UserInfo {
+  token: string;
+
+  constructor() {
+    super();
+  }
+}
+
+export class Name {
+  firstName: string;
+  lastName: string;
+
+  constructor() {  }
 }
 
 export class UserCredentials {
