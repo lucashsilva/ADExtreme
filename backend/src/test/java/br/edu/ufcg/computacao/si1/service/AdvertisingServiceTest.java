@@ -51,11 +51,11 @@ public class AdvertisingServiceTest {
         user = userService.create(new User("user", "Doe", "user@email.com","password", UserRole.LEGAL_PERSON));
                    
         ad1 = new Advertising("Ad of Furniture", new Date(), new Date(), 100, AdType.FURNITURE, user);
-        ad1.setClassification(5);
+        //ad1.setClassification(5);
         ad2 = new Advertising("Ad of House", new Date(), new Date(), 100000, AdType.SERVICE, user);
-        ad1.setClassification(3);
+       //ad1.setClassification(3);
         ad3 = new Advertising("Ad of Job", new Date(), new Date(), 0, AdType.JOB, user);
-        ad1.setClassification(4);
+       //ad1.setClassification(4);
     }
 
     @After
@@ -221,6 +221,7 @@ public class AdvertisingServiceTest {
         assertEquals(adJob.getPrice(), advertisingService.getAdById(adJob.getId()).get().getPrice());
 
         //Update Classification
+        /*
         adFurniture.setClassification(5);
         adJob.setClassification(3);
         adHouse.setClassification(4);
@@ -232,6 +233,7 @@ public class AdvertisingServiceTest {
         assertEquals(5.0, advertisingService.getAdById(adFurniture.getId()).get().getClassification());
         assertEquals(3.0, advertisingService.getAdById(adJob.getId()).get().getClassification());
         assertEquals(4.0, advertisingService.getAdById(adHouse.getId()).get().getClassification());
+        */
     }
 
 }

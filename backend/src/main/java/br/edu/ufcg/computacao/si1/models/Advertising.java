@@ -32,7 +32,6 @@ public class Advertising {
 
     @SuppressWarnings("unused")
 	private final static DateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-    private final double INITIAL_CLASSIFICATION = 0.0;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -56,11 +55,6 @@ public class Advertising {
     @NotNull(message = "Advertising price can not be null.")
     @Min(0)
     private double price;
-
-    @Column(name = "classification")
-    @NotNull(message = "Advertising classification can not be null.")
-    @Min(0) @Max(5)
-    private double classification;
     
     @Column(name = "type")
     @NotNull(message = "Advertising type can not be null.")
@@ -72,19 +66,14 @@ public class Advertising {
     @NotNull(message = "Advertising user can not be null.")
     private User user;
 
-    @Column
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "advertising", orphanRemoval = true)
-    private Set<Question> questions;
 
     public Advertising(String title, Date publicationDate, Date expirationDate, double price, AdType type, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
         this.price = price;
-        this.classification = INITIAL_CLASSIFICATION;
         this.type = type;
         this.user = user;
-        this.questions = new HashSet<>();
     }
 
     public Advertising() {}
@@ -103,10 +92,6 @@ public class Advertising {
 
 	public double getPrice() {
 		return price;
-	}
-
-	public double getClassification() {
-		return classification;
 	}
 
 	public AdType getType() { return type; }
@@ -129,10 +114,6 @@ public class Advertising {
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public void setClassification(double classification) {
-		this.classification = classification;
 	}
 
 	public void setType(AdType type) {
@@ -159,21 +140,6 @@ public class Advertising {
         }
     }
 
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        if(questions == null){
-            this.questions = new HashSet<>();
-        }else{
-            this.questions = questions;
-        }
-    }
-
-    public boolean addQuestion(Question question){
-        return question != null && this.questions.add(question);
-    }
 
     @Override
 	public int hashCode() {
@@ -203,8 +169,7 @@ public class Advertising {
 	@Override
 	public String toString() {
 		return "Advertising [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
-                ", expiration date="+ expirationDate + ", price=" + price +
-                ", classification=" + classification + ", type=" + type + "]";
+                ", expiration date="+ expirationDate + ", price=" + price + ", type=" + type + "]";
 	}
 
 	

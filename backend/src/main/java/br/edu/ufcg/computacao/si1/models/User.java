@@ -52,10 +52,7 @@ public class User {
 	@NotNull(message = "User credit can not be null.")
     private double credit;
 
-
-    public User() {
-        
-    }
+    public User() { }
 
     public User(String firstName, String lastName, String email, String password, UserRole role) {
         this.name = new Name(firstName, lastName);
