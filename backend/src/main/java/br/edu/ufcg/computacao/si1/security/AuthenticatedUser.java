@@ -7,10 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.models.Name;
 import br.edu.ufcg.computacao.si1.models.User;
 
 @JsonInclude(Include.NON_NULL)
@@ -43,7 +40,7 @@ public class AuthenticatedUser implements Authentication {
 
     @Override
     public Object getCredentials() {
-        return null;
+        return this.token;
     }
     
     public String getToken() {
@@ -63,7 +60,7 @@ public class AuthenticatedUser implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        return true; //this object is created only when theres a valid authentication
+        return this.user != null;
     }
 
     @Override

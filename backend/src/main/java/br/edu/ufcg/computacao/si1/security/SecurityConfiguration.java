@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.security;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.edu.ufcg.computacao.si1.providers.UserAuthenticationProvider;
+
 
 @Configuration
 @EnableWebSecurity

@@ -27,14 +27,14 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         try {
             Optional<User> possibleProfile = authenticationService.getUserFromToken((String) authentication.getCredentials());
             
-            return new AuthenticatedUser(possibleProfile.get());
+            return new AuthenticatedUser(possibleProfile.get(), (String) authentication.getCredentials());
         } catch (Exception e) {
-            throw new FailedAuthenticationException("Failed to verify token" + e.getMessage());
+            throw new FailedAuthenticationException("Authentication failed: " + e.getMessage());
         }
     }
 
     @Override
-    public boolean supports(Class<?> authentication) {
-        return AuthenticatedUser.class.equals(authentication);
+    public boolean supports(Class<? extends Object> authentication) {
+        return (AuthenticatedUser.class.isAssignableFrom(authentication));
     }
 }
