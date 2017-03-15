@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import br.edu.ufcg.computacao.si1.models.User;
 
@@ -39,12 +41,13 @@ public class AuthenticatedUser implements Authentication {
     }
 
     @Override
+    @JsonProperty(access = Access.WRITE_ONLY)
     public Object getCredentials() {
         return this.token;
     }
     
     public String getToken() {
-    	return this.token;
+    	return this.token; 
     }
     
 
