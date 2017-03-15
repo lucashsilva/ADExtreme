@@ -8,11 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
-import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
 import br.edu.ufcg.computacao.si1.models.advertising.Advertising;
-import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisingRepository;
 
 @Service
