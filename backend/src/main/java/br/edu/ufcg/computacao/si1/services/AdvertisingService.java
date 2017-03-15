@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
-import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.advertising.Advertising;
 
 public interface AdvertisingService {
 

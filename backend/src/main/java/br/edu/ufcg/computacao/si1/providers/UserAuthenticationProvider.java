@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import br.edu.ufcg.computacao.si1.exceptions.FailedAuthenticationException;
-import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.security.AuthenticatedUser;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
-import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.models.user.User;
 
 public interface UserService {
     User create(User usuario) throws UserAlreadyExistsException;

@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.edu.ufcg.computacao.si1.enums.AdType;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
-import br.edu.ufcg.computacao.si1.models.Advertising;
-import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.models.advertising.Advertising;
+import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisingRepository;
 
 @Service
@@ -27,14 +27,6 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     @Override
     public Advertising create(Advertising ad) throws InvalidAdvertisingUserException {
-        AdType adType = ad.getType();
-        User user = ad.getUser();
-
-        if(user.getRole().equals(UserRole.NATURAL_PERSON)
-                && (adType.equals(AdType.JOB) || adType.equals(AdType.SERVICE))){
-            throw new InvalidAdvertisingUserException();
-        }
-
         return advertisingRepository.save(ad);
     }
 
@@ -45,9 +37,7 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     @Override
     public Collection<Advertising> getAdByType(String type) {
-        return advertisingRepository.findAll().stream()
-                .filter(ad -> ad.getType().name().equalsIgnoreCase(type))
-                .collect(Collectors.toCollection(ArrayList::new));
+        return advertisingRepository.findByType(type);
     }
 
     @Override

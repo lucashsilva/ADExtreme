@@ -1,12 +1,15 @@
-package br.edu.ufcg.computacao.si1.models;
+package br.edu.ufcg.computacao.si1.models.user;
+
+import br.edu.ufcg.computacao.si1.models.rating.Rating;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "tb_user_rating")
-public class UserRating extends Rating{
+public class UserRating extends Rating {
 
     @ManyToOne
     @JoinColumn(name = "user_id")

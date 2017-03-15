@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.services;
 
-import br.edu.ufcg.computacao.si1.models.Question;
+import br.edu.ufcg.computacao.si1.models.advertising.Question;
 import br.edu.ufcg.computacao.si1.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

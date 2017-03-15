@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.models.user.User;
 
 @JsonInclude(Include.NON_NULL)
 public class AuthenticatedUser implements Authentication {

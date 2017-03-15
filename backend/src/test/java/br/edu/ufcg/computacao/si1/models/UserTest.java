@@ -3,7 +3,7 @@ package br.edu.ufcg.computacao.si1.models;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 import org.junit.Test;
 
-import br.edu.ufcg.computacao.si1.models.User;
+import br.edu.ufcg.computacao.si1.models.user.User;
 
 public class UserTest {
 	

@@ -2,7 +2,7 @@ package br.edu.ufcg.computacao.si1.controller;
 
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
-import br.edu.ufcg.computacao.si1.models.Advertising;
+import br.edu.ufcg.computacao.si1.models.advertising.Advertising;
 import br.edu.ufcg.computacao.si1.services.AdvertisingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

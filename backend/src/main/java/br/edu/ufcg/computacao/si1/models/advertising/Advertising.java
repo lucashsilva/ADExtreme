@@ -1,34 +1,20 @@
-package br.edu.ufcg.computacao.si1.models;
+package br.edu.ufcg.computacao.si1.models.advertising;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import br.edu.ufcg.computacao.si1.models.user.User;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
-
 @Entity
-@Table(name="tb_advertising")
-public class Advertising {
+@Table(name = "tb_advertisings")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+public abstract class Advertising {
 
     @SuppressWarnings("unused")
 	private final static DateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -51,28 +37,16 @@ public class Advertising {
 	@NotNull(message = "Advertising creation date can not be null.")
 	private Date expirationDate;
 
-    @Column(name = "price")
-    @NotNull(message = "Advertising price can not be null.")
-    @Min(0)
-    private double price;
-    
-    @Column(name = "type")
-    @NotNull(message = "Advertising type can not be null.")
-	@Enumerated(EnumType.STRING)
-    private AdType type;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     @NotNull(message = "Advertising user can not be null.")
     private User user;
 
 
-    public Advertising(String title, Date publicationDate, Date expirationDate, double price, AdType type, User user) {
+    public Advertising(String title, Date publicationDate, Date expirationDate, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
-        this.price = price;
-        this.type = type;
         this.user = user;
     }
 
@@ -90,12 +64,6 @@ public class Advertising {
 		return publicationDate;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public AdType getType() { return type; }
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -110,14 +78,6 @@ public class Advertising {
         }else{
             this.publicationDate = publicationDate;
         }
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public void setType(AdType type) {
-		this.type = type;
 	}
 
     public User getUser() {
@@ -169,7 +129,7 @@ public class Advertising {
 	@Override
 	public String toString() {
 		return "Advertising [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
-                ", expiration date="+ expirationDate + ", price=" + price + ", type=" + type + "]";
+                ", expiration date="+ expirationDate + "]";
 	}
 
 	

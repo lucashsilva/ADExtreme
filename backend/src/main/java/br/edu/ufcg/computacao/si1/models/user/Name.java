@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.models;
+package br.edu.ufcg.computacao.si1.models.user;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

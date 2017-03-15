@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufcg.computacao.si1.exceptions.FailedAuthenticationException;
-import br.edu.ufcg.computacao.si1.models.UserCredentials;
+import br.edu.ufcg.computacao.si1.models.user.UserCredentials;
 import br.edu.ufcg.computacao.si1.security.AuthenticatedUser;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 
