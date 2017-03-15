@@ -15,6 +15,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 
 @Entity
@@ -92,7 +95,8 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}
