@@ -14,7 +14,6 @@ import br.edu.ufcg.computacao.si1.exceptions.FailedAuthenticationException;
 import br.edu.ufcg.computacao.si1.models.UserCredentials;
 import br.edu.ufcg.computacao.si1.security.AuthenticatedUser;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
-import br.edu.ufcg.computacao.si1.services.JwtService;
 
 @CrossOrigin
 @RestController
@@ -22,12 +21,10 @@ import br.edu.ufcg.computacao.si1.services.JwtService;
 public class AuthenticationController {
 
 	private final AuthenticationService authenticationService;
-	private final JwtService jwtService;
 
 	@Autowired
-	public AuthenticationController(AuthenticationService authenticationService, JwtService jwtService) {
+	public AuthenticationController(AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
-		this.jwtService = jwtService;
 	}
 
 	@RequestMapping(
@@ -42,7 +39,7 @@ public class AuthenticationController {
             		String token;
             		
                     try {
-                        token = jwtService.tokenFor(user);
+                        token = authenticationService.tokenFor(user);
                         response.setHeader("Authorization", token);
                    
                     } catch (Exception e) {

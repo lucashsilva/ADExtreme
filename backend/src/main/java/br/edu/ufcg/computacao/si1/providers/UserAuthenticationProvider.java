@@ -11,21 +11,21 @@ import org.springframework.stereotype.Component;
 import br.edu.ufcg.computacao.si1.exceptions.FailedAuthenticationException;
 import br.edu.ufcg.computacao.si1.models.User;
 import br.edu.ufcg.computacao.si1.security.AuthenticatedUser;
-import br.edu.ufcg.computacao.si1.services.JwtService;
+import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
-    private final JwtService jwtService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public UserAuthenticationProvider(JwtService jwtService) {
-        this.jwtService = jwtService;
+    public UserAuthenticationProvider(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         try {
-            Optional<User> possibleProfile = jwtService.getUserFromToken((String) authentication.getCredentials());
+            Optional<User> possibleProfile = authenticationService.getUserFromToken((String) authentication.getCredentials());
             
             return new AuthenticatedUser(possibleProfile.get());
         } catch (Exception e) {
