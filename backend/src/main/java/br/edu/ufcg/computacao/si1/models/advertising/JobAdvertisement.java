@@ -16,14 +16,14 @@ import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 
 @Entity
 @DiscriminatorValue(value = "job_ad")
-public class JobAd extends Advertisement {
+public class JobAdvertisement extends Advertisement {
 
     @Column(name = "salary_offer")
     @NotNull(message = "Job salary offer can not be null.")
     @Min(0)
     private double salaryOffer;
 
-    public JobAd(String title, Date publicationDate, Date expirationDate, double salaryOffer, User user) throws InvalidAdvertisimentUserException {
+    public JobAdvertisement(String title, Date publicationDate, Date expirationDate, double salaryOffer, User user) throws InvalidAdvertisimentUserException {
         super(title, publicationDate, expirationDate, user);
 
         if(user.getRole().equals(UserRole.NATURAL_PERSON))

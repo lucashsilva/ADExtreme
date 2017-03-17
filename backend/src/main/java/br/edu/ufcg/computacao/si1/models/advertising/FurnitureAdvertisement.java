@@ -10,9 +10,9 @@ import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value = "furniture_ad")
-public class FurnitureAd extends CostAd {
+public class FurnitureAdvertisement extends CostAd {
 
-    public FurnitureAd(String title, Date publicationDate, Date expirationDate, double price, User user) {
+    public FurnitureAdvertisement(String title, Date publicationDate, Date expirationDate, double price, User user) {
         super(title, publicationDate, expirationDate, price, user);
     }
 

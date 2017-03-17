@@ -9,11 +9,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_advertising_rating")
+@Table(name = "tb_advertisement_rating")
 public class AdvertisementRating extends Rating {
 
     @ManyToOne
-    @JoinColumn(name = "advertising_id")
+    @JoinColumn(name = "advertisement_id")
     @NotNull(message = "Rating advertisement can not be null")
     private Advertisement advertisement;
 
