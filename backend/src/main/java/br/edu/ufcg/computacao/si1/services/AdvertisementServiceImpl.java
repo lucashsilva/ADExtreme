@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
-import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisementRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

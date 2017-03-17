@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.repositories;
 
-import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;

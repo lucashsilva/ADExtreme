@@ -9,5 +9,5 @@ public class InvalidAdvertisimentUserException extends Exception{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public InvalidAdvertisimentUserException(){ super("Invalid advertising user.");}
+	public InvalidAdvertisimentUserException(){ super("Invalid advertisement user.");}
 }

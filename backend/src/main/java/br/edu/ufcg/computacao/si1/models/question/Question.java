@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.models.question;
 
-import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name = "tb_question")
 public class Question {
 
-    private final String NO_ANSWER = "";
+    private static final String NO_ANSWER = "";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

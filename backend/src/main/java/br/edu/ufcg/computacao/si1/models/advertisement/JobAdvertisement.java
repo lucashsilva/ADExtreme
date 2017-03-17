@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.models.advertising;
+package br.edu.ufcg.computacao.si1.models.advertisement;
 
 
 import java.util.Date;
@@ -15,7 +15,7 @@ import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 
 
 @Entity
-@DiscriminatorValue(value = "job_ad")
+@DiscriminatorValue(value = "job_advertisement")
 public class JobAdvertisement extends Advertisement {
 
     @Column(name = "salary_offer")

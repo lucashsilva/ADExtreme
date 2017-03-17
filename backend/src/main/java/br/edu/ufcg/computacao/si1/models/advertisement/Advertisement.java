@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.models.advertising;
+package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import br.edu.ufcg.computacao.si1.models.user.User;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "tb_advertisings")
+@Table(name = "tb_advertisement")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Advertisement {

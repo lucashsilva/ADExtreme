@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.models.advertising;
+package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import br.edu.ufcg.computacao.si1.models.user.User;
 
@@ -8,8 +8,8 @@ import java.util.Date;
 
 
 @Entity
-@DiscriminatorValue(value = "realty_ad")
-public class RealtyAdvertisement extends CostAd {
+@DiscriminatorValue(value = "realty_advertisement")
+public class RealtyAdvertisement extends CostAdvertisement {
 
     public RealtyAdvertisement(String title, Date publicationDate, Date expirationDate, double price, User user) {
         super(title, publicationDate, expirationDate, price, user);

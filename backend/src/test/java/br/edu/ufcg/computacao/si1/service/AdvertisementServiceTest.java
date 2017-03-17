@@ -7,7 +7,7 @@ import static junit.framework.TestCase.assertTrue;
 
 import java.util.Date;
 
-import br.edu.ufcg.computacao.si1.models.advertising.*;
+import br.edu.ufcg.computacao.si1.models.advertisement.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
+import br.edu.ufcg.computacao.si1.enums.AdvertisementType;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
@@ -111,13 +111,13 @@ public class AdvertisementServiceTest {
         assertEquals(RealtyAdvertisement.class, adHouse.getClass());
         assertEquals(JobAdvertisement.class, adJob.getClass());
 
-        assertEquals(EXPECTED_AMOUNT, advertisementService.getAdByType(AdType.FURNITURE.toString()).size());
-        assertEquals(EXPECTED_AMOUNT, advertisementService.getAdByType(AdType.SERVICE.toString()).size());
-        assertEquals(EXPECTED_AMOUNT, advertisementService.getAdByType(AdType.JOB.toString()).size());
+        assertEquals(EXPECTED_AMOUNT, advertisementService.getAdByType(AdvertisementType.FURNITURE.toString()).size());
+        assertEquals(EXPECTED_AMOUNT, advertisementService.getAdByType(AdvertisementType.SERVICE.toString()).size());
+        assertEquals(EXPECTED_AMOUNT, advertisementService.getAdByType(AdvertisementType.JOB.toString()).size());
 
-        assertTrue(advertisementService.getAdByType(AdType.FURNITURE.toString()).contains(adFurniture));
-        assertTrue(advertisementService.getAdByType(AdType.SERVICE.toString()).contains(adHouse));
-        assertTrue(advertisementService.getAdByType(AdType.JOB.toString()).contains(adJob));
+        assertTrue(advertisementService.getAdByType(AdvertisementType.FURNITURE.toString()).contains(adFurniture));
+        assertTrue(advertisementService.getAdByType(AdvertisementType.SERVICE.toString()).contains(adHouse));
+        assertTrue(advertisementService.getAdByType(AdvertisementType.JOB.toString()).contains(adJob));
     }
 
     @Test
@@ -208,7 +208,7 @@ public class AdvertisementServiceTest {
         assertEquals(adJob.getTitle(), advertisementService.getAdById(adJob.getId()).get().getTitle());
 
         //Update Price
-        ((CostAd) adFurniture).setPrice(((JobAdvertisement) adJob).getSalaryOffer() * 2);
+        ((CostAdvertisement) adFurniture).setPrice(((JobAdvertisement) adJob).getSalaryOffer() * 2);
         ((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
         ((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
 
@@ -216,7 +216,7 @@ public class AdvertisementServiceTest {
         assertTrue(advertisementService.update(adJob));
         assertTrue(advertisementService.update(adJob));
 
-        /*assertEquals(((CostAd) adFurniture).getPrice(), advertisementService.getAdById(adFurniture.getId()).get().getPrice());
+        /*assertEquals(((CostAdvertisement) adFurniture).getPrice(), advertisementService.getAdById(adFurniture.getId()).get().getPrice());
         assertEquals(((JobAdvertisement) adJob).getSalaryOffer(), advertisementService.getAdById(adJob.getId()).get().getPrice());
         assertEquals(((JobAdvertisement) adJob).getSalaryOffer(), advertisementService.getAdById(adJob.getId()).get().getPrice());*/
 

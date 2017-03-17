@@ -1,8 +1,7 @@
 package br.edu.ufcg.computacao.si1.models.rating;
 
 
-import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
-import br.edu.ufcg.computacao.si1.models.rating.Rating;
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

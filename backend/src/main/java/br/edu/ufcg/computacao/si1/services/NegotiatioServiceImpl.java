@@ -2,13 +2,13 @@ package br.edu.ufcg.computacao.si1.services;
 
 import java.util.Optional;
 
+import br.edu.ufcg.computacao.si1.models.advertisement.CostAdvertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.models.advertising.CostAd;
 import br.edu.ufcg.computacao.si1.models.user.User;
-import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 
 @Service
 public class NegotiatioServiceImpl implements NegotiationService{
@@ -23,15 +23,15 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		if(!user.getRole().equals(UserRole.NATURAL_PERSON))
 			throw new Exception();
 		
-		if(ad.get().getClass() != CostAd.class)
+		if(ad.get().getClass() != CostAdvertisement.class)
 			throw new Exception();
 		
-		CostAd costAd = (CostAd) ad.get();
+		CostAdvertisement costAdvertisement = (CostAdvertisement) ad.get();
 		
-		if(user.getCredit() < costAd.getPrice())
+		if(user.getCredit() < costAdvertisement.getPrice())
 			throw new Exception();
 		
-		user.discountCredit(costAd.getPrice());
+		user.discountCredit(costAdvertisement.getPrice());
 	}
 
 }
