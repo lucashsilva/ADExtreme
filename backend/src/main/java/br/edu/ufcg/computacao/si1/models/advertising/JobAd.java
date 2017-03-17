@@ -1,8 +1,7 @@
 package br.edu.ufcg.computacao.si1.models.advertising;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 import br.edu.ufcg.computacao.si1.models.user.User;
 
 import javax.persistence.Column;
@@ -12,27 +11,26 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- * Created by Jhonatan on 15/03/2017.
- */
 
 @Entity
 @DiscriminatorValue(value = "job_ad")
-public class JobAd extends Advertising {
+public class JobAd extends Advertisement {
 
     @Column(name = "salary_offer")
     @NotNull(message = "Job salary offer can not be null.")
     @Min(0)
     private double salaryOffer;
 
-    public JobAd(String title, Date publicationDate, Date expirationDate, double salaryOffer, User user) throws InvalidAdvertisingUserException {
+    public JobAd(String title, Date publicationDate, Date expirationDate, double salaryOffer, User user) throws InvalidAdvertisimentUserException {
         super(title, publicationDate, expirationDate, user);
 
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
-            throw new InvalidAdvertisingUserException();
+            throw new InvalidAdvertisimentUserException();
 
         this.salaryOffer = salaryOffer;
     }
+
+
 
     public double getSalaryOffer() {
         return salaryOffer;

@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import br.edu.ufcg.computacao.si1.models.name.Name;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,7 @@ import br.edu.ufcg.computacao.si1.enums.UserRole;
 @Table(name = "tb_user")
 public class User {
 
-	private final double INITIAL_CREDIT = 0.0;
+	private static final double INITIAL_CREDIT = 0.0;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +33,7 @@ public class User {
     private Long id;
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "name_id")
 	@NotNull(message = "User name can not be null.")
     private Name name;
 

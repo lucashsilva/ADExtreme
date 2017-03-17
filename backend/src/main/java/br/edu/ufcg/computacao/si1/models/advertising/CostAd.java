@@ -1,6 +1,5 @@
 package br.edu.ufcg.computacao.si1.models.advertising;
 
-import br.edu.ufcg.computacao.si1.enums.AdType;
 import br.edu.ufcg.computacao.si1.models.user.User;
 
 import javax.persistence.Column;
@@ -9,15 +8,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- * Created by Jhonatan on 15/03/2017.
- */
 
 @MappedSuperclass
-public abstract class CostAd extends Advertising {
+public abstract class CostAd extends Advertisement {
 
     @Column(name = "price")
-    @NotNull(message = "Advertising price can not be null.")
+    @NotNull(message = "Advertisement price can not be null.")
     @Min(0)
     private double price;
 

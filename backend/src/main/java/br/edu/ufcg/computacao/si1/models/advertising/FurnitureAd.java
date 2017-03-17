@@ -6,9 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Date;
 
-/**
- * Created by Jhonatan on 15/03/2017.
- */
+
 
 @Entity
 @DiscriminatorValue(value = "furniture_ad")

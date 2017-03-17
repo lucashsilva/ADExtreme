@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "tb_advertisings")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-public abstract class Advertising {
+public abstract class Advertisement {
 
     @SuppressWarnings("unused")
 	private final static DateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -25,32 +25,32 @@ public abstract class Advertising {
     private Long id;
 
     @Column(name = "title")
-    @NotNull(message = "Advertising title can not be null.")
-    @NotEmpty(message = "Advertising title can not be empty.")
+    @NotNull(message = "Advertisement title can not be null.")
+    @NotEmpty(message = "Advertisement title can not be empty.")
     private String title;
 
     @Column(name = "publication_date")
-    @NotNull(message = "Advertising creation date can not be null.")
+    @NotNull(message = "Advertisement creation date can not be null.")
     private Date publicationDate;
 
 	@Column(name = "expiration_date")
-	@NotNull(message = "Advertising creation date can not be null.")
+	@NotNull(message = "Advertisement creation date can not be null.")
 	private Date expirationDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @NotNull(message = "Advertising user can not be null.")
+    @NotNull(message = "Advertisement user can not be null.")
     private User user;
 
 
-    public Advertising(String title, Date publicationDate, Date expirationDate, User user) {
+    public Advertisement(String title, Date publicationDate, Date expirationDate, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
         this.user = user;
     }
 
-    public Advertising() {}
+    public Advertisement() {}
 
 	public Long getId() {
 		return id;
@@ -117,7 +117,7 @@ public abstract class Advertising {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Advertising other = (Advertising) obj;
+		Advertisement other = (Advertisement) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -128,7 +128,7 @@ public abstract class Advertising {
 
 	@Override
 	public String toString() {
-		return "Advertising [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
+		return "Advertisement [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
                 ", expiration date="+ expirationDate + "]";
 	}
 

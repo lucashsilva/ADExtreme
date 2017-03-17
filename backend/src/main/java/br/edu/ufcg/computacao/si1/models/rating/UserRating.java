@@ -1,6 +1,7 @@
-package br.edu.ufcg.computacao.si1.models.user;
+package br.edu.ufcg.computacao.si1.models.rating;
 
 import br.edu.ufcg.computacao.si1.models.rating.Rating;
+import br.edu.ufcg.computacao.si1.models.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

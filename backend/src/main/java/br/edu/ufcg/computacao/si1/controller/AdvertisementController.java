@@ -1,9 +1,9 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisingUserException;
-import br.edu.ufcg.computacao.si1.models.advertising.Advertising;
-import br.edu.ufcg.computacao.si1.services.AdvertisingServiceImpl;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
+import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
+import br.edu.ufcg.computacao.si1.services.AdvertisementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,23 +15,23 @@ import java.util.Collection;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/advertisings")
-public class AdvertisingController {
+@RequestMapping(value = "api/advertisement")
+public class AdvertisementController {
 
     @Autowired
-    private AdvertisingServiceImpl advertisingService;
+    private AdvertisementServiceImpl advertisementService;
 
 
     @RequestMapping(
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Advertising> addAdvertising(@RequestBody Advertising ad){
+    public ResponseEntity<Advertisement> addAdvertisement(@RequestBody Advertisement ad){
         try {
-            advertisingService.create(ad);
+            advertisementService.create(ad);
 
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (InvalidAdvertisingUserException e){
+        } catch (InvalidAdvertisimentUserException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -39,8 +39,8 @@ public class AdvertisingController {
     @RequestMapping(
             method = RequestMethod.GET
     )
-    public ResponseEntity<Collection<Advertising>> getAdvertisings(){
-        Collection<Advertising> ads = advertisingService.getAds();
+    public ResponseEntity<Collection<Advertisement>> getAdvertisement(){
+        Collection<Advertisement> ads = advertisementService.getAds();
 
         return new ResponseEntity<>(ads, HttpStatus.OK);
     }

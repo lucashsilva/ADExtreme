@@ -84,16 +84,6 @@ public class UserController {
     }
 
     @RequestMapping(
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<Collection<User>> getUsers(){
-        Collection<User> users = userService.getUsers();
-
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
-
-
-    @RequestMapping(
             method = RequestMethod.PUT
     )
     public ResponseEntity<User> updateUser(@RequestBody User user){

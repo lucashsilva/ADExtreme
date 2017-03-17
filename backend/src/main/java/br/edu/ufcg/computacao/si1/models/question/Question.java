@@ -1,5 +1,6 @@
-package br.edu.ufcg.computacao.si1.models.advertising;
+package br.edu.ufcg.computacao.si1.models.question;
 
+import br.edu.ufcg.computacao.si1.models.advertising.Advertisement;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -32,15 +33,15 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "advertising_id")
-    @NotNull(message = "Question advertising can not be null.")
-    private Advertising advertising;
+    @NotNull(message = "Question advertisement can not be null.")
+    private Advertisement advertisement;
 
 
-    public Question(String body, Advertising advertising) {
+    public Question(String body, Advertisement advertisement) {
         this.body = body;
         this.answer = NO_ANSWER;
         this.creationDate = new Date();
-        this.advertising = advertising;
+        this.advertisement = advertisement;
     }
 
     public Question(){};
@@ -77,11 +78,11 @@ public class Question {
         this.creationDate = creationDate;
     }
 
-    public Advertising getAdvertising() {
-        return advertising;
+    public Advertisement getAdvertisement() {
+        return advertisement;
     }
 
-    public void setAdvertising(Advertising advertising) {
-        this.advertising = advertising;
+    public void setAdvertisement(Advertisement advertisement) {
+        this.advertisement = advertisement;
     }
 }
