@@ -45,7 +45,4 @@ public class AdvertisementController {
         return new ResponseEntity<>(ads, HttpStatus.OK);
     }
 
-
-
-
 }

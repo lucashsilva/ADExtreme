@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Long> {
 
-    @Query("select a from Advertising a where type = ?1")
+    @Query("select a from Advertisement a where type = ?1")
     List<Advertisement> findByType(String typeValue);
 
 }

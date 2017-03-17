@@ -1,15 +1,17 @@
 package br.edu.ufcg.computacao.si1.models.advertising;
 
-import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
-import br.edu.ufcg.computacao.si1.models.user.User;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.models.user.User;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 
 
 @Entity
