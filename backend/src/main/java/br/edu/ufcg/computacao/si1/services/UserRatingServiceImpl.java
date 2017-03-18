@@ -5,15 +5,21 @@ import br.edu.ufcg.computacao.si1.exceptions.UserAutoRatingException;
 import br.edu.ufcg.computacao.si1.models.rating.Rating;
 import br.edu.ufcg.computacao.si1.models.rating.UserRating;
 import br.edu.ufcg.computacao.si1.repositories.UserRatingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
+@Transactional
 public class UserRatingServiceImpl implements UserRatingService {
 
-    @Autowired
     private UserRatingRepository userRatingRepository;
+
+    public UserRatingServiceImpl(UserRatingRepository userRatingRepository) {
+        this.userRatingRepository = userRatingRepository;
+    }
 
     @Override
     public UserRating create(Rating rating) throws UserAutoRatingException{

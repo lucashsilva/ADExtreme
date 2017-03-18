@@ -6,15 +6,21 @@ import br.edu.ufcg.computacao.si1.exceptions.UserRatingOwnAdvertisementException
 import br.edu.ufcg.computacao.si1.models.rating.AdvertisementRating;
 import br.edu.ufcg.computacao.si1.models.rating.Rating;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisementRatingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
+@Transactional
 public class AdvertisementRatingServiceImpl implements AdvertisementRatingService{
 
-    @Autowired
     private AdvertisementRatingRepository advertisementRatingRepository;
+
+    public AdvertisementRatingServiceImpl(AdvertisementRatingRepository advertisementRatingRepository) {
+        this.advertisementRatingRepository = advertisementRatingRepository;
+    }
 
     @Override
     public Rating create(Rating rating) throws UserRatingOwnAdvertisementException{

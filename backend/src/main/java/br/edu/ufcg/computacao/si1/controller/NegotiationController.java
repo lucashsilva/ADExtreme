@@ -26,7 +26,12 @@ public class NegotiationController {
 	
 	@Autowired
 	private AuthenticationService authenticationService;
-	
+
+	public NegotiationController(NegotiationService negotiationService, AuthenticationService authenticationService) {
+		this.service = negotiationService;
+		this.authenticationService = authenticationService;
+	}
+
 	@RequestMapping(
 			method = RequestMethod.POST,
 			produces= MediaType.APPLICATION_JSON_VALUE

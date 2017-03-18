@@ -21,6 +21,9 @@ public class AdvertisementController {
     @Autowired
     private AdvertisementServiceImpl advertisementService;
 
+    public AdvertisementController(AdvertisementServiceImpl advertisementService) {
+        this.advertisementService = advertisementService;
+    }
 
     @RequestMapping(
             method = RequestMethod.POST,

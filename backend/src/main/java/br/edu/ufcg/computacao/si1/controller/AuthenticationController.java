@@ -20,9 +20,9 @@ import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 @RequestMapping(path = "api/auth/login")
 public class AuthenticationController {
 
+	@Autowired
 	private final AuthenticationService authenticationService;
 
-	@Autowired
 	public AuthenticationController(AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}

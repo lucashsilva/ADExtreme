@@ -35,6 +35,11 @@ public class UserController {
 	@Autowired
 	private AuthenticationService authenticationService;
 
+    public UserController(UserServiceImpl userService, AuthenticationService authenticationService) {
+        this.userService = userService;
+        this.authenticationService = authenticationService;
+    }
+
     @RequestMapping(
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
