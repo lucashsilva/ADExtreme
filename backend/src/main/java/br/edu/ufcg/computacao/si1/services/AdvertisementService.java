@@ -8,18 +8,18 @@ import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 
 public interface AdvertisementService {
 
-    public Advertisement create(Advertisement ad) throws InvalidAdvertisimentUserException;
+    Advertisement create(Advertisement ad) throws InvalidAdvertisimentUserException;
 
-    public Optional<Advertisement> getAdById(Long id);
+    Optional<Advertisement> getAdById(Long id);
 
-    public Collection<Advertisement> getAdByType(String type);
+    Collection<Advertisement> getAdByType(String type);
 
-    public Collection<Advertisement> getAdByTitle(String title);
+    Collection<Advertisement> getAdByTitle(String title);
 
-    public Collection<Advertisement> getAds();
+    Collection<Advertisement> getAds();
 
-    public boolean update(Advertisement ad);
+    boolean update(Advertisement ad);
 
-    public boolean delete(Long id);
+    boolean delete(Long id);
 
 }

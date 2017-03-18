@@ -5,5 +5,5 @@ import br.edu.ufcg.computacao.si1.models.question.Question;
 
 public interface QuestionService {
 
-    public Question create(Question question);
+    Question create(Question question);
 }
