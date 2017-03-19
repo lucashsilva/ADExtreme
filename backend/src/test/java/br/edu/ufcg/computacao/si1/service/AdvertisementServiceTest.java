@@ -50,11 +50,11 @@ public class AdvertisementServiceTest {
     public void setUp() throws UserAlreadyExistsException, InvalidAdvertisimentUserException {
         user = userService.create(new User("user", "Doe", "user@email.com","password", UserRole.LEGAL_PERSON));
                    
-        ad1 = new FurnitureAdvertisement("Ad of Furniture", new Date(), new Date(), 100, user);
+        //ad1 = new FurnitureAdvertisement("Ad of Furniture", new Date(), new Date(), 100, user);
         //ad1.setClassification(5);
-        ad2 = new RealtyAdvertisement("Ad of House", new Date(), new Date(), 100000, user);
+       // ad2 = new RealtyAdvertisement("Ad of House", new Date(), new Date(), 100000, user);
        //ad1.setClassification(3);
-        ad3 = new JobAdvertisement("Ad of Job", new Date(), new Date(), 0, user);
+       // ad3 = new JobAdvertisement("Ad of Job", new Date(), new Date(), 0, user);
        //ad1.setClassification(4);
     }
 
@@ -208,7 +208,7 @@ public class AdvertisementServiceTest {
         assertEquals(adJob.getTitle(), advertisementService.getAdById(adJob.getId()).get().getTitle());
 
         //Update Price
-        //((CostAdvertisement) adFurniture).setPrice(((JobAdvertisement) adJob).getSalaryOffer() * 2);
+        //((CostAdvertisement) adFurniture).setValue(((JobAdvertisement) adJob).getSalaryOffer() * 2);
         //((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
         //((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
 
@@ -216,9 +216,9 @@ public class AdvertisementServiceTest {
         assertTrue(advertisementService.update(adJob));
         assertTrue(advertisementService.update(adJob));
 
-        /*assertEquals(((CostAdvertisement) adFurniture).getPrice(), advertisementService.getAdById(adFurniture.getId()).get().getPrice());
-        assertEquals(((JobAdvertisement) adJob).getSalaryOffer(), advertisementService.getAdById(adJob.getId()).get().getPrice());
-        assertEquals(((JobAdvertisement) adJob).getSalaryOffer(), advertisementService.getAdById(adJob.getId()).get().getPrice());*/
+        /*assertEquals(((CostAdvertisement) adFurniture).getValue(), advertisementService.getAdById(adFurniture.getId()).get().getValue());
+        assertEquals(((JobAdvertisement) adJob).getSalaryOffer(), advertisementService.getAdById(adJob.getId()).get().getValue());
+        assertEquals(((JobAdvertisement) adJob).getSalaryOffer(), advertisementService.getAdById(adJob.getId()).get().getValue());*/
 
         //Update Classification
         /*

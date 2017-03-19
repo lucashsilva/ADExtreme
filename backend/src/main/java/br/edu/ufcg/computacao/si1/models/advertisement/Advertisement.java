@@ -3,7 +3,6 @@ package br.edu.ufcg.computacao.si1.models.advertisement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -39,10 +38,10 @@ public abstract class Advertisement {
 	@NotNull(message = "Advertisement creation date can not be null.")
 	private LocalDate expirationDate;
 
-	@Column(name = "price")
-	@NotNull(message = "Advertisement price can not be null.")
+	@Column(name = "value")
+	@NotNull(message = "Advertisement value can not be null.")
 	@Min(0)
-	private double price;
+	private double value;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -50,11 +49,11 @@ public abstract class Advertisement {
     private User user;
 
 
-    public Advertisement(String title, LocalDate publicationDate, LocalDate expirationDate, double price, User user) {
+    public Advertisement(String title, LocalDate publicationDate, LocalDate expirationDate, double value, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
-		this.price = price;
+		this.value = value;
 		this.user = user;
     }
 
@@ -108,12 +107,12 @@ public abstract class Advertisement {
         }
     }
 
-	public double getPrice() {
-		return price;
+	public double getValue() {
+		return value;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 

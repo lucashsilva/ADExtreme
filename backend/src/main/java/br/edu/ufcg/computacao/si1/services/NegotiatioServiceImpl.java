@@ -35,13 +35,13 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		if(ad.get().getClass() == CostAdvertisement.class)
 			throw new PurchaseCostException();
 		
-		if(user.getCredit() < ad.get().getPrice())
+		if(user.getCredit() < ad.get().getValue())
 			throw new InsufficientCreditException();
 
 		User salesman = ad.get().getUser();
 
-		user.discountCredit(ad.get().getPrice());
-		salesman.increaseCredit(ad.get().getPrice());
+		user.discountCredit(ad.get().getValue());
+		salesman.increaseCredit(ad.get().getValue());
 
 		return userService.update(user) && userService.update(salesman);
 	}
@@ -53,14 +53,14 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		if(ad.get().getClass() != ServiceAdvertisement.class)
 			throw new PurchaseNotServiceException();
 
-		if(user.getCredit() < ad.get().getPrice())
+		if(user.getCredit() < ad.get().getValue())
 			throw new InsufficientCreditException();
 
 		User salesman = ad.get().getUser();
 		ServiceAdvertisement sAd = (ServiceAdvertisement) ad.get();
 
-		user.discountCredit(sAd.getPrice());
-		salesman.increaseCredit(sAd.getPrice());
+		user.discountCredit(sAd.getValue());
+		salesman.increaseCredit(sAd.getValue());
 
 		sAd.setScheduledDate(DateUtil.getDate(date));
 
