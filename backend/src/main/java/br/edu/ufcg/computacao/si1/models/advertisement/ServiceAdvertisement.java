@@ -10,6 +10,10 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * Created by gustavo on 18/03/17.
+ */
+
 @Entity
 @DiscriminatorValue(value = "service_advertisement")
 public class ServiceAdvertisement extends CostAdvertisement {

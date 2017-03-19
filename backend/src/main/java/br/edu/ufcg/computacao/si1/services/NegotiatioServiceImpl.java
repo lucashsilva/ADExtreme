@@ -2,7 +2,11 @@ package br.edu.ufcg.computacao.si1.services;
 
 import java.util.Optional;
 
+import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
+import br.edu.ufcg.computacao.si1.exceptions.PurchaseCostException;
+import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
 import br.edu.ufcg.computacao.si1.models.advertisement.CostAdvertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +18,30 @@ import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 public class NegotiatioServiceImpl implements NegotiationService{
 	
 	@Autowired
-	AdvertisementService adService;
+	private AdvertisementService adService;
+
+	@Autowired
+	private UserService userService;
 
 	@Override
-	public void buyAdvertising(User user, Long id) throws Exception {
+	public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseCostException {
 		Optional<Advertisement> ad = adService.getAdById(id);
 		
-		if(!user.getRole().equals(UserRole.NATURAL_PERSON))
-			throw new Exception();
+		if(ad.get().getClass() == JobAdvertisement.class)
+			throw new PurchaseJobException();
+
+		if(ad.get().getClass() == CostAdvertisement.class)
+			throw new PurchaseCostException();
 		
-		if(ad.get().getClass() != CostAdvertisement.class)
-			throw new Exception();
-		
-		CostAdvertisement costAdvertisement = (CostAdvertisement) ad.get();
-		
-		if(user.getCredit() < costAdvertisement.getPrice())
-			throw new Exception();
-		
-		user.discountCredit(costAdvertisement.getPrice());
+		if(user.getCredit() < ad.get().getPrice())
+			throw new InsufficientCreditException();
+
+		User salesman = ad.get().getUser();
+
+		user.discountCredit(ad.get().getPrice());
+		salesman.increaseCredit(ad.get().getPrice());
+
+		return userService.update(user) && userService.update(salesman);
 	}
 
 }

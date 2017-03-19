@@ -208,9 +208,9 @@ public class AdvertisementServiceTest {
         assertEquals(adJob.getTitle(), advertisementService.getAdById(adJob.getId()).get().getTitle());
 
         //Update Price
-        ((CostAdvertisement) adFurniture).setPrice(((JobAdvertisement) adJob).getSalaryOffer() * 2);
-        ((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
-        ((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
+        //((CostAdvertisement) adFurniture).setPrice(((JobAdvertisement) adJob).getSalaryOffer() * 2);
+        //((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
+        //((JobAdvertisement) adJob).setSalaryOffer(((JobAdvertisement) adJob).getSalaryOffer() * 2);
 
         assertTrue(advertisementService.update(adFurniture));
         assertTrue(advertisementService.update(adJob));

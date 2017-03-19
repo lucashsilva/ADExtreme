@@ -18,27 +18,10 @@ import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 @DiscriminatorValue(value = "job_advertisement")
 public class JobAdvertisement extends Advertisement {
 
-    @Column(name = "salary_offer")
-    @NotNull(message = "Job salary offer can not be null.")
-    @Min(0)
-    private double salaryOffer;
-
     public JobAdvertisement(String title, Date publicationDate, Date expirationDate, double salaryOffer, User user) throws InvalidAdvertisimentUserException {
-        super(title, publicationDate, expirationDate, user);
+        super(title, publicationDate, expirationDate, salaryOffer, user);
 
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
             throw new InvalidAdvertisimentUserException();
-
-        this.salaryOffer = salaryOffer;
-    }
-
-
-
-    public double getSalaryOffer() {
-        return salaryOffer;
-    }
-
-    public void setSalaryOffer(double salaryOffer) {
-        this.salaryOffer = salaryOffer;
     }
 }

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import br.edu.ufcg.computacao.si1.models.user.User;
@@ -37,17 +38,23 @@ public abstract class Advertisement {
 	@NotNull(message = "Advertisement creation date can not be null.")
 	private Date expirationDate;
 
+	@Column(name = "price")
+	@NotNull(message = "Advertisement price can not be null.")
+	@Min(0)
+	private double price;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @NotNull(message = "Advertisement user can not be null.")
     private User user;
 
 
-    public Advertisement(String title, Date publicationDate, Date expirationDate, User user) {
+    public Advertisement(String title, Date publicationDate, Date expirationDate, double price, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
-        this.user = user;
+		this.price = price;
+		this.user = user;
     }
 
     public Advertisement() {}
@@ -100,6 +107,14 @@ public abstract class Advertisement {
         }
     }
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 
     @Override
 	public int hashCode() {
@@ -131,6 +146,4 @@ public abstract class Advertisement {
 		return "Advertisement [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
                 ", expiration date="+ expirationDate + "]";
 	}
-
-	
 }
