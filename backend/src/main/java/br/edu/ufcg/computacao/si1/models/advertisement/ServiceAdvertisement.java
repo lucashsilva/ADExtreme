@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Created by gustavo on 18/03/17.
@@ -20,9 +20,9 @@ public class ServiceAdvertisement extends CostAdvertisement {
 
     @Column(name = "scheduled_date")
     @NotNull(message = "Advertisement scheduled date can not be null.")
-    private Date scheduledDate;
+    private LocalDate scheduledDate;
 
-    public ServiceAdvertisement(String title, Date publicationDate, Date expirationDate, Date scheduledDate, double price, User user) throws InvalidAdvertisimentUserException {
+    public ServiceAdvertisement(String title, LocalDate publicationDate, LocalDate expirationDate, LocalDate scheduledDate, double price, User user) throws InvalidAdvertisimentUserException {
         super(title, publicationDate, expirationDate, price, user);
 
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
@@ -31,11 +31,12 @@ public class ServiceAdvertisement extends CostAdvertisement {
         this.scheduledDate = scheduledDate;
     }
 
-    public Date getScheduledDate() {
+    public LocalDate getScheduledDate() {
         return scheduledDate;
     }
 
-    public void setScheduledDate(Date scheduledDate) {
+    public void setScheduledDate(LocalDate scheduledDate) {
         this.scheduledDate = scheduledDate;
     }
+
 }

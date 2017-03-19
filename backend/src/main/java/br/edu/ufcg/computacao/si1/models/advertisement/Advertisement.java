@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -32,11 +33,11 @@ public abstract class Advertisement {
 
     @Column(name = "publication_date")
     @NotNull(message = "Advertisement creation date can not be null.")
-    private Date publicationDate;
+    private LocalDate publicationDate;
 
 	@Column(name = "expiration_date")
 	@NotNull(message = "Advertisement creation date can not be null.")
-	private Date expirationDate;
+	private LocalDate expirationDate;
 
 	@Column(name = "price")
 	@NotNull(message = "Advertisement price can not be null.")
@@ -49,7 +50,7 @@ public abstract class Advertisement {
     private User user;
 
 
-    public Advertisement(String title, Date publicationDate, Date expirationDate, double price, User user) {
+    public Advertisement(String title, LocalDate publicationDate, LocalDate expirationDate, double price, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
@@ -67,7 +68,7 @@ public abstract class Advertisement {
 		return title;
 	}
 
-	public Date getPublicationDate() {
+	public LocalDate getPublicationDate() {
 		return publicationDate;
 	}
 
@@ -79,9 +80,9 @@ public abstract class Advertisement {
 		this.title = title;
 	}
 
-	public void setPublicationDate(Date publicationDate) {
+	public void setPublicationDate(LocalDate publicationDate) {
 		if(publicationDate == null) {
-            this.publicationDate = new Date();
+            this.publicationDate = LocalDate.now();
         }else{
             this.publicationDate = publicationDate;
         }
@@ -95,13 +96,13 @@ public abstract class Advertisement {
         this.user = user;
     }
 
-    public Date getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         if(expirationDate == null) {
-            this.expirationDate = new Date();
+            this.expirationDate = LocalDate.now();
         } else {
             this.expirationDate = expirationDate;
         }

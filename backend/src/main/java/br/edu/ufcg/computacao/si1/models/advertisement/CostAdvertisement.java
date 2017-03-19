@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import br.edu.ufcg.computacao.si1.models.user.User;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  */
 public class CostAdvertisement extends  Advertisement{
 
-    public CostAdvertisement(String title, Date publicationDate, Date expirationDate, double price, User user) {
+    public CostAdvertisement(String title, LocalDate publicationDate, LocalDate expirationDate, double price, User user) {
         super(title, publicationDate, expirationDate, price, user);
     }
 
