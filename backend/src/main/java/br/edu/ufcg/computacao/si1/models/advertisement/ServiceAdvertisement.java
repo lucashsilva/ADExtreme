@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 @Entity
 @DiscriminatorValue(value = "service_advertisement")
-public class ServiceAdvertisement extends CostAdvertisement {
+public class ServiceAdvertisement extends Advertisement {
 
     @Column(name = "scheduled_date")
     @NotNull(message = "Advertisement scheduled date can not be null.")

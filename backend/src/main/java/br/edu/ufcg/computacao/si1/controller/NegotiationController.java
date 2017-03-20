@@ -51,14 +51,15 @@ public class NegotiationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		} catch (PurchaseJobException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (PurchaseCostException e) {
+		} catch (PurchaseServiceException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} catch (InsufficientCreditException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 
-	public ResponseEntity<HttpStatus> buyService(@RequestHeader(value="Authorization") String token, @RequestBody Long id, @RequestBody String date) throws IOException, URISyntaxException {
+	public ResponseEntity<HttpStatus> buyService(@RequestHeader(value="Authorization") String token, @RequestBody Long id, @RequestBody String date) 
+			throws IOException, URISyntaxException {
 		Optional<User> user;
 		try {
 			user = authenticationService.getUserFromToken(token);
@@ -73,6 +74,5 @@ public class NegotiationController {
 		} catch (PurchaseNotServiceException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
 	}
 }

@@ -3,10 +3,9 @@ package br.edu.ufcg.computacao.si1.services;
 import java.util.Optional;
 
 import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseCostException;
+import br.edu.ufcg.computacao.si1.exceptions.PurchaseServiceException;
 import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
 import br.edu.ufcg.computacao.si1.exceptions.PurchaseNotServiceException;
-import br.edu.ufcg.computacao.si1.models.advertisement.CostAdvertisement;
 import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
 import br.edu.ufcg.computacao.si1.models.advertisement.ServiceAdvertisement;
 import br.edu.ufcg.computacao.si1.util.DateUtil;
@@ -26,14 +25,14 @@ public class NegotiatioServiceImpl implements NegotiationService{
 	private UserService userService;
 
 	@Override
-	public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseCostException {
+	public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException {
 		Optional<Advertisement> ad = adService.getAdById(id);
 		
 		if(ad.get().getClass() == JobAdvertisement.class)
 			throw new PurchaseJobException();
 
-		if(ad.get().getClass() == CostAdvertisement.class)
-			throw new PurchaseCostException();
+		if(ad.get().getClass() == ServiceAdvertisement.class)
+			throw new PurchaseServiceException();
 		
 		if(user.getCredit() < ad.get().getValue())
 			throw new InsufficientCreditException();
