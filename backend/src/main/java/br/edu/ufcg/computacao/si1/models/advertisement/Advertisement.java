@@ -1,16 +1,15 @@
 package br.edu.ufcg.computacao.si1.models.advertisement;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
+import br.edu.ufcg.computacao.si1.models.user.User;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
-import br.edu.ufcg.computacao.si1.models.user.User;
-import org.hibernate.validator.constraints.NotEmpty;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_advertisement")
@@ -92,7 +91,7 @@ public abstract class Advertisement {
         return user;
     }
 
-    public void setUser(User user) throws InvalidAdvertisimentUserException {
+    public void setUser(User user) throws InvalidAdvertisementUserException {
         this.user = user;
     }
 
