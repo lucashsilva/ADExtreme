@@ -15,7 +15,7 @@ import java.util.Collection;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/advertisement")
+@RequestMapping(value = "api/advertisements")
 public class AdvertisementController {
 
     @Autowired
