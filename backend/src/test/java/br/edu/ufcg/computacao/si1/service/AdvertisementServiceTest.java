@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.edu.ufcg.computacao.si1.enums.AdvertisementType;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisementRepository;
@@ -47,7 +47,7 @@ public class AdvertisementServiceTest {
 
 
     @Before
-    public void setUp() throws UserAlreadyExistsException, InvalidAdvertisimentUserException {
+    public void setUp() throws UserAlreadyExistsException, InvalidAdvertisementUserException {
         user = userService.create(new User("user", "Doe", "user@email.com","password", UserRole.LEGAL_PERSON));
                    
         //ad1 = new FurnitureAdvertisement("Ad of Furniture", new Date(), new Date(), 100, user);
@@ -72,7 +72,7 @@ public class AdvertisementServiceTest {
 
 
     @Test
-    public void testCreateAd() throws InvalidAdvertisimentUserException {
+    public void testCreateAd() throws InvalidAdvertisementUserException {
         Advertisement ad1FromDB = advertisementService.create(ad1);
         Advertisement ad2FromDB = advertisementService.create(ad2);
         Advertisement ad3FromDB = advertisementService.create(ad3);
@@ -95,7 +95,7 @@ public class AdvertisementServiceTest {
     }
 
     @Test
-    public void getByTypeTest() throws InvalidAdvertisimentUserException {
+    public void getByTypeTest() throws InvalidAdvertisementUserException {
 
         int EXPECTED_AMOUNT = 1;
 
@@ -121,7 +121,7 @@ public class AdvertisementServiceTest {
     }
 
     @Test
-    public void testGetAds() throws InvalidAdvertisimentUserException {
+    public void testGetAds() throws InvalidAdvertisementUserException {
         int EXPECTED_AMOUNT = 3;
 
         Advertisement adFurniture = advertisementService.create(ad1);
@@ -141,7 +141,7 @@ public class AdvertisementServiceTest {
     }
 
     @Test
-    public void testDelete() throws InvalidAdvertisimentUserException {
+    public void testDelete() throws InvalidAdvertisementUserException {
         int EXPECTED_AMOUNT = 3;
 
         Advertisement adFurniture = advertisementService.create(ad1);
@@ -182,7 +182,7 @@ public class AdvertisementServiceTest {
     }
 
     @Test
-    public void testUpdate() throws InvalidAdvertisimentUserException {
+    public void testUpdate() throws InvalidAdvertisementUserException {
 
         String SUFFIX = " edited";
 

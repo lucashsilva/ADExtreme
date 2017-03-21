@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.models.user.User;
 
 import javax.persistence.Column;
@@ -22,11 +22,11 @@ public class ServiceAdvertisement extends Advertisement {
     @NotNull(message = "Advertisement scheduled date can not be null.")
     private LocalDate scheduledDate;
 
-    public ServiceAdvertisement(String title, LocalDate publicationDate, LocalDate expirationDate, LocalDate scheduledDate, double price, User user) throws InvalidAdvertisimentUserException {
+    public ServiceAdvertisement(String title, LocalDate publicationDate, LocalDate expirationDate, LocalDate scheduledDate, double price, User user) throws InvalidAdvertisementUserException {
         super(title, publicationDate, expirationDate, price, user);
 
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
-            throw new InvalidAdvertisimentUserException();
+            throw new InvalidAdvertisementUserException();
 
         this.scheduledDate = scheduledDate;
     }

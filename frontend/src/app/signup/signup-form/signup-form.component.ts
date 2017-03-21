@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService, UserInfo } from '../../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { UserInfo } from '../../models/user';
+
 @Component({
   selector: 'app-signup-form',
   templateUrl: './signup-form.component.html',

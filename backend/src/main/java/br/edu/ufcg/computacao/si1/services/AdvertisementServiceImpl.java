@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisementRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
-    public Advertisement create(Advertisement ad) throws InvalidAdvertisimentUserException {
+    public Advertisement create(Advertisement ad) throws InvalidAdvertisementUserException {
         return advertisementRepository.save(ad);
     }
 

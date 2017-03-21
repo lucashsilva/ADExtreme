@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import br.edu.ufcg.computacao.si1.services.AdvertisementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class AdvertisementController {
             advertisementService.create(ad);
 
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (InvalidAdvertisimentUserException e){
+        } catch (InvalidAdvertisementUserException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

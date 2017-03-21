@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.models.user.Candidate;
 import br.edu.ufcg.computacao.si1.models.user.User;
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 
 
 @Entity
@@ -24,11 +24,11 @@ public class JobAdvertisement extends Advertisement {
     private Set<Candidate> candidate;
 
     public JobAdvertisement(String title, LocalDate publicationDate, LocalDate expirationDate,
-                            double salaryOffer, User user) throws InvalidAdvertisimentUserException {
+                            double salaryOffer, User user) throws InvalidAdvertisementUserException {
         super(title, publicationDate, expirationDate, salaryOffer, user);
 
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
-            throw new InvalidAdvertisimentUserException();
+            throw new InvalidAdvertisementUserException();
 
         this.candidate = new HashSet<>();
     }

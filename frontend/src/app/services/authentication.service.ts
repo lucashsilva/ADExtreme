@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
+import { AuthenticatedUser, UserCredentials, UserInfo } from '../models/user';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -77,42 +78,4 @@ export class AuthenticationService {
 
   return options;
   }
-}
-
-export class UserInfo {
-
-  name: Name;
-  password: string;
-  role: string;
-  email: string;
-  credit: number;
-
-  constructor() {
-    this.name = new Name();
-    this.role = "NATURAL_PERSON"
-  }
-}
-
-class AuthenticatedUser {
-  token: string;
-  authenticated: boolean;
-  userInfo: UserInfo;
-
-  constructor() {
-  }
-}
-
-export class Name {
-  firstName: string;
-  lastName: string;
-
-  constructor() {  }
-}
-
-export class UserCredentials {
-  email: string;
-  password: string;
-
-  constructor() {}
-
 }

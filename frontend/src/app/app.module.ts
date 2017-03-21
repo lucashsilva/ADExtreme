@@ -11,7 +11,8 @@ import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ConnectCardComponent } from './connect-card/connect-card.component';
-import { NavbarComponent } from './navbar/navbar.component'
+import { NavbarComponent } from './navbar/navbar.component';
+import { AdvertisementComponent } from './advertisement/advertisement.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component'
     SignupFormComponent,
     SidebarComponent,
     ConnectCardComponent,
-    NavbarComponent
+    NavbarComponent,
+    AdvertisementComponent
   ],
   imports: [
     BrowserModule,
