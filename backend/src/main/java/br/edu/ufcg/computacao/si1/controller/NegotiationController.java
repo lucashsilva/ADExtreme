@@ -40,7 +40,8 @@ public class NegotiationController {
 			method = RequestMethod.POST,
 			produces= MediaType.APPLICATION_JSON_VALUE
 	)
-	public ResponseEntity<HttpStatus> buyAdvertising(@RequestHeader(value="Authorization") String token, @RequestBody Long id) throws Exception {
+	public ResponseEntity<HttpStatus> buyAdvertising(@RequestHeader(value="Authorization") String token,
+													 @RequestBody Long id) throws Exception {
 		Optional<User> user;
 		try {
 			user = authenticationService.getUserFromToken(token);
@@ -58,7 +59,12 @@ public class NegotiationController {
 		}
 	}
 
-	public ResponseEntity<HttpStatus> buyService(@RequestHeader(value="Authorization") String token, @RequestBody Long id, @RequestBody String date) 
+	@RequestMapping(
+		method = RequestMethod.PUT,
+		produces = MediaType.APPLICATION_JSON_VALUE
+	)
+	public ResponseEntity<HttpStatus> buyService(@RequestHeader(value="Authorization") String token,
+												 @RequestBody Long id, @RequestBody String date)
 			throws IOException, URISyntaxException {
 		Optional<User> user;
 		try {
@@ -72,6 +78,30 @@ public class NegotiationController {
 		} catch (InsufficientCreditException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		} catch (PurchaseNotServiceException e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+
+	@RequestMapping(
+			method = RequestMethod.PATCH,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE
+	)
+	public ResponseEntity<HttpStatus> applyForAJob(@RequestHeader(value="Authorization") String token, @RequestBody Long id, Integer opa)
+			throws IOException, URISyntaxException {
+		Optional<User> user;
+
+		try {
+			user = authenticationService.getUserFromToken(token);
+
+			service.applyForAJob(user.get(), id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		} catch (NotLegalPersonException e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} catch (AdvertisementNotAJobException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}

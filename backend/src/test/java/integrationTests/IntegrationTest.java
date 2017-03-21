@@ -34,7 +34,7 @@ import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 @SpringBootTest(classes = ADExtremeApplication.class)
 @WebAppConfiguration
 public class IntegrationTest {
-    private final String USER_API = "/api/users/";
+    /*private final String USER_API = "/api/users/";
 
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
@@ -106,6 +106,6 @@ public class IntegrationTest {
         this.mapping.write(object, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
         return mockHttpOutputMessage.getBodyAsString();
     }
-
+*/
 
 }
