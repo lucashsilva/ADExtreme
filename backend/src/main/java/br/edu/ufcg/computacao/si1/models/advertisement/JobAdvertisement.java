@@ -21,4 +21,10 @@ public class JobAdvertisement extends Advertisement {
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
             throw new InvalidAdvertisimentUserException();
     }
+
+    @Override
+    public void setUser(User user) throws InvalidAdvertisimentUserException {
+        if(user.getRole().equals(UserRole.NATURAL_PERSON))
+            throw new InvalidAdvertisimentUserException();
+    }
 }

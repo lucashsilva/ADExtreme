@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisimentUserException;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -91,7 +92,7 @@ public abstract class Advertisement {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(User user) throws InvalidAdvertisimentUserException {
         this.user = user;
     }
 
