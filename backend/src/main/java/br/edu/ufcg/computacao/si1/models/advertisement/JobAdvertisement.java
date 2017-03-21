@@ -48,4 +48,10 @@ public class JobAdvertisement extends Advertisement {
     public boolean addCandidate(Candidate candidate) {
         return this.candidate.add(candidate);
     }
+
+    @Override
+    public void setUser(User user) throws InvalidAdvertisimentUserException {
+        if(user.getRole().equals(UserRole.NATURAL_PERSON))
+            throw new InvalidAdvertisimentUserException();
+    }
 }

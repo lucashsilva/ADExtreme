@@ -39,4 +39,10 @@ public class ServiceAdvertisement extends Advertisement {
         this.scheduledDate = scheduledDate;
     }
 
+    @Override
+    public void setUser(User user) throws InvalidAdvertisimentUserException {
+        if(user.getRole().equals(UserRole.NATURAL_PERSON))
+            throw new InvalidAdvertisimentUserException();
+    }
+
 }
