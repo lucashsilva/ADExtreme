@@ -2,12 +2,11 @@ package br.edu.ufcg.computacao.si1.services;
 
 import java.util.Optional;
 
-import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseServiceException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseNotServiceException;
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.exceptions.*;
 import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
 import br.edu.ufcg.computacao.si1.models.advertisement.ServiceAdvertisement;
+import br.edu.ufcg.computacao.si1.models.user.Candidate;
 import br.edu.ufcg.computacao.si1.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +41,7 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		user.discountCredit(ad.get().getValue());
 		salesman.increaseCredit(ad.get().getValue());
 
+		adService.delete(id);
 		return userService.update(user) && userService.update(salesman);
 	}
 
@@ -65,5 +65,23 @@ public class NegotiatioServiceImpl implements NegotiationService{
 
 		return userService.update(user) && userService.update(salesman) && adService.update(sAd);
 	}
+
+	@Override
+	public boolean applyForAJob(User user, Long id) throws NotLegalPersonException, AdvertisementNotAJobException {
+		Optional<Advertisement> ad = adService.getAdById(id);
+
+		if(ad.get().getClass() != JobAdvertisement.class)
+			throw new AdvertisementNotAJobException();
+
+		if(user.getRole().equals(UserRole.NATURAL_PERSON))
+			throw new NotLegalPersonException();
+
+		JobAdvertisement jAd = (JobAdvertisement) ad.get();
+
+		jAd.addCandidate(new Candidate(user.getName().toString(), user.getEmail()));
+
+		return adService.update(jAd);
+	}
+
 
 }
