@@ -1,3 +1,10 @@
-<p>
-  advertisement works!
-</p>
+<div class="card" *ngIf="advertisement">
+  <div class="card-block">
+    <h4 class="card-title">{{ advertisement.title }}</h4>
+    <p class="card-text">Publicado em {{ advertisement.publicationDate | date }}</p>
+    <p class="card-text">Expira em {{ advertisement.expirationDate | date }}</p>
+    <p class="card-text value">Valor: {{ advertisement.value }}</p>
+    <p class="card-text">{{ advertisement.user.name }}</p>
+    <button (click)="get()" type="submit" class="btn btn-primary">Comprar</button>
+  </div>
+</div>

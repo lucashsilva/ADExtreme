@@ -1,12 +1,16 @@
 import { MinimalUser } from './user';
 
-export abstract class Advertisement {
+export class Advertisement {
     id: Number;
     title: string;
     publicationDate: Date;
     expirationDate: Date;
     value: Number;
     user: MinimalUser;
+
+    constructor() {
+        this.user = new MinimalUser();
+    }
 
 }
 
@@ -37,4 +41,8 @@ export class ServiceAdvertisement extends Advertisement {
     constructor() {
         super();
     }
+}
+
+export enum AdvertisementType {
+    FURNITURE, JOB, REALTY, SERVICE
 }

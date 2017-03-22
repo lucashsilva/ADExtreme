@@ -12,7 +12,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ConnectCardComponent } from './connect-card/connect-card.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AdvertisementComponent } from './advertisement/advertisement.component'
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { AdvertisementCardComponent } from './advertisement-card/advertisement-card.component'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AdvertisementComponent } from './advertisement/advertisement.component'
     SidebarComponent,
     ConnectCardComponent,
     NavbarComponent,
-    AdvertisementComponent
+    AdvertisementComponent,
+    AdvertisementCardComponent
   ],
   imports: [
     BrowserModule,
