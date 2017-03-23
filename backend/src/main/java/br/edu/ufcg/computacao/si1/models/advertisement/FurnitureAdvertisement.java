@@ -15,4 +15,6 @@ public class FurnitureAdvertisement extends Advertisement {
         super(title, publicationDate, expirationDate, price, user);
     }
 
+    public FurnitureAdvertisement() {
+    }
 }

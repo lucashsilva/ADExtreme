@@ -33,6 +33,8 @@ public class JobAdvertisement extends Advertisement {
         this.candidate = new HashSet<>();
     }
 
+    public JobAdvertisement() {
+    }
 
     public Set<Candidate> getCandidate() {
         return candidate;

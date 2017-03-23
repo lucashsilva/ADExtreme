@@ -2,6 +2,10 @@ package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.models.user.User;
+import br.edu.ufcg.computacao.si1.services.JsonDateDeserializer;
+import br.edu.ufcg.computacao.si1.services.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -32,10 +36,14 @@ public abstract class Advertisement {
 
     @Column(name = "publication_date")
     @NotNull(message = "Advertisement creation date can not be null.")
+	//@JsonDeserialize(using = JsonDateDeserializer.class)
+	//@JsonSerialize(using = JsonDateSerializer.class)
     private LocalDate publicationDate;
 
 	@Column(name = "expiration_date")
 	@NotNull(message = "Advertisement creation date can not be null.")
+	//@JsonDeserialize(using = JsonDateDeserializer.class)
+	//@JsonSerialize(using = JsonDateSerializer.class)
 	private LocalDate expirationDate;
 
 	@Column(name = "value")

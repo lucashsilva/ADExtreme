@@ -15,4 +15,6 @@ public class RealtyAdvertisement extends Advertisement {
         super(title, publicationDate, expirationDate, price, user);
     }
 
+    public RealtyAdvertisement() {
+    }
 }

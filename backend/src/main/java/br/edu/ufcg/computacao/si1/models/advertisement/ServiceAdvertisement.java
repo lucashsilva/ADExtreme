@@ -31,6 +31,9 @@ public class ServiceAdvertisement extends Advertisement {
         this.scheduledDate = scheduledDate;
     }
 
+    public ServiceAdvertisement() {
+    }
+
     public LocalDate getScheduledDate() {
         return scheduledDate;
     }

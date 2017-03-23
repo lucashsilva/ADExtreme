@@ -1,23 +1,12 @@
 package br.edu.ufcg.computacao.si1.models.user;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import br.edu.ufcg.computacao.si1.models.name.Name;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import br.edu.ufcg.computacao.si1.enums.UserRole;
 
@@ -93,8 +82,7 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@JsonProperty(access = Access.WRITE_ONLY)
+
 	public String getPassword() {
 		return password;
 	}
