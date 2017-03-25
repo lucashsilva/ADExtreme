@@ -8,7 +8,6 @@ import br.edu.ufcg.computacao.si1.exceptions.*;
 import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
 import br.edu.ufcg.computacao.si1.models.advertisement.ServiceAdvertisement;
 import br.edu.ufcg.computacao.si1.models.user.Candidate;
-import br.edu.ufcg.computacao.si1.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

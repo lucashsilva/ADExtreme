@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.Date;
 
 /**
