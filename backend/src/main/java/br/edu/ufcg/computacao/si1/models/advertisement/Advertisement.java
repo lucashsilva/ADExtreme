@@ -25,8 +25,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
+import br.edu.ufcg.computacao.si1.models.user.MinimalUser;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.services.JsonDateDeserializer;
+import br.edu.ufcg.computacao.si1.util.Util;
 
 @Entity
 @Table(name = "tb_advertisement")
@@ -84,8 +86,6 @@ public abstract class Advertisement {
 
     public Advertisement() {}
 
-
-
 	public Long getId() {
 		return id;
 	}
@@ -114,8 +114,8 @@ public abstract class Advertisement {
         }
 	}
 
-    public User getUser() {
-        return user;
+    public MinimalUser getUser() {
+        return Util.minimalUserFor(this.user);
     }
 
     public void setUser(User user) throws InvalidAdvertisementUserException {

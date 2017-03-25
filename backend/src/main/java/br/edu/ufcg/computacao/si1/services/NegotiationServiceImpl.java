@@ -3,19 +3,24 @@ package br.edu.ufcg.computacao.si1.services;
 import java.io.IOException;
 import java.util.Optional;
 
-import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.*;
-import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
-import br.edu.ufcg.computacao.si1.models.advertisement.ServiceAdvertisement;
-import br.edu.ufcg.computacao.si1.models.user.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufcg.computacao.si1.models.user.User;
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.exceptions.AdvertisementNotAJobException;
+import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
+import br.edu.ufcg.computacao.si1.exceptions.NotLegalPersonException;
+import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
+import br.edu.ufcg.computacao.si1.exceptions.PurchaseNotServiceException;
+import br.edu.ufcg.computacao.si1.exceptions.PurchaseServiceException;
 import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
+import br.edu.ufcg.computacao.si1.models.advertisement.ServiceAdvertisement;
+import br.edu.ufcg.computacao.si1.models.user.Candidate;
+import br.edu.ufcg.computacao.si1.models.user.User;
 
 @Service
-public class NegotiatioServiceImpl implements NegotiationService{
+public class NegotiationServiceImpl implements NegotiationService{
 	
 	@Autowired
 	private AdvertisementService adService;
@@ -36,13 +41,13 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		if(user.getCredit() < ad.get().getValue())
 			throw new InsufficientCreditException();
 
-		User salesman = ad.get().getUser();
+		User salesMan = userService.getUserById(ad.get().getId()).get();
 
 		user.discountCredit(ad.get().getValue());
-		salesman.increaseCredit(ad.get().getValue());
+		salesMan.increaseCredit(ad.get().getValue());
 
 		adService.delete(id);
-		return userService.update(user) && userService.update(salesman);
+		return userService.update(user) && userService.update(salesMan);
 	}
 
 	@Override
@@ -55,15 +60,15 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		if(user.getCredit() < ad.get().getValue())
 			throw new InsufficientCreditException();
 
-		User salesman = ad.get().getUser();
+		User salesMan = userService.getUserById(ad.get().getId()).get();
 		ServiceAdvertisement sAd = (ServiceAdvertisement) ad.get();
 
 		user.discountCredit(sAd.getValue());
-		salesman.increaseCredit(sAd.getValue());
+		salesMan.increaseCredit(sAd.getValue());
 
-		TODO: sAd.setScheduledDate(DateDeserializer.deserialize(date));
+		//sAd.setScheduledDate(DateDeserializer.deserialize(date));
 
-		return userService.update(user) && userService.update(salesman) && adService.update(sAd);
+		return userService.update(user) && userService.update(salesMan) && adService.update(sAd);
 	}
 
 	@Override
