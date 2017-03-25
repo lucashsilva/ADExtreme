@@ -2,7 +2,6 @@ package br.edu.ufcg.computacao.si1.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
+import br.edu.ufcg.computacao.si1.models.user.MinimalUser;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 import br.edu.ufcg.computacao.si1.services.UserServiceImpl;
+import br.edu.ufcg.computacao.si1.util.Util;
 
 @CrossOrigin
 @RestController
@@ -61,13 +62,13 @@ public class UserController {
             value = "/{id}",
             method = RequestMethod.GET
     )
-    public ResponseEntity<User> getUser(@PathVariable Long id){
+    public ResponseEntity<MinimalUser> getUser(@PathVariable Long id){
         Optional<User> user = userService.getUserById(id);
 
         if(user.isPresent()) {
-        	return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+        	return new ResponseEntity<MinimalUser>(Util.minimalUserFor(user.get()), HttpStatus.OK);
         } else {
-        	return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        	return new ResponseEntity<MinimalUser>(HttpStatus.NOT_FOUND);
         }
     }
     
@@ -88,25 +89,25 @@ public class UserController {
 
     }
 
-    @RequestMapping(
-            method = RequestMethod.PUT
-    )
-    public ResponseEntity<User> updateUser(@RequestBody User user){
-        userService.update(user);
+//    @RequestMapping(
+//            method = RequestMethod.PUT
+//    )
+//    public ResponseEntity<User> updateUser(@RequestBody User user){
+//        userService.update(user);
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
-
-    @RequestMapping(
-            value = "/{id}",
-            method = RequestMethod.DELETE
-    )
-    public ResponseEntity<User> deleteUser(@PathVariable Long id){
-        userService.delete(id);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @RequestMapping(
+//            value = "/{id}",
+//            method = RequestMethod.DELETE
+//    )
+//    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+//        userService.delete(id);
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 	
 }
