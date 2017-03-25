@@ -1,23 +1,43 @@
 package br.edu.ufcg.computacao.si1.models.advertisement;
 
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
-import br.edu.ufcg.computacao.si1.models.user.User;
-import br.edu.ufcg.computacao.si1.services.JsonDateDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
+import br.edu.ufcg.computacao.si1.models.user.User;
+import br.edu.ufcg.computacao.si1.services.JsonDateDeserializer;
+
 @Entity
 @Table(name = "tb_advertisement")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXTERNAL_PROPERTY, property = "type")
+@JsonSubTypes({
+	@JsonSubTypes.Type(value = FurnitureAdvertisement.class, name = "FURNITURE"),
+	@JsonSubTypes.Type(value = JobAdvertisement.class, name = "JOB"),
+	@JsonSubTypes.Type(value = RealtyAdvertisement.class, name = "REALTY"),
+	@JsonSubTypes.Type(value = ServiceAdvertisement.class, name = "SERVICE")
+})
 public abstract class Advertisement {
 
     @SuppressWarnings("unused")
