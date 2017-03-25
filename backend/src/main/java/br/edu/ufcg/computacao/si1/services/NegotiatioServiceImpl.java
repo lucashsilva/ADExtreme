@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.services;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import br.edu.ufcg.computacao.si1.enums.UserRole;
@@ -46,7 +47,7 @@ public class NegotiatioServiceImpl implements NegotiationService{
 	}
 
 	@Override
-	public boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException {
+	public boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException {
 		Optional<Advertisement> ad = adService.getAdById(id);
 
 		if(ad.get().getClass() != ServiceAdvertisement.class)
@@ -61,7 +62,7 @@ public class NegotiatioServiceImpl implements NegotiationService{
 		user.discountCredit(sAd.getValue());
 		salesman.increaseCredit(sAd.getValue());
 
-		sAd.setScheduledDate(DateUtil.getDate(date));
+		TODO: sAd.setScheduledDate(DateDeserializer.deserialize(date));
 
 		return userService.update(user) && userService.update(salesman) && adService.update(sAd);
 	}
