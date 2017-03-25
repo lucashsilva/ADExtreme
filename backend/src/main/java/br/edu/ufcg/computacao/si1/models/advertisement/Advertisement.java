@@ -2,6 +2,8 @@ package br.edu.ufcg.computacao.si1.models.advertisement;
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.models.user.User;
+import br.edu.ufcg.computacao.si1.services.JsonDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -9,7 +11,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "tb_advertisement")
@@ -32,11 +35,13 @@ public abstract class Advertisement {
 
     @Column(name = "publication_date")
     @NotNull(message = "Advertisement creation date can not be null.")
-    private LocalDate publicationDate;
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+    private Date publicationDate;
 
 	@Column(name = "expiration_date")
 	@NotNull(message = "Advertisement creation date can not be null.")
-	private LocalDate expirationDate;
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	private Date expirationDate;
 
 	@Column(name = "value")
 	@NotNull(message = "Advertisement value can not be null.")
@@ -49,7 +54,7 @@ public abstract class Advertisement {
     private User user;
 
 
-    public Advertisement(String title, LocalDate publicationDate, LocalDate expirationDate, double value, User user) {
+    public Advertisement(String title, Date publicationDate, Date expirationDate, double value, User user) {
         this.title = title;
         this.publicationDate = publicationDate;
         this.expirationDate = expirationDate;
@@ -59,6 +64,8 @@ public abstract class Advertisement {
 
     public Advertisement() {}
 
+
+
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +74,7 @@ public abstract class Advertisement {
 		return title;
 	}
 
-	public LocalDate getPublicationDate() {
+	public Date getPublicationDate() {
 		return publicationDate;
 	}
 
@@ -79,9 +86,9 @@ public abstract class Advertisement {
 		this.title = title;
 	}
 
-	public void setPublicationDate(LocalDate publicationDate) {
+	public void setPublicationDate(Date publicationDate) {
 		if(publicationDate == null) {
-            this.publicationDate = LocalDate.now();
+            this.publicationDate = Date.from(Instant.now());
         }else{
             this.publicationDate = publicationDate;
         }
@@ -95,13 +102,13 @@ public abstract class Advertisement {
         this.user = user;
     }
 
-    public LocalDate getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         if(expirationDate == null) {
-            this.expirationDate = LocalDate.now();
+            this.expirationDate = Date.from(Instant.now());
         } else {
             this.expirationDate = expirationDate;
         }

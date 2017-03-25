@@ -1,7 +1,6 @@
 package br.edu.ufcg.computacao.si1.models.advertisement;
 
-
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class JobAdvertisement extends Advertisement {
     @NotNull(message = "Advertisement candidate can not be null.")
     private Set<Candidate> candidate;
 
-    public JobAdvertisement(String title, LocalDate publicationDate, LocalDate expirationDate,
+    public JobAdvertisement(String title, Date publicationDate, Date expirationDate,
                             double salaryOffer, User user) throws InvalidAdvertisementUserException {
         super(title, publicationDate, expirationDate, salaryOffer, user);
 
@@ -33,6 +32,8 @@ public class JobAdvertisement extends Advertisement {
         this.candidate = new HashSet<>();
     }
 
+    public JobAdvertisement() {
+    }
 
     public Set<Candidate> getCandidate() {
         return candidate;
