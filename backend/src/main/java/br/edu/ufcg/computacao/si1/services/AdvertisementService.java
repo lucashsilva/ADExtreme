@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.services;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
@@ -21,4 +22,6 @@ public interface AdvertisementService {
     boolean update(Advertisement ad);
 
     boolean delete(Long id);
+
+    Collection<Advertisement> getAdsByDate(Date initialDate, Date finalDate);
 }

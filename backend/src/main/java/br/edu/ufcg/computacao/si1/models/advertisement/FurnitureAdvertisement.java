@@ -18,4 +18,9 @@ public class FurnitureAdvertisement extends Advertisement {
 
     public FurnitureAdvertisement() {
     }
+
+    @Override
+    public String showType() {
+        return "furniture";
+    }
 }
