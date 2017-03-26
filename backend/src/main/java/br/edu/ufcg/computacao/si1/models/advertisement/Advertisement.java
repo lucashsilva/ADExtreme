@@ -142,6 +142,8 @@ public abstract class Advertisement {
 		this.value = value;
 	}
 
+	public abstract String showType();
+
 
     @Override
 	public int hashCode() {
@@ -170,7 +172,7 @@ public abstract class Advertisement {
 
 	@Override
 	public String toString() {
-		return "Advertisement [id=" + id + ", title=" + title + ", creation date=" + publicationDate +
-                ", expiration date="+ expirationDate + "]";
+		return "Advertisement [id=" + id + ", title=" + title + ", creation date=" + publicationDate.toString() +
+                ", expiration date="+ expirationDate.toString() + ", type=" + showType() + "]";
 	}
 }
