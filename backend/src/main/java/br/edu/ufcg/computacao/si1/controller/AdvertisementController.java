@@ -63,11 +63,22 @@ public class AdvertisementController {
     }
 
     @RequestMapping(
-            method = RequestMethod.POST
+            method = RequestMethod.GET,
+            value = "/{type}"
     )
-    public ResponseEntity<Collection<Advertisement>> getAdvertisementsByType(@RequestBody String type){
+    public ResponseEntity<Collection<Advertisement>> getAdvertisementsByType(@PathVariable(value = "type") String type){
 
-        return new ResponseEntity<>(advertisementService.getAdsByType(type), HttpStatus.OK);
+        return new ResponseEntity<>(advertisementService.getAdByType(type), HttpStatus.OK);
     }
 
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/{init}/{final}"
+    )
+    public ResponseEntity<Collection<Advertisement>> getAdvertisementsByDate(
+            @PathVariable(value = "init") Date initialDate,
+            @PathVariable(value = "final", required = false) Date finalDate){
+
+        return new ResponseEntity<>(advertisementService.getAdsByDate(initialDate, finalDate), HttpStatus.OK);
+    }
 }

@@ -80,9 +80,4 @@ public class AdvertisementServiceImpl implements AdvertisementService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Collection<Advertisement> getAdsByType(String type) {
-        return advertisementRepository.findAll().stream().filter(ad ->
-                ad.getClass().getSimpleName().equalsIgnoreCase(type)).collect(Collectors.toList());
-    }
 }

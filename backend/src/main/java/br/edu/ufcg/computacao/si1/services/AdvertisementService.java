@@ -24,6 +24,4 @@ public interface AdvertisementService {
     boolean delete(Long id);
 
     Collection<Advertisement> getAdsByDate(Date initialDate, Date finalDate);
-
-    Collection<Advertisement>getAdsByType(String type);
 }
