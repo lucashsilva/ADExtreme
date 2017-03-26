@@ -1,7 +1,8 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 
-import java.time.LocalDate;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -9,11 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
-import br.edu.ufcg.computacao.si1.models.advertisement.FurnitureAdvertisement;
 import br.edu.ufcg.computacao.si1.services.AdvertisementServiceImpl;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 
@@ -32,6 +38,7 @@ public class AdvertisementController {
     public AdvertisementController(AdvertisementServiceImpl advertisementService, AuthenticationService authenticationService) {
         this.advertisementService = advertisementService;
         this.authenticationService = authenticationService;
+  
     }
 
     @RequestMapping(
@@ -53,33 +60,30 @@ public class AdvertisementController {
             return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
-
-    @RequestMapping(
+    
+	@RequestMapping(
             method = RequestMethod.GET
     )
-    public ResponseEntity<Collection<Advertisement>> getAllAdvertisements(){
-        Collection<Advertisement> ads = advertisementService.getAds();
-
-        return new ResponseEntity<>(ads, HttpStatus.OK);
+    public ResponseEntity<Collection<Advertisement>> getAds(@RequestParam(value = "type", required = false) String type, @RequestParam(value = "startDate", required = false) Long startDate, @RequestParam(value = "endDate", required = false) Long endDate) throws IOException{
+    	
+    	if (type != null) {
+    		return new ResponseEntity<>(advertisementService.getAdByType(type), HttpStatus.OK);
+    	}
+    	
+    	if (startDate != null) {
+    		return new ResponseEntity<>(advertisementService.getAdsByDate(getDate(startDate), getDate(endDate)), HttpStatus.OK);
+    	}
+    	
+        return new ResponseEntity<>(advertisementService.getAds(), HttpStatus.OK);
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/{type}"
-    )
-    public ResponseEntity<Collection<Advertisement>> getAdvertisementsByType(@PathVariable(value = "type") String type){
+	private Date getDate(Long date) throws IOException {
+		if(date != null) {
+			Timestamp timestamp = new Timestamp(date);
+			return new Date(timestamp.getTime());
+		} else {
+			return new Date();
+		}
+	}
 
-        return new ResponseEntity<>(advertisementService.getAdByType(type), HttpStatus.OK);
-    }
-
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/{init}/{final}"
-    )
-    public ResponseEntity<Collection<Advertisement>> getAdvertisementsByDate(
-            @PathVariable(value = "init") Date initialDate,
-            @PathVariable(value = "final", required = false) Date finalDate){
-
-        return new ResponseEntity<>(advertisementService.getAdsByDate(initialDate, finalDate), HttpStatus.OK);
-    }
 }

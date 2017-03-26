@@ -4,7 +4,7 @@
     <p class="card-text">Publicado em {{ advertisement.publicationDate | date }}</p>
     <p class="card-text">Expira em {{ advertisement.expirationDate | date }}</p>
     <p class="card-text value">Valor: {{ advertisement.value }}</p>
-    <p class="card-text">{{ advertisement.user.name }}</p>
+    <p class="card-text">{{ advertisement.user.name.firstName + ' ' + advertisement.user.name.lastName }}</p>
     <button (click)="get()" type="submit" class="btn btn-primary">Comprar</button>
   </div>
 </div>
