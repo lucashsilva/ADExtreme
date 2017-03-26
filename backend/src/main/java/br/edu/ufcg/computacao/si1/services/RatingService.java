@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.services;
 
 
+import br.edu.ufcg.computacao.si1.exceptions.EntityNotFoundException;
 import br.edu.ufcg.computacao.si1.exceptions.RatingException;
 import br.edu.ufcg.computacao.si1.models.rating.Rating;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public interface RatingService {
 
-    Rating create(Rating rating) throws RatingException;
+    Rating create(Rating rating) throws RatingException, EntityNotFoundException;
 
     Optional<Rating> getRatingById(Long id);
 
@@ -18,4 +19,7 @@ public interface RatingService {
     boolean update(Rating rating);
 
     boolean delete(Long id);
+
+    Collection<Rating> getRatingsByRatedEntityId(Long advertisementId);
+
 }

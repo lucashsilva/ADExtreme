@@ -21,5 +21,4 @@ public interface AdvertisementService {
     boolean update(Advertisement ad);
 
     boolean delete(Long id);
-
 }

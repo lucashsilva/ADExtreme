@@ -1,15 +1,10 @@
 package br.edu.ufcg.computacao.si1.exceptions;
 
-public class UserNotFoundException extends Exception {
+public class UserNotFoundException extends EntityNotFoundException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	public UserNotFoundException() { }
-	
-	public UserNotFoundException(String message) {
-		super(message);
+	public UserNotFoundException() {
+		super("User does not exist. ");
 	}
 }
