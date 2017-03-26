@@ -1,7 +1,8 @@
 package br.edu.ufcg.computacao.si1.services;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public Collection<Advertisement> getAdByTitle(String title) {
         return advertisementRepository.findAll().stream()
                 .filter(ad -> ad.getTitle().equalsIgnoreCase(title))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -66,4 +67,22 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         return false;
     }
 
+    @Override
+    public List<Advertisement> getAdsByDate(Date initialDate, Date finalDate) {
+        Date end;
+        if(finalDate == null)
+            end = new Date();
+        else
+            end = finalDate;
+
+        return advertisementRepository.findAll().stream().filter(ad ->
+                ad.getPublicationDate().after(initialDate) && ad.getPublicationDate().before(end))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Advertisement> getAdsByType(String type) {
+        return advertisementRepository.findAll().stream().filter(ad ->
+                ad.getClass().getSimpleName().equalsIgnoreCase(type)).collect(Collectors.toList());
+    }
 }

@@ -89,25 +89,25 @@ public class UserController {
 
     }
 
-//    @RequestMapping(
-//            method = RequestMethod.PUT
-//    )
-//    public ResponseEntity<User> updateUser(@RequestBody User user){
-//        userService.update(user);
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @RequestMapping(
+            method = RequestMethod.PUT
+    )
+    public ResponseEntity<User> updateUser(@RequestBody User user){
+        userService.update(user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
-//    @RequestMapping(
-//            value = "/{id}",
-//            method = RequestMethod.DELETE
-//    )
-//    public ResponseEntity<User> deleteUser(@PathVariable Long id){
-//        userService.delete(id);
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.DELETE
+    )
+    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+        userService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 	
 }
