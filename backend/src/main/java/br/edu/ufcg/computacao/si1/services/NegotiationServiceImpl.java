@@ -1,92 +1,85 @@
 package br.edu.ufcg.computacao.si1.services;
 
-import java.io.IOException;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.exceptions.AdvertisementNotAJobException;
-import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
-import br.edu.ufcg.computacao.si1.exceptions.NotLegalPersonException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseNotServiceException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseServiceException;
+import br.edu.ufcg.computacao.si1.exceptions.*;
 import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import br.edu.ufcg.computacao.si1.models.advertisement.JobAdvertisement;
 import br.edu.ufcg.computacao.si1.models.advertisement.ServiceAdvertisement;
 import br.edu.ufcg.computacao.si1.models.user.Candidate;
 import br.edu.ufcg.computacao.si1.models.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
-public class NegotiationServiceImpl implements NegotiationService{
-	
-	@Autowired
-	private AdvertisementService adService;
+public class NegotiationServiceImpl implements NegotiationService {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private AdvertisementService adService;
 
-	@Override
-	public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException {
-		Optional<Advertisement> ad = adService.getAdById(id);
-		
-		if(ad.get().getClass() == JobAdvertisement.class)
-			throw new PurchaseJobException();
+    @Autowired
+    private UserService userService;
 
-		if(ad.get().getClass() == ServiceAdvertisement.class)
-			throw new PurchaseServiceException();
-		
-		if(user.getCredit() < ad.get().getValue())
-			throw new InsufficientCreditException();
+    @Override
+    public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException {
+        Optional<Advertisement> ad = adService.getAdById(id);
 
-		User salesMan = userService.getUserById(ad.get().getId()).get();
+        if (ad.get().getClass().equals(JobAdvertisement.class))
+            throw new PurchaseJobException();
 
-		user.discountCredit(ad.get().getValue());
-		salesMan.increaseCredit(ad.get().getValue());
+        if (ad.get().getClass().equals(ServiceAdvertisement.class))
+            throw new PurchaseServiceException();
 
-		adService.delete(id);
-		return userService.update(user) && userService.update(salesMan);
-	}
+        if (user.getCredit() < ad.get().getValue())
+            throw new InsufficientCreditException();
 
-	@Override
-	public boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException {
-		Optional<Advertisement> ad = adService.getAdById(id);
+        User salesMan = userService.getUserById(ad.get().getId()).get();
 
-		if(ad.get().getClass() != ServiceAdvertisement.class)
-			throw new PurchaseNotServiceException();
+        user.discountCredit(ad.get().getValue());
+        salesMan.increaseCredit(ad.get().getValue());
 
-		if(user.getCredit() < ad.get().getValue())
-			throw new InsufficientCreditException();
+        adService.delete(id);
+        return userService.update(user) && userService.update(salesMan);
+    }
 
-		User salesMan = userService.getUserById(ad.get().getId()).get();
-		ServiceAdvertisement sAd = (ServiceAdvertisement) ad.get();
+    @Override
+    public boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException {
+        Optional<Advertisement> ad = adService.getAdById(id);
 
-		user.discountCredit(sAd.getValue());
-		salesMan.increaseCredit(sAd.getValue());
+        if (!ad.get().getClass().equals(ServiceAdvertisement.class))
+            throw new PurchaseNotServiceException();
 
-		//sAd.setScheduledDate(DateDeserializer.deserialize(date));
+        if (user.getCredit() < ad.get().getValue())
+            throw new InsufficientCreditException();
 
-		return userService.update(user) && userService.update(salesMan) && adService.update(sAd);
-	}
+        User salesMan = userService.getUserById(ad.get().getId()).get();
+        ServiceAdvertisement sAd = (ServiceAdvertisement) ad.get();
 
-	@Override
-	public boolean applyForAJob(User user, Long id) throws NotLegalPersonException, AdvertisementNotAJobException {
-		Optional<Advertisement> ad = adService.getAdById(id);
+        user.discountCredit(sAd.getValue());
+        salesMan.increaseCredit(sAd.getValue());
 
-		if(ad.get().getClass() != JobAdvertisement.class)
-			throw new AdvertisementNotAJobException();
+        //sAd.setScheduledDate(DateDeserializer.deserialize(date));
 
-		if(user.getRole().equals(UserRole.NATURAL_PERSON))
-			throw new NotLegalPersonException();
+        return userService.update(user) && userService.update(salesMan) && adService.update(sAd);
+    }
 
-		JobAdvertisement jAd = (JobAdvertisement) ad.get();
+    @Override
+    public boolean applyForAJob(User user, Long id) throws NotLegalPersonException, AdvertisementNotAJobException {
+        Optional<Advertisement> ad = adService.getAdById(id);
 
-		jAd.addCandidate(new Candidate(user.getName().toString(), user.getEmail()));
+        if (!ad.get().getClass().equals(JobAdvertisement.class))
+            throw new AdvertisementNotAJobException();
 
-		return adService.update(jAd);
-	}
+        if (user.getRole().equals(UserRole.NATURAL_PERSON))
+            throw new NotLegalPersonException();
 
+        JobAdvertisement jAd = (JobAdvertisement) ad.get();
+
+        jAd.addCandidate(new Candidate(user.getName().toString(), user.getEmail()));
+
+        return adService.update(jAd);
+    }
 
 }
