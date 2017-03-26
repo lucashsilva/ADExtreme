@@ -27,21 +27,21 @@ public class Rating {
     private String publisherName;
 
     @Column(name = "rated_entity_id")
-    @NotNull(message = "Rating's ratedEntityId can not be null")
+    @NotNull(message = "Rating ratedEntityId can not be null")
     private Long ratedEntityId;
 
     @Column(name = "comment")
-    @NotEmpty(message = "Rating's comment can not be empty")
-    @NotNull(message = "Rating's comment can not be null")
+    @NotEmpty(message = "Rating comment can not be empty")
+    @NotNull(message = "Rating comment can not be null")
     private String comment;
 
     @Column(name = "grade")
-    @NotNull(message = "Rating's grade can not be null")
+    @NotNull(message = "Rating grade can not be null")
     @Min(0) @Max(5)
     private double grade;
 
     @Column(name = "publication_date")
-    @NotNull(message = "Rating's publicationDate can not be null")
+    @NotNull(message = "Rating publicationDate can not be null")
     @JsonDeserialize(using = JsonDateDeserializer.class)
     private Date publicationDate;
 

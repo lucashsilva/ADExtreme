@@ -25,8 +25,11 @@ public class RatingServiceImpl implements RatingService {
     private UserRepository userRepository;
     private AdvertisementRepository advertisementRepository;
 
-    public RatingServiceImpl(RatingRepository ratingRepository){
+    public RatingServiceImpl(RatingRepository ratingRepository, UserRepository userRepository,
+                             AdvertisementRepository advertisementRepository){
         this.ratingRepository = ratingRepository;
+        this.userRepository = userRepository;
+        this.advertisementRepository = advertisementRepository;
     }
 
     @Override

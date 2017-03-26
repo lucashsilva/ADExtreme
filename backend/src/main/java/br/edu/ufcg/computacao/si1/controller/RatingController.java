@@ -1,6 +1,9 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 
+import br.edu.ufcg.computacao.si1.exceptions.EntityNotFoundException;
+import br.edu.ufcg.computacao.si1.exceptions.RatingException;
+import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.models.rating.Rating;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 import br.edu.ufcg.computacao.si1.services.RatingServiceImpl;
@@ -9,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 @CrossOrigin
 @RestController
@@ -37,11 +43,11 @@ public class RatingController {
                     .getUserFromToken(token).get().getName().toString());
 
             ratingService.create(rating);
+
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
 }
