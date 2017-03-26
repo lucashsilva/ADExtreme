@@ -55,4 +55,9 @@ public class JobAdvertisement extends Advertisement {
         if(user.getRole().equals(UserRole.NATURAL_PERSON))
             throw new InvalidAdvertisementUserException();
     }
+
+    @Override
+    public String showType() {
+        return "job";
+    }
 }

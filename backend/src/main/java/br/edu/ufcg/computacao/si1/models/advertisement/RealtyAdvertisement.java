@@ -17,4 +17,9 @@ public class RealtyAdvertisement extends Advertisement {
 
     public RealtyAdvertisement() {
     }
+
+    @Override
+    public String showType() {
+        return "realty";
+    }
 }

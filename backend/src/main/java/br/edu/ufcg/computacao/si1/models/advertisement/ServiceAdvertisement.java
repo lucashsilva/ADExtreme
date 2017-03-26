@@ -48,4 +48,9 @@ public class ServiceAdvertisement extends Advertisement {
             throw new InvalidAdvertisementUserException();
     }
 
+    @Override
+    public String showType() {
+        return "service";
+    }
+
 }

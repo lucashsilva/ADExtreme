@@ -37,12 +37,13 @@ public class AdvertisementController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Advertisement> addAdvertisement(@RequestBody FurnitureAdvertisement ad, @RequestHeader(value="Authorization") String token){
-
+    public ResponseEntity<Advertisement> addAdvertisement(@RequestBody Advertisement ad, @RequestHeader(value="Authorization") String token){
+        
         	try {
 				ad.setUser(authenticationService.getUserFromToken(token).get());
 				advertisementService.create(ad);
-			} catch (UserNotFoundException e) {
+
+        	} catch (UserNotFoundException e) {
 				return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
