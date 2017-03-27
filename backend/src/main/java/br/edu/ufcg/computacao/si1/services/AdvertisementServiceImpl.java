@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
 import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import br.edu.ufcg.computacao.si1.repositories.AdvertisementRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -34,7 +35,8 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     @Override
     public Collection<Advertisement> getAdByType(String type) {
-        return advertisementRepository.findByType(type);
+        return advertisementRepository.findAll().stream().filter(ad ->
+        		splitName(ad.getClass().getSimpleName(), type)).collect(Collectors.toList());
     }
 
     @Override
@@ -78,6 +80,14 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         return advertisementRepository.findAll().stream().filter(ad ->
                 ad.getPublicationDate().after(initialDate) && ad.getPublicationDate().before(end))
                 .collect(Collectors.toList());
+    }
+    
+    private boolean splitName(String className, String typeName){
+    	String adName = "Advertisement";
+    	
+    	
+    	String name = className.split(adName)[0];
+    	return name.equalsIgnoreCase(typeName);
     }
 
 }
