@@ -67,6 +67,10 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public double getAverageRating(Long id) {
         Collection<Rating> ratings = getRatingsByRatedEntityId(id);
+
+        if(ratings.size() == 0){
+            return 0;
+        }
         return ratings.stream()
                 .mapToDouble(rating -> rating.getGrade()).sum() / ratings.size();
     }

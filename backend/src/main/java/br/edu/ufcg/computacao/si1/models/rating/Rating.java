@@ -87,8 +87,8 @@ public class Rating {
         this.grade = grade;
     }
 
-    public Date getPublicationDate() {
-        return publicationDate;
+    public String getPublicationDate() {
+        return publicationDate.toString();
     }
 
     public void setPublicationDate(Date publicationDate) {
