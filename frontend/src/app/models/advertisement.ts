@@ -7,16 +7,18 @@ export class Advertisement {
     expirationDate: Date;
     value: Number;
     user: MinimalUser;
+    type: string;
 
-    constructor() {
+    constructor(type?: string) {
         this.user = new MinimalUser();
+        this.type = type;
     }
 
 }
 
 export class FurnitureAdvertisement extends Advertisement {
     constructor() {
-        super();
+        super("FURNITURE");
     }
 
 }
@@ -25,13 +27,13 @@ export class JobAdvertisement extends Advertisement {
     candidate: Object; // change to Candidate - to be discussed
 
     constructor() {
-        super();
+        super("JOB");
     }
 }
 
 export class RealtyAdvertisement extends Advertisement {
     constructor () {
-        super();
+        super("REALTY");
     }
 }
 
@@ -39,10 +41,6 @@ export class ServiceAdvertisement extends Advertisement {
     scheduledDate: Date;
 
     constructor() {
-        super();
+        super("SERVICE");
     }
-}
-
-export enum AdvertisementType {
-    FURNITURE, JOB, REALTY, SERVICE
 }

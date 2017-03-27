@@ -17,13 +17,13 @@
   <fieldset class="form-group">
     <div class="form-check">
       <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="personType" id="personType1" [checked]="userInfo.role === 'NATURAL_PERSON'" (click)="userInfo.role = 'NATURAL_PERSON'">
+        <input type="radio" class="form-check-input" name="personType" id="personType1" [checked]="!isLegalPerson()" (click)="changeRole()">
         Pessoa física
       </label>
     </div>
     <div class="form-check">
     <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="personType" id="personType2" [checked]="userInfo.role === 'LEGAL_PERSON'" (click)="userInfo.role = 'LEGAL_PERSON'">
+        <input type="radio" class="form-check-input" name="personType" id="personType2" [checked]="isLegalPerson()" (click)="changeRole()">
         Pessoa jurídica
       </label>
     </div>

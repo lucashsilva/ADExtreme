@@ -22,5 +22,16 @@ export class AdvertisementService {
     }).toPromise();
   }
   
+  createAds(ads: Advertisement): Promise<boolean> {
+    console.log(ads);
+    ads.publicationDate = new Date(Date.now());
+    return this.http.post(API_BASE_URL + "advertisements", JSON.stringify(ads), this.authenticationService.getOptions()).map(res =>{
+      if(res.status >= 200) {
+        return true;
+      } else {
+        throw new Error("Não foi possível cadastrar o anúncio.");
+      }
+    }).toPromise();
+  }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserInfo } from '../../models/user';
+import { UserRole } from '../../models/user';
 
 @Component({
   selector: 'app-signup-form',
@@ -64,4 +65,11 @@ export class SignupFormComponent implements OnInit {
     }
   }
 
+  changeRole() {
+    this.userInfo.role = (this.userInfo.role == UserRole.LEGAL_PERSON) ? UserRole.NATURAL_PERSON : UserRole.LEGAL_PERSON;
+  }
+
+  isLegalPerson() {
+    return this.userInfo.role == UserRole.LEGAL_PERSON;
+  }
 }

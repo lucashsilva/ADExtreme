@@ -7,13 +7,13 @@ export class UserInfo {
 
   name: Name;
   password: string;
-  role: string;
+  role: UserRole;
   email: string;
   credit: number;
 
   constructor() {
     this.name = new Name();
-    this.role = "NATURAL_PERSON"
+    this.role = UserRole.NATURAL_PERSON;
   }
 }
 
@@ -39,4 +39,8 @@ export class UserCredentials {
 
   constructor() {}
 
+}
+
+export enum UserRole {
+  NATURAL_PERSON, LEGAL_PERSON
 }

@@ -1,1 +1,8 @@
-sidebar works
+<div class="private-card" *ngIf="this.authenticationService.isLoggedIn()">
+    <span class="sidebar-title">
+        Bem vindo, {{  this.authenticationService.authenticatedUser.userInfo.name.firstName + " " + this.authenticationService.authenticatedUser.userInfo.name.lastName  }}!
+        </span>
+    <span class="sidebar-body">
+        Seu saldo é de {{ this.authenticationService.authenticatedUser.userInfo.credit }} créditos.
+    </span>
+</div>

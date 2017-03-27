@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
+import { AdvertisementFormComponent } from './advertisement-form/advertisement-form.component';
 
 const routes: Routes = [
     { path: '', component: MainComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'signup', component: SignupFormComponent }
+      { path: 'signup', component: SignupFormComponent },
+      { path: 'advertisements/new', component: AdvertisementFormComponent }
     ] }
 ];
 

@@ -1,3 +1,22 @@
-<p>
-  advertisement-form works!
-</p>
+<h3>Criar anúncio</h3>
+<div class="type-selector" *ngIf="!selectedType">
+  <button class="type" (click)="initType('FURNITURE')">Móvel</button>
+  <button class="type"(click)="initType('REALTY')">Imóvel</button>
+  <button class="type" [disabled]="!isLegalPerson()" (click)="initType('JOB')">Emprego</button>
+  <button class="type" [disabled]="!isLegalPerson()" (click)="initType('SERVICE')">Serviço</button>
+</div>
+<div class="ad-form" *ngIf="selectedType">
+  <div class="form-group row">
+    <div class="input-group">
+      <input type="text" [(ngModel)]="ad.title" [ngModelOptions]="{standalone: true}" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Título do anúncio">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input type="text" [(ngModel)]="ad.value" value="0.00" [ngModelOptions]="{standalone: true}" class="form-control" aria-label="Número de créditos">
+    </div>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="ad.expirationDate" [ngModelOptions]="{standalone: true}" class="form-control" aria-label="Data de expiração" placeholder="Data de expiração">
+    </div>
+    <button (click)="submit()" type="submit" class="btn btn-primary">Cadastrar</button>
+  </div>
+</div>

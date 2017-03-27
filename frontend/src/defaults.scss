@@ -13,10 +13,20 @@ $body-grey: #eeeeee;
 
 button {
     border: none;
+    color: $white;
     border-radius: 4px;
     padding: 10px 15px;
     font-size: 12px;
     background: $medium-blue;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:disabled {
+    background: $medium-grey;
+    color: $white;
 }
 
 input {
