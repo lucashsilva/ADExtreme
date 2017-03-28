@@ -6,9 +6,9 @@ import br.edu.ufcg.computacao.si1.models.user.User;
 import java.io.IOException;
 
 public interface NegotiationService {
-    boolean buyAdvertising(User User, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException;
+    boolean buyAdvertising(User User, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException, BuyOwnAdvertisementException;
 
-    boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException;
+    boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException, BuyOwnAdvertisementException;
 
     boolean applyForAJob(User user, Long id) throws NotLegalPersonException, AdvertisementNotAJobException;
 }

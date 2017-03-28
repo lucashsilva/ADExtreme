@@ -45,7 +45,8 @@ public class NegotiationServiceImpl implements NegotiationService {
     }
 
     @Override
-    public boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException {
+    public boolean buyService(User user, Long id, String date) throws PurchaseNotServiceException, InsufficientCreditException, IOException, BuyOwnAdvertisementException {
+        verifyBuyer(user.getId(), id);
         Optional<Advertisement> ad = adService.getAdById(id);
 
         if (!ad.get().getClass().equals(ServiceAdvertisement.class))
@@ -59,8 +60,6 @@ public class NegotiationServiceImpl implements NegotiationService {
 
         user.discountCredit(sAd.getValue());
         salesMan.increaseCredit(sAd.getValue());
-
-        //sAd.setScheduledDate(DateDeserializer.deserialize(date));
 
         return userService.update(user) && userService.update(salesMan) && adService.update(sAd);
     }
@@ -80,6 +79,11 @@ public class NegotiationServiceImpl implements NegotiationService {
         jAd.addCandidate(new Candidate(user.getName().toString(), user.getEmail()));
 
         return adService.update(jAd);
+    }
+
+    private void verifyBuyer(Long buyerId, Long adId) throws BuyOwnAdvertisementException {
+        if(buyerId.equals(adService.getAdById(adId).get().getUser().getId()))
+            throw new BuyOwnAdvertisementException();
     }
 
 }
