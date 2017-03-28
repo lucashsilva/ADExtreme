@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Advertisement, FurnitureAdvertisement, JobAdvertisement, RealtyAdvertisement, ServiceAdvertisement } from '../models/advertisement';
 
 import { AdvertisementService } from '../services/advertisement.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-advertisement',
@@ -12,18 +13,27 @@ export class AdvertisementComponent implements OnInit {
 
   @Input() advertisement: Advertisement;
 
-  constructor(private advertisementService: AdvertisementService) {
+  constructor(private advertisementService: AdvertisementService, private authenticationService: AuthenticationService) {
     this.advertisement = new Advertisement();
    }
 
   ngOnInit() {
   }
 
-  buyAd(id) {
-    this.advertisementService.buyAd(id).then(success => {
-      if(success) {
-        console.log("Advertisement successful bought");
+  buyAd() {
+    if(!this.authenticationService.isLoggedIn()) {
+      alert("Você deve estar conectado para comprar no site.");
+    } else {
+      if(confirm("Você deseja comprar esse anúncio?")){
+        this.advertisementService.buyAd(this.advertisement).then(success => {
+          if(success) {
+            alert("Compra efetuada com sucesso!")
+            location.reload();
+          }
+        }).catch(error => {
+          alert("Não foi possível efetuar a compra. " + error);
+        });
       }
-    });
+    }
   }
 }

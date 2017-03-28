@@ -6,3 +6,6 @@
         Seu saldo é de {{ this.authenticationService.authenticatedUser.userInfo.credit }} créditos.
     </span>
 </div>
+<div class="public-card" *ngIf="!this.authenticationService.isLoggedIn()">
+    Você não está conectado. 
+</div>

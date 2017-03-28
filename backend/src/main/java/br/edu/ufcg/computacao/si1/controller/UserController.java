@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
+import br.edu.ufcg.computacao.si1.models.Deposit;
 import br.edu.ufcg.computacao.si1.models.user.MinimalUser;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
@@ -92,4 +93,16 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/credit/deposit", method = RequestMethod.POST)
+	public ResponseEntity<User> deposit(@RequestHeader(value = "Authorization") String token, @RequestBody Deposit deposit) throws IOException, URISyntaxException {
+		Optional<User> user;
+		try {
+			user = authenticationService.getUserFromToken(token);
+			userService.addCash(deposit.getAmount(), user.get());
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
+		}
+
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

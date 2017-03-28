@@ -32,16 +32,13 @@ export class AdvertisementService {
     }).toPromise();
   }
 
-  buyAd(id): Promise<boolean> {
-    console.log(id);
-    let data = {
-      "id": id
-    };
-    return this.http.post(API_BASE_URL + "users/buy", data, this.authenticationService.getOptions()).map(res =>{
+  buyAd(ads: Advertisement): Promise<boolean> {
+    let data = {};
+    return this.http.post(API_BASE_URL + "advertisements/buy/" + ads.id, data, this.authenticationService.getOptions()).map(res =>{
       if(res.status >= 200) {
         return true;
       } else {
-        throw new Error("Não foi possível efetuar a venda.");
+        throw new Error("Não foi possível efetuar a compra.");
       }
     }).toPromise();
   }

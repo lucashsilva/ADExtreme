@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Advertisement } from '../models/advertisement';
 import { AdvertisementService } from '../services/advertisement.service';
 
@@ -11,7 +12,7 @@ import { AdvertisementService } from '../services/advertisement.service';
 export class AdvertisementCardComponent implements OnInit {
   advertisements: Array<Advertisement>;
 
-  constructor(private advertisementService: AdvertisementService) {
+  constructor(private advertisementService: AdvertisementService, private router: Router) {
     this.advertisements = new Array<Advertisement>();
   }
 
@@ -20,5 +21,6 @@ export class AdvertisementCardComponent implements OnInit {
       this.advertisements = res;
     });
   }
+
 
 }

@@ -3,6 +3,7 @@ import { Advertisement, FurnitureAdvertisement, JobAdvertisement, RealtyAdvertis
 import { AuthenticationService } from '../services/authentication.service';
 import { AdvertisementService } from '../services/advertisement.service';
 import { UserRole } from '../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-advertisement-form',
@@ -13,7 +14,7 @@ export class AdvertisementFormComponent implements OnInit {
   private ad: Advertisement;
   private selectedType: boolean;
 
-  constructor(private authenticationService: AuthenticationService, private advertisementService: AdvertisementService) {   }
+  constructor(private authenticationService: AuthenticationService, private advertisementService: AdvertisementService, private router: Router) {   }
 
   ngOnInit() {
   }
@@ -47,7 +48,7 @@ export class AdvertisementFormComponent implements OnInit {
   submit() {
     this.advertisementService.createAds(this.ad).then(success => {
       if(success) {
-        //handle
+        this.router.navigate(['dashboard']);
       }
     });
   }
