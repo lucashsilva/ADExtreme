@@ -41,7 +41,7 @@ export class AdvertisementFormComponent implements OnInit {
   submit() {
     this.advertisementService.createAds(this.ad).then(success => {
       if(success) {
-        console.log("foi!");
+        //handle
       }
     });
   }

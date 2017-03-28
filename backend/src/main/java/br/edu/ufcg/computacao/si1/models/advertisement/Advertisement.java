@@ -15,6 +15,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -56,13 +58,13 @@ public abstract class Advertisement {
     private String title;
 
     @Column(name = "publication_date")
+	@Temporal(TemporalType.TIMESTAMP)
     @NotNull(message = "Advertisement creation date can not be null.")
-	@JsonDeserialize(using = JsonDateDeserializer.class)
     private Date publicationDate;
 
 	@Column(name = "expiration_date")
-	@NotNull(message = "Advertisement creation date can not be null.")
-	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@NotNull(message = "Advertisement expiration date can not be null.")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date expirationDate;
 
 	@Column(name = "value")
@@ -84,7 +86,9 @@ public abstract class Advertisement {
 		this.user = user;
     }
 
-    public Advertisement() {}
+    public Advertisement() {
+    	this.publicationDate = Date.from(Instant.now());
+    }
 
 	public Long getId() {
 		return id;
@@ -104,14 +108,6 @@ public abstract class Advertisement {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public void setPublicationDate(Date publicationDate) {
-		if(publicationDate == null) {
-            this.publicationDate = Date.from(Instant.now());
-        }else{
-            this.publicationDate = publicationDate;
-        }
 	}
 
     public MinimalUser getUser() {
