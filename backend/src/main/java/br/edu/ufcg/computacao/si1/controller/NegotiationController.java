@@ -21,27 +21,27 @@ import java.util.Optional;
 public class NegotiationController {
 
     @Autowired
-    private NegotiationService service;
+    private NegotiationService negotiationService;
 
     @Autowired
     private AuthenticationService authenticationService;
 
     public NegotiationController(NegotiationService negotiationService, AuthenticationService authenticationService) {
-        this.service = negotiationService;
+        this.negotiationService = negotiationService;
         this.authenticationService = authenticationService;
     }
     
     @RequestMapping(
-            value = "api/users/buy",
+            value = "api/advertisements/buy/{id}",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<HttpStatus> buyAdvertising(@RequestHeader(value = "Authorization") String token,
-                                                     @RequestBody AdId id) throws Exception {
+                                                     @PathVariable long id) throws Exception {
         Optional<User> user;
         try {
             user = authenticationService.getUserFromToken(token);
-            service.buyAdvertising(user.get(), id.getId());
+            negotiationService.buyAdvertising(user.get(), id);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserNotFoundException e) {

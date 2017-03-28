@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
+import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 
@@ -46,6 +47,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public Collection<User> getUsers() {
         return userRepository.findAll();
+    }
+    
+    public void addCash(long amount, User user) throws UserNotFoundException {
+    	if (user != null) {
+    		user.increaseCredit(amount);
+    		userRepository.save(user);
+    	} else {
+    		throw new UserNotFoundException();
+    	}
     }
 
     @Override

@@ -35,7 +35,7 @@ public class NegotiationServiceImpl implements NegotiationService {
         if (user.getCredit() < ad.get().getValue())
             throw new InsufficientCreditException();
 
-        User salesMan = userService.getUserById(ad.get().getId()).get();
+        User salesMan = userService.getUserById(ad.get().getUser().getId()).get();
 
         user.discountCredit(ad.get().getValue());
         salesMan.increaseCredit(ad.get().getValue());
