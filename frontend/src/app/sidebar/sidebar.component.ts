@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.authenticationService.reloadUserData();
   }
 
 }

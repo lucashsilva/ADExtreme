@@ -57,6 +57,19 @@ export class AuthenticationService {
     }).toPromise();
   }
 
+  reloadUserData(): Promise<boolean> {
+    if(this.authenticatedUser) {
+      return this.http.get(API_BASE_URL + '/users/info', this.getOptions()).map(res => {
+        if(res.status >= 200) {
+          this.authenticatedUser.userInfo = <UserInfo> res.json();
+          return true;
+        } else {
+          return false;
+        }
+      }).toPromise();
+    } 
+  }
+
   private setAuthenticatedUser(user: AuthenticatedUser) {
     if(user.token && user.userInfo ) {
       this.authenticatedUser = user;

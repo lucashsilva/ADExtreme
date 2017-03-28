@@ -5,13 +5,8 @@
         <p class="card-text">Publicado em {{ advertisement.publicationDate | date }}</p>
         <p class="card-text">Expira em {{ advertisement.expirationDate | date }}</p>
         <p class="card-text">{{ advertisement.user.name.firstName + ' ' + advertisement.user.name.lastName }}</p>
+        <div class="price">R$ {{ advertisement.value }},00  <button (click)="buyAd(advertisement.id)" type="submit" class="btn btn-primary center">Comprar</button></div>
       </div>
     </div>
-    <div class="card text-center"  style="width: 20rem;" *ngIf="advertisement">
-      <div class="card-block">
-        <h1>R${{ advertisement.value }},00</h1>
-        <p></p>
-        <button (click)="buyAd(advertisement.id)" type="submit" class="btn btn-primary center">Comprar</button>
-      </div>
-    </div>
+
   </div>

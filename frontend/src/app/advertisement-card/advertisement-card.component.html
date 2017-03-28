@@ -2,6 +2,6 @@
 <div class="alert alert-success" role="alert" *ngIf="advertisements.length == 0">
     Sem anúncios para mostrar.
 </div>
-<div class="card-columns" *ngIf="advertisements.length > 0">
+<div class="cards" *ngIf="advertisements.length > 0">
     <app-advertisement *ngFor="let ad of advertisements" [advertisement]="ad"></app-advertisement>
 </div>
