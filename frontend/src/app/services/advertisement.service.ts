@@ -37,7 +37,7 @@ export class AdvertisementService {
     let data = {
       "id": id
     };
-    return this.http.post(API_BASE_URL + "users/buy/" + id, this.authenticationService.getOptions()).map(res =>{
+    return this.http.post(API_BASE_URL + "users/buy", data, this.authenticationService.getOptions()).map(res =>{
       if(res.status >= 200) {
         return true;
       } else {

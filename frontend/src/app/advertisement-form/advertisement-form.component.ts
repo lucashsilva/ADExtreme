@@ -38,6 +38,12 @@ export class AdvertisementFormComponent implements OnInit {
     return this.authenticationService.authenticatedUser.userInfo.role.toString() == "LEGAL_PERSON";
   }
 
+  isAuthenticated() {
+    if (this.authenticationService.authenticatedUser) {
+      return true;
+    } else return false;
+  }
+
   submit() {
     this.advertisementService.createAds(this.ad).then(success => {
       if(success) {

@@ -60,7 +60,8 @@ public class AdvertisementController {
             return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
-    
+
+    @CrossOrigin
 	@RequestMapping(
             method = RequestMethod.GET
     )

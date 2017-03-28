@@ -4,6 +4,7 @@ import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
 import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
 import br.edu.ufcg.computacao.si1.exceptions.PurchaseServiceException;
 import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
+import br.edu.ufcg.computacao.si1.models.advertisement.AdId;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 import br.edu.ufcg.computacao.si1.services.NegotiationService;
@@ -29,18 +30,18 @@ public class NegotiationController {
         this.service = negotiationService;
         this.authenticationService = authenticationService;
     }
-
+    
     @RequestMapping(
-            value = "api/users/buy/{id}",
+            value = "api/users/buy",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<HttpStatus> buyAdvertising(@RequestHeader(value = "Authorization") String token,
-                                                     @PathVariable String id) throws Exception {
+                                                     @RequestBody AdId id) throws Exception {
         Optional<User> user;
         try {
             user = authenticationService.getUserFromToken(token);
-            service.buyAdvertising(user.get(), Long.parseLong(id));
+            service.buyAdvertising(user.get(), id.getId());
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserNotFoundException e) {

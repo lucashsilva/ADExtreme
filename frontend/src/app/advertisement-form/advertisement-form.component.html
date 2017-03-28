@@ -1,9 +1,9 @@
 <h3>Criar anúncio</h3>
 <div class="type-selector" *ngIf="!selectedType">
-  <button class="type" (click)="initType('FURNITURE')">Móvel</button>
-  <button class="type"(click)="initType('REALTY')">Imóvel</button>
-  <button class="type" [disabled]="!isLegalPerson()" (click)="initType('JOB')">Emprego</button>
-  <button class="type" [disabled]="!isLegalPerson()" (click)="initType('SERVICE')">Serviço</button>
+  <button class="type" [disabled]="!isAuthenticated" (click)="initType('FURNITURE')">Móvel</button>
+  <button class="type" [disabled]="!isAuthenticated" (click)="initType('REALTY')">Imóvel</button>
+  <button class="type" [disabled]="!isLegalPerson() || !isAuthenticated()" (click)="initType('JOB')">Emprego</button>
+  <button class="type" [disabled]="!isLegalPerson() || !isAuthenticated()" (click)="initType('SERVICE')">Serviço</button>
 </div>
 <div class="ad-form" *ngIf="selectedType">
   <div class="form-group row">
