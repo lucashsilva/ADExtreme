@@ -32,82 +32,64 @@ public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
-	
+
 	@Autowired
 	private AuthenticationService authenticationService;
 
-    public UserController(UserServiceImpl userService, AuthenticationService authenticationService) {
-        this.userService = userService;
-        this.authenticationService = authenticationService;
-    }
+	public UserController(UserServiceImpl userService, AuthenticationService authenticationService) {
+		this.userService = userService;
+		this.authenticationService = authenticationService;
+	}
 
-    @RequestMapping(
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        try {
-            userService.create(user);
-            return new ResponseEntity<User>(HttpStatus.CREATED);
-        } catch (UserAlreadyExistsException e) {
-            return new ResponseEntity<User>(HttpStatus.CONFLICT);
-        } catch(TransactionSystemException e) {
-            return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> addUser(@RequestBody User user) {
+		try {
+			userService.create(user);
+			return new ResponseEntity<User>(HttpStatus.CREATED);
+		} catch (UserAlreadyExistsException e) {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+		} catch (TransactionSystemException e) {
+			return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<MinimalUser> getUser(@PathVariable Long id) {
+		Optional<User> user = userService.getUserById(id);
 
-    @RequestMapping(
-            value = "/{id}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<MinimalUser> getUser(@PathVariable Long id){
-        Optional<User> user = userService.getUserById(id);
+		if (user.isPresent()) {
+			return new ResponseEntity<MinimalUser>(Util.minimalUserFor(user.get()), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<MinimalUser>(HttpStatus.NOT_FOUND);
+		}
+	}
 
-        if(user.isPresent()) {
-        	return new ResponseEntity<MinimalUser>(Util.minimalUserFor(user.get()), HttpStatus.OK);
-        } else {
-        	return new ResponseEntity<MinimalUser>(HttpStatus.NOT_FOUND);
-        }
-    }
-    
-
-    @RequestMapping(
-            value = "/info",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<User> getUserInfo(@RequestHeader(value="Authorization") String token) throws IOException, URISyntaxException{
-        Optional<User> user;
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public ResponseEntity<User> getUserInfo(@RequestHeader(value = "Authorization") String token)
+			throws IOException, URISyntaxException {
+		Optional<User> user;
 		try {
 			user = authenticationService.getUserFromToken(token);
-			
+
 			return new ResponseEntity<User>(user.get(), HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
 		}
 
-    }
+	}
 
-    @RequestMapping(
-            method = RequestMethod.PUT
-    )
-    public ResponseEntity<User> updateUser(@RequestBody User user){
-        userService.update(user);
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
+		userService.update(user);
 
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+		userService.delete(id);
 
-    @RequestMapping(
-            value = "/{id}",
-            method = RequestMethod.DELETE
-    )
-    public ResponseEntity<User> deleteUser(@PathVariable Long id){
-        userService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-	
 }
