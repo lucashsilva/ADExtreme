@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/users/buy")
 public class NegotiationController {
 
     @Autowired
@@ -32,15 +31,16 @@ public class NegotiationController {
     }
 
     @RequestMapping(
+            value = "api/users/buy/{id}",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<HttpStatus> buyAdvertising(@RequestHeader(value = "Authorization") String token,
-                                                     @RequestBody Long id) throws Exception {
+                                                     @PathVariable String id) throws Exception {
         Optional<User> user;
         try {
             user = authenticationService.getUserFromToken(token);
-            service.buyAdvertising(user.get(), id);
+            service.buyAdvertising(user.get(), Long.parseLong(id));
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserNotFoundException e) {
