@@ -93,7 +93,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/credit/deposit", method = RequestMethod.POST)
+	@RequestMapping(value = "/credits/deposit", method = RequestMethod.POST)
 	public ResponseEntity<User> deposit(@RequestHeader(value = "Authorization") String token, @RequestBody Deposit deposit) throws IOException, URISyntaxException {
 		Optional<User> user;
 		try {
