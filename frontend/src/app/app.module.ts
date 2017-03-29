@@ -34,7 +34,7 @@ import { AdvertisementRatingComponent } from './advertisement-rating/advertiseme
     AdvertisementComponent,
     AdvertisementCardComponent,
     AdvertisementFormComponent,
-    DepositCardComponent
+    DepositCardComponent,
     AdvertisementRatingComponent
   ],
   imports: [

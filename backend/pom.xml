@@ -107,6 +107,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+		        <groupId>com.heroku.sdk</groupId>
+		        <artifactId>heroku-maven-plugin</artifactId>
+		        <version>1.1.3</version>
+		        	<configuration>
+				  <processTypes>
+				     <web>java -Dserver.port=$PORT -cp target/classes/:target/dependency/* br.edu.ufcg.computacao.si1.ADExtremeApplication </web>
+				  </processTypes>
+				  <appName>adextremesi1</appName>
+				</configuration>
+				
+		        
+	      	</plugin>
 		</plugins>
 	</build>
 
