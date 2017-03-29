@@ -1,7 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 
-import br.edu.ufcg.computacao.si1.exceptions.EntityNotFoundException;
 import br.edu.ufcg.computacao.si1.exceptions.RatingException;
 import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.models.rating.Rating;
@@ -13,9 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.GET;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Collection;
 
 @CrossOrigin

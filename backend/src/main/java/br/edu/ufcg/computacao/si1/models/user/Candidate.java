@@ -1,6 +1,5 @@
 package br.edu.ufcg.computacao.si1.models.user;
 
-import br.edu.ufcg.computacao.si1.models.name.Name;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;

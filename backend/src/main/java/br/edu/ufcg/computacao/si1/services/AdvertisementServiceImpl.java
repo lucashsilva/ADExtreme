@@ -1,17 +1,16 @@
 package br.edu.ufcg.computacao.si1.services;
 
+import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
+import br.edu.ufcg.computacao.si1.repositories.AdvertisementRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import br.edu.ufcg.computacao.si1.exceptions.InvalidAdvertisementUserException;
-import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
-import br.edu.ufcg.computacao.si1.repositories.AdvertisementRepository;
 
 @Service
 @Transactional
@@ -36,7 +35,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Override
     public Collection<Advertisement> getAdByType(String type) {
         return advertisementRepository.findAll().stream().filter(ad ->
-        		splitName(ad.getClass().getSimpleName(), type)).collect(Collectors.toList());
+                splitName(ad.getClass().getSimpleName(), type)).collect(Collectors.toList());
     }
 
     @Override
@@ -72,7 +71,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Override
     public List<Advertisement> getAdsByDate(Date initialDate, Date finalDate) {
         Date end;
-        if(finalDate == null)
+        if (finalDate == null)
             end = new Date();
         else
             end = finalDate;
@@ -81,13 +80,13 @@ public class AdvertisementServiceImpl implements AdvertisementService {
                 ad.getPublicationDate().after(initialDate) && ad.getPublicationDate().before(end))
                 .collect(Collectors.toList());
     }
-    
-    private boolean splitName(String className, String typeName){
-    	String adName = "Advertisement";
-    	
-    	
-    	String name = className.split(adName)[0];
-    	return name.equalsIgnoreCase(typeName);
+
+    private boolean splitName(String className, String typeName) {
+        String adName = "Advertisement";
+
+
+        String name = className.split(adName)[0];
+        return name.equalsIgnoreCase(typeName);
     }
 
 }

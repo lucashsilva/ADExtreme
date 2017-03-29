@@ -12,7 +12,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public Question create(Question question){
+    public Question create(Question question) {
 
         return questionRepository.save(question);
     }

@@ -1,7 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.exceptions.*;
-import br.edu.ufcg.computacao.si1.models.advertisement.AdId;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
 import br.edu.ufcg.computacao.si1.services.NegotiationService;

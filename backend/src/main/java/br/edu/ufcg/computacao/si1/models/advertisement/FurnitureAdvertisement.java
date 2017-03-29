@@ -4,7 +4,6 @@ import br.edu.ufcg.computacao.si1.models.user.User;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.time.LocalDate;
 import java.util.Date;
 
 

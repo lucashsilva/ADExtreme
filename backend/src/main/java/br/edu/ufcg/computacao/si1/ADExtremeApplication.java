@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ADExtremeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ADExtremeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ADExtremeApplication.class, args);
+    }
 }

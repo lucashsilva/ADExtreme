@@ -1,12 +1,11 @@
 package br.edu.ufcg.computacao.si1.models.user;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
+import br.edu.ufcg.computacao.si1.enums.UserRole;
 import br.edu.ufcg.computacao.si1.models.name.Name;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.edu.ufcg.computacao.si1.enums.UserRole;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_user")

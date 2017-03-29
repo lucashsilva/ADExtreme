@@ -1,9 +1,9 @@
 package br.edu.ufcg.computacao.si1.models.name;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tb_name")

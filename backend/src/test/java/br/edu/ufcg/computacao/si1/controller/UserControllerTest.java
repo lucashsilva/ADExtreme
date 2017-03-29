@@ -1,7 +1,8 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import static org.junit.Assert.assertEquals;
-
+import br.edu.ufcg.computacao.si1.enums.UserRole;
+import br.edu.ufcg.computacao.si1.models.user.User;
+import br.edu.ufcg.computacao.si1.repositories.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.edu.ufcg.computacao.si1.enums.UserRole;
-import br.edu.ufcg.computacao.si1.models.user.User;
-import br.edu.ufcg.computacao.si1.repositories.UserRepository;
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

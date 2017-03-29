@@ -1,24 +1,16 @@
 package br.edu.ufcg.computacao.si1.security;
 
-import java.util.Collection;
-
+import br.edu.ufcg.computacao.si1.models.user.User;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import br.edu.ufcg.computacao.si1.models.user.User;
-
-import javax.persistence.Access;
+import java.util.Collection;
 
 @JsonInclude(Include.NON_NULL)
 public class AuthenticatedUser implements Authentication {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String token;
 	private User user;

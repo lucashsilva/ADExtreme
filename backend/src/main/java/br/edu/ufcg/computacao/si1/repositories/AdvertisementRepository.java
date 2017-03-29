@@ -1,12 +1,11 @@
 package br.edu.ufcg.computacao.si1.repositories;
 
-import java.util.List;
-
+import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.edu.ufcg.computacao.si1.models.advertisement.Advertisement;
+import java.util.List;
 
 @Repository
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Long> {

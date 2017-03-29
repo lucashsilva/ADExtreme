@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.exceptions.BuyOwnAdvertisementException;
 import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
 import br.edu.ufcg.computacao.si1.exceptions.PurchaseNotServiceException;
 import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
@@ -56,6 +57,8 @@ public class ServiceController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } catch (PurchaseNotServiceException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (BuyOwnAdvertisementException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 }

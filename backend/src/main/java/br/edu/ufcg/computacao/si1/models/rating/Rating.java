@@ -2,8 +2,6 @@ package br.edu.ufcg.computacao.si1.models.rating;
 
 
 import br.edu.ufcg.computacao.si1.services.JsonDateDeserializer;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.hibernate.validator.constraints.NotEmpty;
 

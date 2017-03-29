@@ -26,7 +26,7 @@ public class RatingServiceImpl implements RatingService {
     private AdvertisementRepository advertisementRepository;
 
     public RatingServiceImpl(RatingRepository ratingRepository, UserRepository userRepository,
-                             AdvertisementRepository advertisementRepository){
+                             AdvertisementRepository advertisementRepository) {
         this.ratingRepository = ratingRepository;
         this.userRepository = userRepository;
         this.advertisementRepository = advertisementRepository;
@@ -42,19 +42,19 @@ public class RatingServiceImpl implements RatingService {
 
         Long id = rating.getRatedEntityId();
 
-        if(userRepository.exists(id)){
+        if (userRepository.exists(id)) {
             User user = userRepository.findOne(id);
 
-            if(user.getName().toString().equals(rating.getPublisherName()))
+            if (user.getName().toString().equals(rating.getPublisherName()))
                 throw new UserAutoRatingException();
 
-        } else if(advertisementRepository.exists(id)){
+        } else if (advertisementRepository.exists(id)) {
             Advertisement advertisement = advertisementRepository.findOne(id);
 
-            if(advertisement.getUser().getName().toString().equals(rating.getPublisherName()))
+            if (advertisement.getUser().getName().toString().equals(rating.getPublisherName()))
                 throw new UserRatingOwnAdvertisementException();
 
-        }else{
+        } else {
             throw new EntityNotFoundException();
         }
     }
@@ -68,7 +68,7 @@ public class RatingServiceImpl implements RatingService {
     public double getAverageRating(Long id) {
         Collection<Rating> ratings = getRatingsByRatedEntityId(id);
 
-        if(ratings.size() == 0){
+        if (ratings.size() == 0) {
             return 0;
         }
         return ratings.stream()
@@ -77,7 +77,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public boolean update(Rating rating) {
-        if(exists(rating.getId())){
+        if (exists(rating.getId())) {
             ratingRepository.save(rating);
             return true;
         }
@@ -86,14 +86,14 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public boolean delete(Long id) {
-        if(exists(id)){
+        if (exists(id)) {
             ratingRepository.delete(id);
             return true;
         }
         return false;
     }
 
-    private boolean exists(Long id){
+    private boolean exists(Long id) {
         return ratingRepository.findOne(id) != null;
     }
 

@@ -23,7 +23,8 @@ public class NegotiationServiceImpl implements NegotiationService {
     private UserService userService;
 
     @Override
-    public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException {
+    public boolean buyAdvertising(User user, Long id) throws PurchaseJobException, InsufficientCreditException, PurchaseServiceException, BuyOwnAdvertisementException {
+        verifyBuyer(user.getId(), id);
         Optional<Advertisement> ad = adService.getAdById(id);
 
         if (ad.get().getClass().equals(JobAdvertisement.class))
@@ -82,7 +83,7 @@ public class NegotiationServiceImpl implements NegotiationService {
     }
 
     private void verifyBuyer(Long buyerId, Long adId) throws BuyOwnAdvertisementException {
-        if(buyerId.equals(adService.getAdById(adId).get().getUser().getId()))
+        if (buyerId.equals(adService.getAdById(adId).get().getUser().getId()))
             throw new BuyOwnAdvertisementException();
     }
 

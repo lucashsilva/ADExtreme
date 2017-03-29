@@ -1,10 +1,10 @@
 package br.edu.ufcg.computacao.si1.services;
 
-import java.util.Collection;
-import java.util.Optional;
-
 import br.edu.ufcg.computacao.si1.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.computacao.si1.models.user.User;
+
+import java.util.Collection;
+import java.util.Optional;
 
 public interface UserService {
     User create(User usuario) throws UserAlreadyExistsException;
@@ -18,5 +18,5 @@ public interface UserService {
     boolean update(User usuario);
 
     boolean delete(Long id);
-	
+
 }
