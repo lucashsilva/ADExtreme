@@ -1,9 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import br.edu.ufcg.computacao.si1.exceptions.InsufficientCreditException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseJobException;
-import br.edu.ufcg.computacao.si1.exceptions.PurchaseServiceException;
-import br.edu.ufcg.computacao.si1.exceptions.UserNotFoundException;
+import br.edu.ufcg.computacao.si1.exceptions.*;
 import br.edu.ufcg.computacao.si1.models.advertisement.AdId;
 import br.edu.ufcg.computacao.si1.models.user.User;
 import br.edu.ufcg.computacao.si1.services.AuthenticationService;
@@ -52,6 +49,8 @@ public class NegotiationController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (InsufficientCreditException e) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } catch (BuyOwnAdvertisementException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 }
