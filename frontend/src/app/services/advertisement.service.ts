@@ -42,4 +42,9 @@ export class AdvertisementService {
       }
     }).toPromise();
   }
+
+  getAdById(id) {
+    return this.http.get(API_BASE_URL + "advertisements/" + id, this.authenticationService.getOptions())
+      .map(res => <Advertisement> res.json());
+  }
 }

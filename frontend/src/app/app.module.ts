@@ -18,6 +18,7 @@ import { AdvertisementService } from './services/advertisement.service';
 import { AdvertisementFormComponent } from './advertisement-form/advertisement-form.component';
 import { DepositCardComponent } from './deposit-card/deposit-card.component';
 import { UserService } from './services/user.service';
+import { AdvertisementRatingComponent } from './advertisement-rating/advertisement-rating.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserService } from './services/user.service';
     AdvertisementCardComponent,
     AdvertisementFormComponent,
     DepositCardComponent
+    AdvertisementRatingComponent
   ],
   imports: [
     BrowserModule,

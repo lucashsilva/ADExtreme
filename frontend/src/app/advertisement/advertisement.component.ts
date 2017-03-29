@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Advertisement, FurnitureAdvertisement, JobAdvertisement, RealtyAdvertisement, ServiceAdvertisement } from '../models/advertisement';
+import { Router } from '@angular/router';
 
 import { AdvertisementService } from '../services/advertisement.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -13,7 +14,7 @@ export class AdvertisementComponent implements OnInit {
 
   @Input() advertisement: Advertisement;
 
-  constructor(private advertisementService: AdvertisementService, private authenticationService: AuthenticationService) {
+  constructor(private advertisementService: AdvertisementService, private authenticationService: AuthenticationService, private router: Router) {
     this.advertisement = new Advertisement();
    }
 
@@ -35,5 +36,8 @@ export class AdvertisementComponent implements OnInit {
         });
       }
     }
+  }
+  detail(id) {
+    this.router.navigate(['/advertisement-rating', id]);
   }
 }

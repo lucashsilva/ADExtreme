@@ -54,6 +54,15 @@ public class AdvertisementController {
 
     }
 
+	@CrossOrigin
+	@RequestMapping(
+			value = "/{id}",
+			method = RequestMethod.GET
+	)
+	public ResponseEntity<Object> getAdById(@PathVariable Long id) {
+		return new ResponseEntity<>(advertisementService.getAdById(id), HttpStatus.OK);
+	}
+
     @CrossOrigin
     @RequestMapping(
             method = RequestMethod.GET
