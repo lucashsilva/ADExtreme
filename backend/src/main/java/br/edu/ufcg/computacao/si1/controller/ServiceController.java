@@ -41,7 +41,7 @@ public class ServiceController {
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<HttpStatus> buyService(@RequestHeader(value="Authorization") String token,
+    public ResponseEntity<HttpStatus> buyService(@RequestHeader(value = "Authorization") String token,
                                                  @RequestParam("id") Long id, @RequestParam("date") String date)
             throws IOException, URISyntaxException {
         Optional<User> user;
@@ -53,12 +53,12 @@ public class ServiceController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } catch (BuyOwnAdvertisementException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (InsufficientCreditException e) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } catch (PurchaseNotServiceException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (BuyOwnAdvertisementException e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 }
